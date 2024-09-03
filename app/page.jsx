@@ -75,7 +75,7 @@ const page = () => {
                   <p>Disfruta de una noche llena de música, baile y diversión con los mejores DJs del momento.</p>
                   <div className="flex items-center gap-2 mt-4">
                     <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" alt="DJ Name" />
+                      <AvatarImage src="placeholder-user.jpg" alt="DJ Name" />
                       <AvatarFallback>DJ</AvatarFallback>
                     </Avatar>
                     <div>
@@ -90,7 +90,7 @@ const page = () => {
                   <p>Ven disfrazado y disfruta de una noche llena de sorpresas y diversión.</p>
                   <div className="flex items-center gap-2 mt-4">
                     <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" alt="DJ Name" />
+                      <AvatarImage src="placeholder-user.jpg" alt="DJ Name" />
                       <AvatarFallback>DJ</AvatarFallback>
                     </Avatar>
                     <div>
