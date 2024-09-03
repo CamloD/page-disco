@@ -67,21 +67,21 @@ const Gallery = () => {
     {
       id: 10,
       type: "image",
-      src: "/images/image8.jpg",
+      src: "images/image8.jpg",
     
       date: "2023-10-05",
     },
     {
       id: 11,
       type: "image",
-      src: "/images/image9.jpg",
+      src: "images/image9.jpg",
       
       date: "2023-10-05",
     },
     {
       id: 12,
       type: "image",
-      src: "/images/image10.jpg",
+      src: "images/image10.jpg",
       date: "2023-10-05",
     },
     
