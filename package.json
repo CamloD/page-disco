@@ -2,11 +2,14 @@
   "name": "page_disco",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://www.disco.com/page-disco/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint"
+    
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
