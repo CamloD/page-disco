@@ -4,21 +4,6 @@ import { motion, useInView, useScroll } from 'framer-motion';
 import styles from "@/app/Styles/ParallaxVideo.css"
 
 
-
-const translate = document.querySelectorAll(".translate");
-const big_title = document.querySelector(".big-title");
-const header = document.querySelector("header");
-const shadow = document.querySelector(".shadow");
-const content = document.querySelector(".content");
-const section = document.querySelector("section");
-const image_container = document.querySelector(".imgContainer");
-const opacity = document.querySelectorAll(".opacity");
-const border = document.querySelector(".border");
-
-let header_height = header.offsetHeight;
-let section_height = section.offsetHeight;
-
-
 const ScrollVideo = () => {
   const { scrollY } = useScroll();
   const videoRef = React.createRef();
