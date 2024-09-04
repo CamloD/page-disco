@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+"use client"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
@@ -6,8 +7,16 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import Nav from "./componentes/Nav"
-import MobileNav from "./componentes/MobileNav"
+
+
+import ScrollImage from "./animations/ScrollImage"
+import { Parallax } from "react-parallax"
+import styles from "./Styles/ParallaxImage.css"
+import PScrollVideo from "./animations/ScrollVideo"
+import ScrollVideo from "./animations/ScrollVideo"
+import Scroll_image from "./animations/scroll_image"
+import Pruebas from "./animations/Pruebas"
+
 
 
 
@@ -219,6 +228,10 @@ const page = () => {
               
             </div>
           </div>
+        </section>
+
+        <section>   
+        <ScrollVideo/>
         </section>
 
         <section id="contact" className="py-16 bg-[#1a1a1a]">
