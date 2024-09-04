@@ -9,13 +9,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 
-import ScrollImage from "./animations/ScrollImage"
-import { Parallax } from "react-parallax"
-import styles from "./Styles/ParallaxImage.css"
-import PScrollVideo from "./animations/ScrollVideo"
 import ScrollVideo from "./animations/ScrollVideo"
-import Scroll_image from "./animations/scroll_image"
-import Pruebas from "./animations/Pruebas"
+
 
 
 

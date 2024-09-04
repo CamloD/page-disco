@@ -1,42 +1,58 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { motion, useInView, useScroll } from 'framer-motion';
-import styles from "@/app/Styles/ParallaxVideo.css"
-
+import React, { useEffect, useRef, useState } from 'react';
+import styles from "@/app/Styles/ParallaxVideo.css";
 
 const ScrollVideo = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const videoWrapperRef = useRef(null);
+
+  const handleScroll = () => {
+    if (videoWrapperRef.current) {
+      const rect = videoWrapperRef.current.getBoundingClientRect();
+      const isInView = rect.top <= window.innerHeight && rect.bottom >= 0;
+      setIsInView(isInView);
+
+      if (isInView) {
+        const offsetTop = videoWrapperRef.current.offsetTop;
+        setScrollY(window.scrollY - offsetTop);
+      } else {
+        setScrollY(0); // Optionally reset scrollY when out of view
+      }
+    }
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
     window.addEventListener('scroll', handleScroll);
+
+    // Initial check in case the page is already scrolled
+    handleScroll();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
+  console.log("offset", scrollY);
+  
   return (
-    <div className="video-container1" style={{ position: 'relative' }}>
-      <div className="">
-      <motion.video
-  src="video.mp4"
-  autoPlay
-  loop
-  muted
-  playsInline
-  style={{
-    objectFit: 'cover',
-    width: '100%',
-    height: '100vh',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    transform: `translateY(${scrollY * 0.5}px)`, // Actualizado para que el video se mueva según la posición del scroll
-  }}
-  transition={{ duration: 0.5 }}
-></motion.video>
+    <div ref={videoWrapperRef} className='video-container1'>
+      <div className='video-background1'>
+        <div  className={styles.videoWrapper1}>
+          <video
+            className={styles.backgroundVideo1}
+            autoPlay
+            muted
+            loop
+            style={{ transform: `translateY(${isInView ? scrollY * 0.5 : 0}px)` }}
+          >
+            <source src="video/video_banner.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* Optional: Display the scroll offset for debugging or informational purposes */}
+          <div className={styles.offsetInfo}>
+            <p>Scroll Y - Top Offset: {scrollY}px</p>
+          </div>
+        </div>
       </div>
     </div>
   );
