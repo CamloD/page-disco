@@ -1,52 +1,27 @@
 "use client";
-import React, { useEffect, useRef  } from 'react';
+import React from 'react';
 import { motion, useInView, useScroll } from 'framer-motion';
 import styles from "@/app/Styles/ParallaxVideo.css"
 
 
+
+const translate = document.querySelectorAll(".translate");
+const big_title = document.querySelector(".big-title");
+const header = document.querySelector("header");
+const shadow = document.querySelector(".shadow");
+const content = document.querySelector(".content");
+const section = document.querySelector("section");
+const image_container = document.querySelector(".imgContainer");
+const opacity = document.querySelectorAll(".opacity");
+const border = document.querySelector(".border");
+
+let header_height = header.offsetHeight;
+let section_height = section.offsetHeight;
+
+
 const ScrollVideo = () => {
   const { scrollY } = useScroll();
-  const videoRef = useRef(null);
-  const bigTitleRef = useRef(null);
-  const headerRef = useRef(null);
-  const shadowRef = useRef(null);
-  const contentRef = useRef(null);
-  const imageContainerRef = useRef(null);
-  const borderRef = useRef(null);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!bigTitleRef.current || !headerRef.current || !shadowRef.current || !contentRef.current || !imageContainerRef.current || !borderRef.current || !sectionRef.current) {
-        return;
-      }
-
-      const scroll = window.pageYOffset;
-      const sectionY = sectionRef.current.getBoundingClientRect();
-      const headerHeight = headerRef.current.offsetHeight;
-      const sectionHeight = sectionRef.current.offsetHeight;
-
-      document.querySelectorAll('.translate').forEach(element => {
-        const speed = element.dataset.speed;
-        element.style.transform = `translateY(${scroll * speed}px)`;
-      });
-
-      document.querySelectorAll('.opacity').forEach(element => {
-        element.style.opacity = scroll / (sectionY.top + sectionHeight);
-      });
-
-      bigTitleRef.current.style.opacity = -scroll / (headerHeight / 2) + 1;
-      shadowRef.current.style.height = `${scroll * 0.5 + 300}px`;
-
-      contentRef.current.style.transform = `translateY(${scroll / (sectionHeight + sectionY.top) * 50 - 50}px)`;
-      imageContainerRef.current.style.transform = `translateY(${scroll / (sectionHeight + sectionY.top) * -50 + 50}px)`;
-
-      borderRef.current.style.width = `${scroll / (sectionY.top + sectionHeight) * 30}%`;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const videoRef = React.createRef();
 
   return (
     <div className="video-container1">
@@ -65,12 +40,37 @@ const ScrollVideo = () => {
             top: 0,
             left: 0,
           }}
-          animate={{ y: scrollY.current * 0.5 }}
+          y={scrollY * 0.5}
           transition={{ duration: 0.5 }}
-        />
+        ></motion.video>
       </div>
+      <style>
+        {`
+          .video-container1 {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+          }
 
-      
+          .video-background1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
+
+          .video-background1 video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        `}
+      </style>
     </div>
   );
 };
