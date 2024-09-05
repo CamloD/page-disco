@@ -9,8 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 
+import ScrollImage from "./animations/ScrollImage"
+import { Parallax } from "react-parallax"
+import styles from "./Styles/ParallaxImage.css"
+import PScrollVideo from "./animations/ScrollVideo"
 import ScrollVideo from "./animations/ScrollVideo"
-
+import Scroll_image from "./animations/scroll_image"
+import Pruebas from "./animations/Pruebas"
+import Presentacion from "./animations/Presentacion"
 
 
 
@@ -21,9 +27,7 @@ const page = () => {
       
       <main className="flex-1">
         <section className="relative h-[90vh] overflow-hidde">
-          <video autoPlay loop muted className="absolute inset-0 w-full h-full object-cover">
-            <source src="video/video_banner_2.mp4" type="video/mp4"/>  
-          </video>
+          <Presentacion/>
           
           <div className="absolute inset-0 bg-black/20 flex items-center justify-normal">
               <div className="m-20 max-w-4xl text-left space-y-6 text-white flex flex-col justify-center">
@@ -227,6 +231,11 @@ const page = () => {
 
         <section>   
         <ScrollVideo/>
+        </section>
+
+
+        <section>   
+        <Scroll_image/>
         </section>
 
         <section id="contact" className="py-16 bg-[#1a1a1a]">

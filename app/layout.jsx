@@ -37,10 +37,6 @@ export default function RootLayout({ children }) {
       <body className={cn('antialiased', fontHeading.variable, fontBody.variable)} >
         <Header />
         {children}
-
-        
-       
-        
       </body>
     </html>
   );
