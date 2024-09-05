@@ -36,22 +36,22 @@ const Presentacion = () => {
   //console.log("offset", scrollY);
 
   return (
-      <div ref={videoWrapperRef} className='video-background1'>
+      <div ref={videoWrapperRef} className=''>
         <div  className={styles.videoWrapper1}>
           <video
-            className={styles.backgroundVideo1}
+            className={`${styles.backgroundVideo1} absolute inset-0 w-full h-full object-cover`}
             autoPlay
             muted
             loop
-            style={{ transform: `translateY(${isInView ? scrollY * 0.9 : 0}px)` }}
+            style={{ transform: `translateY(${isInView ? scrollY * 0.4 : 0}px)` }}
           >
             <source src="video/video_banner_2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           {/* Optional: Display the scroll offset for debugging or informational purposes */}
-          <div className={styles.offsetInfo}>
+          {/*<div className={styles.offsetInfo}>
             <p>Scroll Y - Top Offset: {scrollY}px</p>
-          </div>
+          </div>*/}
         </div>
       </div>
   )

@@ -49,9 +49,9 @@ const ScrollVideo = () => {
             Your browser does not support the video tag.
           </video>
           {/* Optional: Display the scroll offset for debugging or informational purposes */}
-          <div className={styles.offsetInfo}>
+          {/*<div className={styles.offsetInfo}>
             <p>Scroll Y - Top Offset: {scrollY}px</p>
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>
