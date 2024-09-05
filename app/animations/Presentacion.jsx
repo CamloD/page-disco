@@ -36,10 +36,10 @@ const Presentacion = () => {
   //console.log("offset", scrollY);
 
   return (
-      <div ref={videoWrapperRef} className=''>
+      <div ref={videoWrapperRef} className='video-background1'>
         <div  className={styles.videoWrapper1}>
           <video
-            className={`${styles.backgroundVideo1} absolute inset-0 w-full h-full object-cover`}
+            className={`${styles.backgroundVideo1} `}
             autoPlay
             muted
             loop
