@@ -15,7 +15,6 @@ import styles from "./Styles/ParallaxImage.css"
 import PScrollVideo from "./animations/ScrollVideo"
 import ScrollVideo from "./animations/ScrollVideo"
 import Scroll_image from "./animations/scroll_image"
-import Pruebas from "./animations/Pruebas"
 import Presentacion from "./animations/Presentacion"
 
 
