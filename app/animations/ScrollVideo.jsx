@@ -35,7 +35,7 @@ const ScrollVideo = () => {
   //console.log("offset", scrollY);
   
   return (
-    <div ref={videoWrapperRef} className='video-container1'>
+    <div ref={videoWrapperRef} className='video-container1 bg-[#1a1a1a]'>
       <div className='video-background1'>
         <div  className={styles.videoWrapper1}>
           <video
@@ -46,12 +46,7 @@ const ScrollVideo = () => {
             style={{ transform: `translateY(${isInView ? scrollY * 0.5 : 0}px)` }}
           >
             <source src="video/video_banner.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          {/* Optional: Display the scroll offset for debugging or informational purposes */}
-          {/*<div className={styles.offsetInfo}>
-            <p>Scroll Y - Top Offset: {scrollY}px</p>
-          </div>*/}
         </div>
       </div>
     </div>

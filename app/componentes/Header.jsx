@@ -1,4 +1,5 @@
-"use client"; // Asegúrate de que el componente sea renderizado en el cliente
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client"; 
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -15,8 +16,8 @@ const Header = () => {
     if (headerRef.current) {
       const height = headerRef.current.offsetHeight;
       setHeaderHeight(height);
-      console.log('Altura del header (offsetHeight):', height); // Muestra la altura del header en la consola
-      console.log('Posición del scroll:', window.scrollY); 
+      //console.log('Altura del header (offsetHeight):', height);
+      //console.log('Posición del scroll:', window.scrollY); 
     }
   };
 
@@ -24,9 +25,9 @@ const Header = () => {
     {/* en caso de ponerlo con referencia al tamaño del objeto
       setIsScrolled(window.scrollY > headerHeight);*/}
       const scrollTop = window.scrollY;
-      setIsScrolled(window.scrollY > 0);
-      setHeaderShadow(scrollTop > 0 ? 'shadow-xl' : 'shadow-sm');
-    console.log('Posición del scroll:', window.scrollY); 
+      setIsScrolled(window.scrollY > headerHeight - 30);
+      setHeaderShadow(scrollTop > headerHeight - 30 ? 'shadow-xl' : 'shadow-sm');
+      console.log('Posición del scroll:', window.scrollY); 
   };
 
   useEffect(() => {
@@ -47,10 +48,10 @@ const Header = () => {
         handleScroll();
       });
     };
-  }, [headerHeight]);
+  }, [handleScroll, headerHeight]);
 
   const initialColor = 'rgba(26, 26, 26, 0)'; 
-  const scrolledColor = 'rgba(26, 26, 26, 0.8)';
+  const scrolledColor = 'rgba(26, 26, 26, 0.97)';
 
   const headerStyle = {
     backgroundColor: isScrolled ? scrolledColor : initialColor,
