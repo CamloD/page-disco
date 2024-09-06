@@ -27,7 +27,7 @@ const Header = () => {
       const scrollTop = window.scrollY;
       setIsScrolled(window.scrollY > headerHeight - 30);
       setHeaderShadow(scrollTop > headerHeight - 30 ? 'shadow-xl' : 'shadow-sm');
-      console.log('Posición del scroll:', window.scrollY); 
+      //console.log('Posición del scroll:', window.scrollY); 
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Header = () => {
     top: 0,
     left: 0,
     width: '100%', 
-    zIndex: 2,
+    zIndex: 2
   };
   return (
     <header 
