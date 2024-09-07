@@ -46,12 +46,7 @@ const Presentacion = () => {
             style={{ transform: `translateY(${isInView ? scrollY * 0.4 : 0}px)` }}
           >
             <source src="video/video_banner_2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          {/* Optional: Display the scroll offset for debugging or informational purposes */}
-          {/*<div className={styles.offsetInfo}>
-            <p>Scroll Y - Top Offset: {scrollY}px</p>
-          </div>*/}
         </div>
       </div>
   )

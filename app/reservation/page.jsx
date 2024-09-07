@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 const Reservation = () => {
   return (
     <div>
-
+      <title> Reservación | Disco </title>
         <section id="reservations" className="py-12 md:py-24 bg-[#1f1f1f] h-[100vh]">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold mb-8 text-center text-white">Make a Reservation</h2>

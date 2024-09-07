@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 const Contact = () => {
   return (
       <div className='flex-1'>
+        <title> Contactame | Disco </title>
         <section id="contact" className=" py-32 flex sm:py-32 md:py-24 h-[100vh] bg-[#1a1a1a] ">
           <div className="container mx-auto flex flex-col">
             <div className="grid gap-x-1">

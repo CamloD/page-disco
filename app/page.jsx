@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 import ScrollImage from "./animations/ScrollImage"
 import { Parallax } from "react-parallax"
-import styles from "./Styles/ParallaxImage.css"
+import styles1 from "@/app/Styles/principal.css"
 import PScrollVideo from "./animations/ScrollVideo"
 import ScrollVideo from "./animations/ScrollVideo"
 import Scroll_image from "./animations/scroll_image"
@@ -25,7 +25,7 @@ const page = () => {
     <div className=" dark:bg-[#1a1a1a]">
       
       <main className="flex-1">
-        <section className="relative h-[90vh] overflow-hidde">
+        <section className="relative h-[100vh] overflow-hidde">
           <Presentacion/>
           
           <div className="absolute inset-0 bg-black/20 flex items-center justify-normal">
