@@ -72,7 +72,7 @@ const page = () => {
                   <Link href="/reservation">
                     <Button size="lg" className = "bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
                   </Link>
-                  <Button size="lg" className= "bg-emerald-500 text-black hover:bg-emerald-700">
+                  <Button size="lg" className= "bg-emerald-500 hover:bg-emerald-700">
                     Ver Calendario
                   </Button>
                 </div>
