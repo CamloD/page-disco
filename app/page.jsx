@@ -45,14 +45,14 @@ const page = () => {
                     className="inline-flex h-10 items-center justify-center rounded-md bg-green-600 px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-emerald-500/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
-                    Upcoming Events
+                    Ver Eventos
                   </Link>
                   <Link
-                    href="#"
+                    href="/reservation"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-none bg-rose-900 px-8 text-sm font-medium shadow-sm transition-colors hover:bg-red-600/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
-                    Book a Table
+                    Hacer Reservación
                   </Link>
                 </div>
               </div>
@@ -69,7 +69,9 @@ const page = () => {
                   invitados.
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row ">
-                  <Button size="lg" className = "bg-red-700 hover:bg-red-900">Comprar Entradas</Button>
+                  <Link href="/reservation">
+                    <Button size="lg" className = "bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
+                  </Link>
                   <Button size="lg" className= "bg-emerald-500 text-black hover:bg-emerald-700">
                     Ver Calendario
                   </Button>
@@ -126,7 +128,7 @@ const page = () => {
                   Ven a disfrutar de una noche llena de música electrónica y ambiente de fiesta. Contaremos con la
                   presencia del DJ internacional Sasha.
                 </p>
-                <Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button>
+                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -139,7 +141,7 @@ const page = () => {
                 <p className="text-muted-foreground mb-4">
                   Disfruta de una noche llena de ritmos latinos con la presentación del legendario grupo Niche.
                 </p>
-                <Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button>
+                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -152,7 +154,7 @@ const page = () => {
                 <p className="text-muted-foreground mb-4">
                   Celebramos nuestro 5to aniversario con una fiesta espectacular con la presentación del DJ Tiësto.
                 </p>
-                <Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button>
+                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
             </div>
           </div>
