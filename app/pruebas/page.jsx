@@ -232,7 +232,7 @@ const Pruebas = () => {
       </article>
     </section>
   </main>
-  <footer className="footer">Fin.</footer>
+  
 </div>
   );
 };

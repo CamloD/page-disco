@@ -23,6 +23,11 @@ const links = [
         name: "pruebas",
         path: "/pruebas",
     },
+    {
+        name:"pruebas 2",
+        path:"/pruebas_2"
+    },
+    
 ]
 
 const Nav = () => {

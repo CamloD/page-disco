@@ -25,6 +25,11 @@ const links = [
       name: "reservation",
       path: "/reservation",
   },
+  {
+      name:"pruebas 2",
+      path:"/pruebas_2"
+  },
+  
 ]
 
 const MobileNav = () => {

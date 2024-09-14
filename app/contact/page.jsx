@@ -11,7 +11,7 @@ const Contact = () => {
   return (
       <div className='flex-1'>
         <title> Contactame | Disco </title>
-        <section id="contact" className=" py-32 flex sm:py-32 md:py-24 h-[100vh] bg-[#1a1a1a] ">
+        <section id="contact" className="flex py-32 sm:py-32 md:py-24 h-[100vh] bg-[#1a1a1a] ">
           <div className="container mx-auto flex flex-col">
             <div className="grid gap-x-1">
               <h2 className=" text-3xl font-bold mb-8 text-white ">Contact Us</h2>
