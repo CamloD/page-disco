@@ -2,12 +2,13 @@
   "name": "page_disco",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "homepage": "https://www.disco.com/page-disco/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "export": "next export",
+    "start": "NODE_ENV=production node server.js",
+    "export": "next export",  
     "lint": "next lint"
   },
   "dependencies": {
