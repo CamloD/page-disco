@@ -117,58 +117,8 @@ const Gallery = () => {
       </header>
       <main className="flex-1 bg-[#3a3a3a] py-8">
       <ImageGrid/>
-        <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredMedia.map((item) => (
-            <div
-              key={item.id}
-              className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer group"
-              onClick={() => handleMediaClick(item)}
-            >
-              {item.type === "image" ? (
-                <img
-                  src={item.src}
-                  alt={`Media ${item.id}`}
-                  className="w-full h-64 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                />
-              ) : (
-                <video
-                  src={item.src}
-                  className="w-full h-64 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-                  controls
-                />
-              )}
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-white text-lg font-medium">
-                  {item.type === "image" ? "View Image" : "Play Video"}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </main>
-      {selectedMedia && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className=" sm:max-w-[90vw] md:max-w-[84vw] lg:max-w-[87vw] max-h-[90vh] overflow-auto grid ">
-            {selectedMedia.type === "image" ? (
-              <img
-                src={selectedMedia.src}
-                alt={`Media ${selectedMedia.id}`}
-                className="max-w-full max-h-full object-contain "
-              />
-            ) : (
-              <video src={selectedMedia.src} className="max-w-full max-h-full object-contain" controls />
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 text-white hover:bg-white/20"
-              onClick={handleClosePreview}
-            >
-              <XIcon className="w-6 h-6" />
-            </Button>
-          </div>
-        </div>
-      )}
+      
 
       
     </div>

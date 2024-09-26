@@ -13,24 +13,12 @@ const links = [
         path: "/gallery",
     },
     {
-        name:"gallery1",
-        path:"/gallery1"
-    },
-    {
-        name:"gallery2",
-        path:"/gallery2"
-    },
-    {
         name: "contact",
         path: "/contact",
     },
     {
         name: "reservation",
         path: "/reservation",
-    },
-    {
-        name: "pruebas",
-        path: "/pruebas",
     },
     {
         name:"pruebas 2",

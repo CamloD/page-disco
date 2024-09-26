@@ -8,7 +8,7 @@ export default function Home() {
       <main className=" min-h-screen bg-white">
         <div className='flex py-8'></div>
         
-       
+        
         <div className="p-4">
           <ImageGrid />
         </div>

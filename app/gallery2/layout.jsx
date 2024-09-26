@@ -1,22 +1,34 @@
 import { Inter } from 'next/font/google'
-import { Sidebar } from './components/sidebar'
+import { cn } from '@/lib/utils'
+import './globals.css'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'Google Photos Clone',
-  description: 'A simple clone of Google Photos',
-}
+const fontHeading = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-heading',
+})
+
+
+const fontBody = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  variable: '--font-jetbrainsMono',
+  
+  /*
+  variable: '--font-body',
+  */
+})
 
 export default function SecondaryLayout({ children }) {
   return (
-    <div className="flex h-screen bg-white">
-      <Sidebar />
-      <div className="flex-1 overflow-auto">
+    <html lang="es">
+      <body className={cn('antialiased', fontHeading.variable, fontBody.variable)} >
         {children}
-        
-      </div>
-    </div>
+      </body>
+    </html>
   )
 }
