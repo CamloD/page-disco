@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "export": "next export",  
+    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-parallax": "^3.5.1",
+    "react-photo-album": "^3.0.2",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
   },

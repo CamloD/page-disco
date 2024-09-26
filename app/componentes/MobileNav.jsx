@@ -16,6 +16,10 @@ const links = [
     path: "/gallery",
   },
   {
+    name:"gallery1",
+    path:"/gallery1"
+  },
+  {
     name: "contact",
     path: "/contact",
   },
@@ -27,6 +31,11 @@ const links = [
     name: "pruebas",
     path: "/pruebas",
   },
+  {
+    name: "pruebas_2",
+    path: "/pruebas_2",
+  },
+
 ];
 
 const MobileNav = () => {

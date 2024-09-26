@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from 'next/router';
 
 const links = [
     {
@@ -10,6 +11,14 @@ const links = [
     {
         name: "gallery",
         path: "/gallery",
+    },
+    {
+        name:"gallery1",
+        path:"/gallery1"
+    },
+    {
+        name:"gallery2",
+        path:"/gallery2"
     },
     {
         name: "contact",
@@ -27,10 +36,11 @@ const links = [
         name:"pruebas 2",
         path:"/pruebas_2"
     },
+
     
 ]
 
-const Nav = () => {
+const Naveg = () => {
     const pathName = usePathname();
     return (
         <nav className="hidden md:flex items-center space-x-6">
@@ -50,4 +60,4 @@ const Nav = () => {
   );
 };
 
-export default Nav
+export default Naveg

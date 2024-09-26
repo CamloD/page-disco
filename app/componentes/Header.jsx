@@ -3,8 +3,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Nav from './Nav';
 import MobileNav from './MobileNav';
+import Nav from './Nav';
+
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);

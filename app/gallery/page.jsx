@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
+import { ImageGrid } from './components/imagesgrid'
 import { useState} from "react";
 import { Button } from "@/components/ui/button"
 
@@ -115,6 +116,7 @@ const Gallery = () => {
         </div>
       </header>
       <main className="flex-1 bg-[#3a3a3a] py-8">
+      <ImageGrid/>
         <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredMedia.map((item) => (
             <div
@@ -146,12 +148,12 @@ const Gallery = () => {
       </main>
       {selectedMedia && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="max-w-[90vw] max-h-[90vh] overflow-auto">
+          <div className=" sm:max-w-[90vw] md:max-w-[84vw] lg:max-w-[87vw] max-h-[90vh] overflow-auto grid ">
             {selectedMedia.type === "image" ? (
               <img
                 src={selectedMedia.src}
                 alt={`Media ${selectedMedia.id}`}
-                className="max-w-full max-h-full object-contain"
+                className="max-w-full max-h-full object-contain "
               />
             ) : (
               <video src={selectedMedia.src} className="max-w-full max-h-full object-contain" controls />
@@ -167,6 +169,8 @@ const Gallery = () => {
           </div>
         </div>
       )}
+
+      
     </div>
   )
 }
