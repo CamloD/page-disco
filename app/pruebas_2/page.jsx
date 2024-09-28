@@ -20,7 +20,7 @@ const UserList = () => {
           "Content-Type": "application/json",
         },
       });
-      if (!response.ok) throw new Error("Failed to fetch users");
+      if (!response.ok) throw new Error("No se pudieron obtener los usuarios");
       const data = await response.json();
       setUsers(data);
     } catch (error) {
