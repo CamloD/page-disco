@@ -88,7 +88,7 @@ const UserList = () => {
                     ))
                 ) : (
                     <tr>
-                    <td colSpan="4" className="text-center py-3">No users found</td>
+                    <td colSpan="4" className="text-center py-3">No se encontraron usuarios</td>
                     </tr>
                 )}
                 </tbody>
