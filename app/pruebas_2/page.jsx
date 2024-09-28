@@ -62,10 +62,10 @@ const UserList = () => {
             <table className="min-w-full rounded-lg border border-gray-300 bg-white overflow-hidden shadow-md">
                 <thead className="bg-gray-50">
                 <tr>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">First Name</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Last Name</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Email Id</th>
-                    <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Actions</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Nombres</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Apellidos</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Correo Electrónico</th>
+                    <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Acciones</th>
                 </tr>
                 </thead>
                 <tbody className="bg-[#eaeaea]">
