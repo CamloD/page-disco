@@ -71,7 +71,7 @@ const UserList = () => {
                 <tbody className="bg-[#eaeaea]">
                 {loading ? (
                     <tr>
-                    <td colSpan="4" className="text-center py-3">Loading...</td>
+                    <td colSpan="4" className="text-center py-3">Cargando...</td>
                     </tr>
                 ) : error ? (
                     <tr>
