@@ -17,7 +17,7 @@ export async function getVideoMetadata(src: string) {
   return {
     duration: "00:03:24",
     format: "MP4",
-    resolution: "1920x1080",
+    resolution: "1920x1080..",
     fileName: src.split('/').pop() || 'unknown.mp4',
     fileSize: "15.7 MB"
   }
