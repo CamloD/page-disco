@@ -364,11 +364,22 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
           }}
         />
         <div 
-          className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/50 w-full h-full transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
-          onClick={(e) => e.stopPropagation()}
-          onMouseEnter={() => setShowControls(true)}
-          onMouseLeave={() => isPlaying && setShowControls(false)}
-        >
+            className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/50 w-full h-full transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            onClick={(e) => {
+              e.stopPropagation(); // Evitar que el clic se propague
+            }}
+            onMouseEnter={() => setShowControls(true)}
+            onMouseLeave={() => isPlaying && setShowControls(false)}
+          >
+            {/* Aquí va el área de la pestaña que se usa para play/pause */}
+          <div className="flex-grow"
+            onClick={(e) => {
+              e.stopPropagation(); // Evitar que el clic se propague
+              togglePlayPause(); // Lógica para pausar o reproducir el video
+            }}
+          
+          /> {/* Espacio flexible para que funcione el clic */}
+          <div className="px-4 pb-2"></div>
           <div className="px-4 pb-2">
             <Slider
               value={[currentTime]}
