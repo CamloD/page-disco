@@ -20,7 +20,7 @@ const UserList = () => {
           "Content-Type": "application/json",
         },
       });
-      if (!response.ok) throw new Error("Failed to fetch users");
+      if (!response.ok) throw new Error("No se pudieron obtener los usuarios");
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -62,16 +62,16 @@ const UserList = () => {
             <table className="min-w-full rounded-lg border border-gray-300 bg-white overflow-hidden shadow-md">
                 <thead className="bg-gray-50">
                 <tr>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">First Name</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Last Name</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Email Id</th>
-                    <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Actions</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Nombres</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Apellidos</th>
+                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Correo Electrónico</th>
+                    <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Acciones</th>
                 </tr>
                 </thead>
                 <tbody className="bg-[#eaeaea]">
                 {loading ? (
                     <tr>
-                    <td colSpan="4" className="text-center py-3">Loading...</td>
+                    <td colSpan="4" className="text-center py-3">Cargando...</td>
                     </tr>
                 ) : error ? (
                     <tr>
@@ -88,7 +88,7 @@ const UserList = () => {
                     ))
                 ) : (
                     <tr>
-                    <td colSpan="4" className="text-center py-3">No users found</td>
+                    <td colSpan="4" className="text-center py-3">No se encontraron usuarios</td>
                     </tr>
                 )}
                 </tbody>

@@ -34,11 +34,11 @@ const AddUser = ({ onUserAdded }) => {
   const validateUser = () => {
     const { firstName, lastName, emailId } = user;
     if (!firstName || !lastName || !emailId) {
-      setError('All fields are required.');
+      setError('Todos los campos son obligatorios.');
       return false;
     }
     if (!/\S+@\S+\.\S+/.test(emailId)) {
-      setError('Invalid email address.');
+      setError('Dirección de correo electrónico no válida.');
       return false;
     }
     setError('');
@@ -59,7 +59,7 @@ const AddUser = ({ onUserAdded }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save user");
+        throw new Error("No se pudo guardar la usuario.");
       }
 
       await response.json();
@@ -67,8 +67,8 @@ const AddUser = ({ onUserAdded }) => {
       reset(); // Resetea el estado del usuario
       close(); // Cierra el modal
     } catch (error) {
-      console.error("Error saving user:", error);
-      setError('Failed to save user.');
+      console.error("No se pudo guardar la usuario:", error);
+      setError('No se pudo guardar la usuario.');
     }
   };
 
