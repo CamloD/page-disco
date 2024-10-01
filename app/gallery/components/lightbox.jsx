@@ -508,6 +508,9 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+        onClick={handleClick}
+        onTouchStart={handleDragStart}
+        onTouchEnd={handleDragEnd}
       >
         <div 
           ref={containerRef}
@@ -520,7 +523,10 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
           <motion.div 
             className={`relative ${showInfo ? 'w-3/4' : 'w-full'} h-full transition-all duration-300 ease-in-out absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30`}
           >
-            <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30">
+            <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30"
+            onClick={(e) => {
+              e.stopPropagation();}}
+            >
               <button onClick={onClose} className="text-white hover:text-gray-300" aria-label="Close lightbox">
                 <X size={24} />
               </button>

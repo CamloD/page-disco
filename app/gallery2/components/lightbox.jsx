@@ -503,11 +503,16 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
   return (
     <AnimatePresence>
       <motion.div
+        
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+        onClick={handleClick}
+        onTouchStart={handleDragStart}
+        onTouchEnd={handleDragEnd}
+        
       >
         <div 
           ref={containerRef}
