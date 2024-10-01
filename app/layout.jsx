@@ -4,7 +4,7 @@ import './globals.css'
 
 
 // Components
-import Header from "@/app/componentes/Header";
+import Header from "@/app/components/Header";
 
 
 const fontHeading = Inter({
