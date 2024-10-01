@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Play, Search, Image as ImageIcon, Info } from 'lucide-react'
-import { Lightbox } from './Lightbox'
+import { Lightbox } from './lightbox'
 import { useSwipeable } from 'react-swipeable'
 import { motion } from 'framer-motion'
 import { getImageMetadata } from './lib/mediaUtils'
@@ -130,8 +130,9 @@ export function ImageGrid() {
                 <Image
                   src={item.src}
                   alt={item.alt}
-                  fill
-                  className="transition-transform duration-300 group-hover:scale-105 object-cover"
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
                 <VideoThumbnail src={item.src} alt={item.alt} />

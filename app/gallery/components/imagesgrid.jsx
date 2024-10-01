@@ -99,9 +99,8 @@ export function ImageGrid() {
               <Image
                 src={item.src}
                 alt={item.alt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 group-hover:scale-105"
+                fill
+                className="transition-transform duration-300 group-hover:scale-105 object-cover"
               />
             ) : (
               <VideoThumbnail src={item.src} alt={item.alt} />
