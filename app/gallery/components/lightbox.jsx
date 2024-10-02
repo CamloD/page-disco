@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight, X, Star, Download, Info, Volume2, VolumeX, Play, Pause, Minimize, Maximize, Settings, PictureInPicture2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X, Download, Info, Volume2, VolumeX, Play, Pause, Minimize, Maximize, Settings, PictureInPicture2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
@@ -48,9 +48,9 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
   
   useEffect(() => {
     if (isFullscreen) {
-      setShowInfo(false);
+      setShowInfo(false)
     }
-  }, [isFullscreen]);
+  }, [isFullscreen])
 
   useEffect(() => {
     const fetchMetadata = async () => {
@@ -66,6 +66,22 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
       }
     }
     fetchMetadata()
+  }, [currentIndex, mediaItems])
+
+  const handleInteraction = useCallback((e) => {
+    e.stopPropagation()
+    showControlsTemporarily()
+    
+    const containerWidth = containerRef.current.offsetWidth
+    const interactionX = e.clientX || (e.touches && e.touches[0].clientX)
+    
+    if (interactionX < containerWidth / 3) {
+      handlePrevious()
+    } else if (interactionX > containerWidth * 2 / 3) {
+      handleNext()
+    } else if (mediaItems[currentIndex].type === 'video') {
+      togglePlayPause()
+    }
   }, [currentIndex, mediaItems])
 
   const handleDragStart = useCallback((e) => {
@@ -87,6 +103,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
           handleNext()
         }
       }
+      showControlsTemporarily()
     }
   }, [isMobile, isDragging, dragStart])
 
@@ -111,16 +128,6 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
       return newIndex
     })
   }, [mediaItems.length, isPlaying])
-
-  const handleClick = useCallback((e) => {
-    const containerWidth = containerRef.current.offsetWidth
-    const clickX = e.clientX
-    if (clickX < containerWidth / 3) {
-      handlePrevious()
-    } else if (clickX > containerWidth * 2 / 3) {
-      handleNext()
-    }
-  }, [handlePrevious, handleNext])
 
   const togglePlayPause = useCallback(() => {
     if (videoRef.current) {
@@ -147,12 +154,12 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
       } else {
         videoRef.current.muted = true
         setPreviousVolume(volume)
-        setVolume(0) // Set to minimum instead of 0
+        setVolume(0)
       }
 
       if (isMuted && previousVolume < 0.1) {
-        setVolume(0.5); 
-        handleVolumeChange([0.5]);
+        setVolume(0.5)
+        handleVolumeChange([0.5])
       }
       setIsMuted(!isMuted)
     }
@@ -160,15 +167,15 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
 
   const handleVolumeChange = useCallback((newVolume) => {
     if (videoRef.current) {
-      const volumeValue = newVolume[0];
-      videoRef.current.volume = volumeValue;
-      setVolume(volumeValue);
-      setIsMuted(volumeValue === 0);
+      const volumeValue = newVolume[0]
+      videoRef.current.volume = volumeValue
+      setVolume(volumeValue)
+      setIsMuted(volumeValue === 0)
       if (volumeValue > 0) {
-        setPreviousVolume(volumeValue);
+        setPreviousVolume(volumeValue)
       }
     }
-  }, []);
+  }, [])
 
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
@@ -230,14 +237,12 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current)
     }
-    if (isPlaying) {
-      controlsTimeoutRef.current = setTimeout(() => {
+    controlsTimeoutRef.current = setTimeout(() => {
+      if (isPlaying && !isMobile) {
         setShowControls(false)
-      }, 3000)
-    }
-  }, [isPlaying])
-
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+      }
+    }, 3000)
+  }, [isPlaying, isMobile])
 
   const handleDownload = useCallback(() => {
     const currentItem = mediaItems[currentIndex]
@@ -338,10 +343,10 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
   const currentItem = mediaItems[currentIndex]
 
   const renderMediaItem = (item, isActive = false) => {
-    const mobileScale = showInfo ? 0.82 : 0.90; 
-  const desktopScale = showInfo ? 0.92 : 0.98; 
-  
-  const scale = isMobile ? mobileScale : desktopScale;
+    const mobileScale = showInfo ? 0.82 : 0.90
+    const desktopScale = showInfo ? 0.92 : 0.98
+    const scale = isMobile ? mobileScale : desktopScale
+
     return item.type === 'image' ? (
       <div className="relative w-full h-full flex items-center justify-center">
         <Image
@@ -356,8 +361,8 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
       </div>
     ) : (
       <div 
-      className="relative max-h-[90vh] flex items-center justify-center"
-      style={{ transform: `scale(${scale})`, willChange: 'transform' }}
+        className="relative max-h-[90vh] flex items-center justify-center"
+        style={{ transform: `scale(${scale})`, willChange: 'transform' }}
       >
         <video
           ref={videoRef}
@@ -383,19 +388,18 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
           }}
         />
         <div 
-            className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/50 w-full h-full transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            onMouseEnter={() => setShowControls(true)}
-            onMouseLeave={() => isPlaying && setShowControls(false)}
-          >
+          className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/50 w-full h-full transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+          onMouseEnter={() => setShowControls(true)}
+          onMouseLeave={() => isPlaying && setShowControls(false)}
+        >
           <div className="flex-grow"
             onClick={(e) => {
-              e.stopPropagation(); 
-              togglePlayPause(); 
+              e.stopPropagation()
+              togglePlayPause()
             }}
-          
           />
           <div className="px-4 pb-2">
             <Slider
@@ -429,24 +433,24 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                 {isMuted ? <VolumeX className="w-6 h-6 fill-white" /> : <Volume2 className="w-6 h-6 fill-white" />}
               </Button>
               {showVolumeSlider && (
-                 <Slider
-                 value={[isMuted ? 0 : volume * 100]}
-                 max={100}
-                 step={1}
-                 onValueChange={(newVolume) => {
-                   const volumeValue = newVolume[0] / 100;
-                   handleVolumeChange([volumeValue]);
-                   setVolume(volumeValue);
-             
-                   if (volumeValue > 0) {
-                     setIsMuted(false);
-                     setPreviousVolume(volumeValue);
-                   } else {
-                     setIsMuted(true);
-                   }
-                 }}
-                 className="w-20 ml-2 [&>span:first-child]:h-1 [&>span:first-child]:bg-white/30 [&_[role=slider]]:bg-green-800 [&_[role=slider]]:w-3 [&_[role=slider]]:h-3 [&_[role=slider]]:border-0 [&>span:first-child_span]:bg-green-800 [&_[role=slider]:focus-visible]:ring-0 [&_[role=slider]:focus-visible]:ring-offset-0 [&_[role=slider]:focus-visible]:scale-105 [&_[role=slider]:focus-visible]:transition-transform"
-               /> 
+                <Slider
+                  value={[isMuted ? 0 : volume * 100]}
+                  max={100}
+                  step={1}
+                  onValueChange={(newVolume) => {
+                    const volumeValue = newVolume[0] / 100
+                    handleVolumeChange([volumeValue])
+                    setVolume(volumeValue)
+            
+                    if (volumeValue > 0) {
+                      setIsMuted(false)
+                      setPreviousVolume(volumeValue)
+                    } else {
+                      setIsMuted(true)
+                    }
+                  }}
+                  className="w-20 ml-2 [&>span:first-child]:h-1 [&>span:first-child]:bg-white/30 [&_[role=slider]]:bg-green-800 [&_[role=slider]]:w-3 [&_[role=slider]]:h-3 [&_[role=slider]]:border-0 [&>span:first-child_span]:bg-green-800 [&_[role=slider]:focus-visible]:ring-0 [&_[role=slider]:focus-visible]:ring-offset-0 [&_[role=slider]:focus-visible]:scale-105 [&_[role=slider]:focus-visible]:transition-transform"
+                />
               )}
             </div>
             <div className="text-sm">{formatTime(currentTime)} / {formatTime(duration)}</div>
@@ -506,7 +510,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                 )}
               </div>
               
-              { isDesktop && (
+              {!isMobile && (
                 <Button
                   size="icon"
                   variant="ghost"
@@ -539,22 +543,19 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         className={`fixed inset-0 ${isFullscreen ? 'bg-black' : 'bg-black bg-opacity-90'} flex items-center justify-center z-50`}
-        onClick={handleClick}
+        onClick={handleInteraction}
         onTouchStart={handleDragStart}
         onTouchEnd={handleDragEnd}
+        onMouseMove={showControlsTemporarily}
       >
         <div
           ref={containerRef}
           className={`relative w-full h-full ${isFullscreen ? 'max-w-full max-h-full' : 'max-w-7xl'} mx-auto flex ${isMobile ? 'flex-col' : 'flex-row'}`}
-          onClick={handleClick}
-          onTouchStart={handleDragStart}
-          onTouchEnd={handleDragEnd}
-          onMouseMove={showControlsTemporarily}
         >
           <motion.div 
             className={`relative ${showInfo ? (isMobile ? 'w-full h-[64%] p-4' : 'w-3/4 h-full') : 'w-full h-full'} transition-all duration-300 ease-in-out flex justify-center items-center z-30`}
           >
-            <div className={`absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30 ${isFullscreen ? 'hidden' : ''}`}>
+            <div className={`absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30 ${isFullscreen ? 'hidden' : ''} ${showControls ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
               <button onClick={onClose} className="text-white hover:text-gray-300" aria-label="Close lightbox">
                 <X size={24} />
               </button>
@@ -567,8 +568,8 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                   size="icon"
                   className="text-white hover:text-gray-300"
                   onClick={(e) => {
-                    e.stopPropagation();
-                    setShowInfo(!showInfo);
+                    e.stopPropagation()
+                    setShowInfo(!showInfo)
                   }}
                   aria-label="Toggle information"
                 >
@@ -606,14 +607,14 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                     opacity: { duration: 0.2 },
                   }}
                   className="absolute inset-0 flex items-center justify-center"
+                  onClick={handleInteraction}
                 >
                   {renderMediaItem(currentItem, true)}
                 </motion.div>
               </AnimatePresence>
             </div>
   
-            {/* Botones de navegación siempre visibles */}
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
+            <div className={`absolute left-4 top-1/2 transform -translate-y-1/2 z-20 ${showControls ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
               <button
                 onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
                 className="text-white hover:text-gray-300"
@@ -622,7 +623,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                 <ChevronLeft size={48} />
               </button>
             </div>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20">
+            <div className={`absolute right-4 top-1/2 transform -translate-y-1/2 z-20 ${showControls ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
               <button
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
                 className="text-white hover:text-gray-300"
@@ -673,7 +674,5 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
         </div>
       </motion.div>
     </AnimatePresence>
-  );
-  
-  
+  )
 }
