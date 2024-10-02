@@ -338,7 +338,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
   const currentItem = mediaItems[currentIndex]
 
   const renderMediaItem = (item, isActive = false) => {
-    const mobileScale = showInfo ? 0.75 : 0.90; 
+    const mobileScale = showInfo ? 0.82 : 0.90; 
   const desktopScale = showInfo ? 0.92 : 0.98; 
   
   const scale = isMobile ? mobileScale : desktopScale;
