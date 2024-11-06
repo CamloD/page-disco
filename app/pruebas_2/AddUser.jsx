@@ -89,7 +89,7 @@ const AddUser = ({ onUserAdded }) => {
             onClick={open}
             className="rounded bg-slate-600 hover:bg-slate-800 text-white px-6 py-2 font-semibold"
           >
-            Add User
+             Añadir Usuario
           </Button>
         </div>
       </div>
@@ -107,12 +107,12 @@ const AddUser = ({ onUserAdded }) => {
             >
               <DialogPanel className="w-full max-w-md p-6 mx-auto bg-white shadow-lg rounded">
                 <DialogTitle as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                  Add New User
+                  Añadir Nuevo Usuario
                 </DialogTitle>
                 <div className="flex flex-col space-y-4 mt-4">
                   {error && <p className="text-red-500">{error}</p>}
                   <div>
-                    <label className="block text-gray-600 text-sm font-normal">First Name</label>
+                    <label className="block text-gray-600 text-sm font-normal">Nombres</label>
                     <input
                       type="text"
                       name="firstName"
@@ -122,7 +122,7 @@ const AddUser = ({ onUserAdded }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm font-normal">Last Name</label>
+                    <label className="block text-gray-600 text-sm font-normal">Apellidos</label>
                     <input
                       type="text"
                       name="lastName"
@@ -132,7 +132,7 @@ const AddUser = ({ onUserAdded }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-600 text-sm font-normal">Email Id</label>
+                    <label className="block text-gray-600 text-sm font-normal">Correo Electrónico</label>
                     <input
                       type="text"
                       name="emailId"
@@ -146,13 +146,13 @@ const AddUser = ({ onUserAdded }) => {
                       onClick={saveUser}
                       className="rounded text-white font-semibold bg-green-500 hover:bg-green-700 py-2 px-6"
                     >
-                      Save
+                      Guardar
                     </Button>
                     <Button
                       onClick={close}
                       className="rounded text-white font-semibold bg-red-500 hover:bg-red-700 py-2 px-6"
                     >
-                      Close
+                      Cerrar
                     </Button>
                   </div>
                 </div>

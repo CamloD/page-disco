@@ -16,12 +16,12 @@ const User = ({ user, deleteUser, editUser }) => {
         <a
           onClick={(e, id) => editUser(e, user.id)}
           className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer px-4">
-          Edit
+          Editar
         </a>
         <a
           onClick={(e, id) => deleteUser(e, user.id)}
           className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer">
-          Delete
+          Eliminar
         </a>
       </td>
     </tr>

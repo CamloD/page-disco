@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import User from './User';
 import AddUser from './AddUser';
+import EditUser from './EditUser';
 
 const UserList = () => {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -39,62 +41,76 @@ const UserList = () => {
     setUserId(id);
   };
 
-  const deleteUser = (e, id) => {
+  const deleteUser = async (e, id) => {
     e.preventDefault();
-    fetch(USER_API_BASE_URL + "/" + id, {
-      method: "DELETE",
-    }).then((res) => {
-      if (users) {
-        setUsers((prevElement) => {
-          return prevElement.filter((user) => user.id !== id);
-        });
+    setLoading(true);
+    try {
+      const response = await fetch(USER_API_BASE_URL + "/" + id, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+      } else {
+        throw new Error("No se pudo eliminar el usuario.");
       }
-    });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className='flex flex-col w-full py-24 sm:py-16 md:py-12 min-h-screen bg-[#3a3a3a]'>
-        <div className="container mx-auto my-8 mb-24">
-            <div className="flex justify-end mb-4">
-            <AddUser onUserAdded={fetchUsers} />
-            </div>
-            <div className="flex">
-            <table className="min-w-full rounded-lg border border-gray-300 bg-white overflow-hidden shadow-md">
-                <thead className="bg-gray-50">
+    <div className="flex flex-col w-full py-24 sm:py-16 md:py-12 min-h-screen bg-[#3a3a3a]">
+      <div className="container mx-auto my-8 mb-24">
+        <div className="flex justify-end mb-4">
+          <AddUser onUserAdded={fetchUsers} />
+        </div>
+        <div className="flex">
+          <table className="min-w-full rounded-lg border border-gray-300 bg-white overflow-hidden shadow-md">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Nombres</th>
+                <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Apellidos</th>
+                <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Correo Electrónico</th>
+                <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Acciones</th>
+              </tr>
+            </thead>
+            <tbody className="bg-[#eaeaea]">
+              {loading ? (
                 <tr>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Nombres</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Apellidos</th>
-                    <th className="text-left font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Correo Electrónico</th>
-                    <th className="text-right font-medium text-gray-500 uppercase tracking-wide py-3 px-6">Acciones</th>
+                  <td colSpan="4" className="text-center py-3">Cargando...</td>
                 </tr>
-                </thead>
-                <tbody className="bg-[#eaeaea]">
-                {loading ? (
-                    <tr>
-                    <td colSpan="4" className="text-center py-3">Cargando...</td>
-                    </tr>
-                ) : error ? (
-                    <tr>
-                    <td colSpan="4" className="text-center py-3 text-red-600">{error}</td>
-                    </tr>
-                ) : users.length > 0 ? (
-                    users.map(user => (
-                    <User 
+              ) : error ? (
+                <tr>
+                  <td colSpan="4" className="text-center py-3 text-red-600">{error}</td>
+                </tr>
+              ) : users.length > 0 ? (
+                users.map(user => (
+                  <User
                     user={user}
                     key={user.id}
                     deleteUser={deleteUser}
                     editUser={editUser}
-                    />
-                    ))
-                ) : (
-                    <tr>
-                    <td colSpan="4" className="text-center py-3">No se encontraron usuarios</td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
-            </div>
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center py-3">No se encontraron usuarios</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
+      </div>
+
+      {userId && (
+        <EditUser
+          userId={userId}
+          setResponseUser={fetchUsers}
+          closeModal={() => setUserId(null)}
+        />
+      )}
     </div>
   );
 };
