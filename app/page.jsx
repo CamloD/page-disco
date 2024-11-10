@@ -1,22 +1,17 @@
-"use client"
 
+"use client"
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function RootLayout({ children }) {
-  const router = useRouter();
+const Page = () => {
+    const router = useRouter();
 
-  useEffect(() => {
-    if (window.location.pathname === '/') {
-      router.push('/home');
-    }
-  }, [router]);
+    useEffect(() => {
+        router.push('/home');
+    }, [router]);
 
-  return (
-    <html lang="es">
-      <body>
-        {children}
-      </body>
-    </html>
-  );
+
+    return null;
 }
+
+export default Page;
