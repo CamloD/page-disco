@@ -71,7 +71,7 @@ const Header = () => {
       >
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center justify-center space-x-2" prefetch={false}>
+            <Link href="/home" className="flex items-center justify-center space-x-2" prefetch={false}>
             <Music2Icon className="h-6 w-6" />
               <h1 className="text-2xl font-bold uppercase">Discoteca</h1>
             </Link>

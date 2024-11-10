@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const links = [
     {
         name: "home",
-        path: "/",
+        path: "/home",
     },
     {
         name: "gallery",

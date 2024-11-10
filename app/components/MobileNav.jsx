@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   {
     name: "home",
-    path: "/",
+    path: "/home",
   },
   {
     name: "gallery",
@@ -73,7 +73,7 @@ const MobileNav = () => {
             <XIcon className="w-6 h-6" />
           </Button>
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
-            <Link href="/" prefetch={false} className="flex items-center justify-center space-x-2">
+            <Link href="/home" prefetch={false} className="flex items-center justify-center space-x-2">
               <Music2Icon className="h-6 w-6" />
               <h1 className="text-2xl font-bold uppercase">Discoteca</h1>
             </Link>
