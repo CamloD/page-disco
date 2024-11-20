@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from 'react';
@@ -74,8 +75,16 @@ const MobileNav = () => {
           </Button>
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
             <Link href="/home" prefetch={false} className="flex items-center justify-center space-x-2">
-              <Music2Icon className="h-6 w-6" />
-              <h1 className="text-2xl font-bold uppercase">Discoteca</h1>
+              <img
+                src="logo.png"
+                alt="Dulcinea Logo"
+                className='h-12 w-[55px] -mt-1.5'
+              />
+              <img
+                src="letras_logo.png"
+                alt="Dulcinea Letras Logo"
+                className='h-10 w-50 -mt-2.5'
+              />
             </Link>
           </div>
           <nav className="flex flex-col justify-center items-center gap-4 p-4">
