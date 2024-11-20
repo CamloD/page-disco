@@ -79,8 +79,8 @@ const Header = () => {
                 className='h-14 w-[65px] -mt-1.5'
               />
               <img
-                src="letras logo.png"
-                alt="Dulcinea Logo"
+                src="letras_logo.png"
+                alt="Dulcinea Letras Logo"
                 className='h-10 w-56 -mt-1.5'
               />
               
