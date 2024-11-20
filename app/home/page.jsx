@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client"; 
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
@@ -7,6 +9,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useState, useEffect, useRef } from 'react';
 
 
 import ScrollImage from "../animations/ScrollImage"
@@ -15,47 +18,19 @@ import styles1 from "@/app/Styles/principal.css"
 import PScrollVideo from "../animations/ScrollVideo"
 import ScrollVideo from "../animations/ScrollVideo"
 import Scroll_image from "../animations/scroll_image"
-import Presentacion from "../animations/Presentacion"
+import ImageBackgroung1 from "../animations/ImageBackgroung1"
+import VideoBackground from "../animations/VideoBackground"
 
 
-
-
-const page = () => {
+const Page = () => {
   return (
-    <div className=" dark:bg-[#1a1a1a]">
-      
+    <div className="dark:bg-[#1a1a1a]">
       <main className="flex-1">
-        <section className="relative h-[100vh] overflow-hidde">
-          <Presentacion/>
-          
+        <section className="relative h-[100vh] overflow-hidden">
+          <ImageBackgroung1/>
           <div className="absolute inset-0 bg-black/20 flex items-center justify-normal">
-              <div className="m-20 max-w-4xl text-left space-y-6 text-white flex flex-col justify-center">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Experience the Rhythm of Club Rhythm
-                  </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl text-white">
-                    Immerse yourself in the electrifying atmosphere of Club Rhythm, where music and energy collide to
-                    create an unforgettable nightlife experience.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link
-                    href="#"
-                    className="inline-flex h-10 items-center justify-center rounded-md bg-green-600 px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-emerald-500/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
-                  >
-                    Ver Eventos
-                  </Link>
-                  <Link
-                    href="/reservation"
-                    className="inline-flex h-10 items-center justify-center rounded-md border border-none bg-rose-900 px-8 text-sm font-medium shadow-sm transition-colors hover:bg-red-600/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                    prefetch={false}
-                  >
-                    Hacer Reservación
-                  </Link>
-                </div>
-              </div>
+            <div className="m-20 max-w-4xl text-left space-y-6 text-white flex flex-col justify-center">
+            </div>
           </div>
         </section>
         
@@ -70,9 +45,9 @@ const page = () => {
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row ">
                   <Link href="/reservation">
-                    <Button size="lg" className = "bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
+                    <Button size="lg" className="bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
                   </Link>
-                  <Button size="lg" className= "bg-emerald-500 hover:bg-emerald-700">
+                  <Button size="lg" className="bg-emerald-500 hover:bg-emerald-700">
                     Ver Calendario
                   </Button>
                 </div>
@@ -128,7 +103,7 @@ const page = () => {
                   Ven a disfrutar de una noche llena de música electrónica y ambiente de fiesta. Contaremos con la
                   presencia del DJ internacional Sasha.
                 </p>
-                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -141,7 +116,7 @@ const page = () => {
                 <p className="text-muted-foreground mb-4">
                   Disfruta de una noche llena de ritmos latinos con la presentación del legendario grupo Niche.
                 </p>
-                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -154,7 +129,7 @@ const page = () => {
                 <p className="text-muted-foreground mb-4">
                   Celebramos nuestro 5to aniversario con una fiesta espectacular con la presentación del DJ Tiësto.
                 </p>
-                <Link href="/reservation"><Button size="sm" className= "bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
             </div>
           </div>
@@ -166,7 +141,7 @@ const page = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src="placeholder.svg"
+                  src="/placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 1"
@@ -177,7 +152,7 @@ const page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <video
                   autoPlay loop muted
-                  src="video/video.mp4"
+                  src="/video/video.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
@@ -186,7 +161,7 @@ const page = () => {
               </div>
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src="placeholder.svg"
+                  src="/placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 2"
@@ -197,17 +172,16 @@ const page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <video
                   autoPlay loop muted
-                  src="video/video.mp4"
+                  src="/video/video.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
                 ></video>
               </div>
-              
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src="placeholder.svg"
+                  src="/placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 3"
@@ -218,30 +192,28 @@ const page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <video
                   autoPlay loop muted
-                  src="video/video.mp4"
+                  src="/video/video.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
                 ></video>
               </div>
-              
             </div>
           </div>
         </section>
 
         <section>   
-        <ScrollVideo/>
+          <ScrollVideo/>
         </section>
 
-
         <section>   
-        <Scroll_image/>
+          <Scroll_image/>
         </section>
 
         <section id="contact" className="py-16 bg-[#1a1a1a]">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-8  text-white">Contact Us</h2>
+            <h2 className="text-3xl font-bold mb-8 text-white">Contact Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="text-white">
                 <div className="flex items-center space-x-4 mb-6">
@@ -254,7 +226,7 @@ const page = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                   <LocateIcon className="w-6 h-6" />
-                  <span> 1234, Anywhere Medellin, Colombia</span>
+                  <span>1234, Anywhere Medellin, Colombia</span>
                 </div>
               </div>
               <div>
@@ -281,7 +253,6 @@ const page = () => {
             </div>
           </div>
         </section>
-
       </main>
       <footer className="bg-[#171922] py-8 text-white">
         <div className="container mx-auto text-center">
@@ -315,7 +286,6 @@ function LocateIcon(props) {
   )
 }
 
-
 function MailIcon(props) {
   return (
     <svg
@@ -336,29 +306,6 @@ function MailIcon(props) {
   )
 }
 
-
-function MenuIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
-  )
-}
-
-
 function PhoneIcon(props) {
   return (
     <svg
@@ -378,24 +325,4 @@ function PhoneIcon(props) {
   )
 }
 
-function Music2Icon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="8" cy="18" r="4" />
-      <path d="M12 18V2l7 4" />
-    </svg>
-  )
-}
-
-export default page
+export default Page

@@ -1,12 +1,12 @@
 /* Styles/ParallaxVideo.css */
 .videoWrapper1 {
-  position: fixed; /* Fija el contenedor del video a la ventana del navegador */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100vw; /* Cubre toda la ventana en horizontal */
-  height: 100vh; /* Cubre toda la ventana en vertical */
-  overflow: hidden; /* Evita que el contenido se desborde del contenedor */
-  z-index: -1; /* Envía el video al fondo detrás del contenido */
+  width: 100vw; 
+  height: 100vh; 
+  overflow: hidden; 
+  z-index: -1;
 }
 
 .backgroundVideo1 {

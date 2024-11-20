@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"; 
 
@@ -72,8 +73,18 @@ const Header = () => {
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
           <div className="flex items-center">
             <Link href="/home" className="flex items-center justify-center space-x-2" prefetch={false}>
-            <Music2Icon className="h-6 w-6" />
-              <h1 className="text-2xl font-bold uppercase">Discoteca</h1>
+              <img
+                src="/logo.png"
+                alt="Dulcinea Logo"
+                className='h-14 w-[65px] -mt-1.5'
+              />
+              <img
+                src="/letras logo.png"
+                alt="Dulcinea Logo"
+                className='h-10 w-56 -mt-1.5'
+              />
+              
+              
             </Link>
           </div>
           <Nav>
