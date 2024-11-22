@@ -1,8 +1,11 @@
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import './globals.css';
+import 'app/globals.css';
 
+// Componentes
+import Header from "@/app/Dulcinea/components/Header";
 
+// Fuentes
 const fontHeading = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -25,7 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
-        
+        <Header />
         {children}
       </body>
     </html>

@@ -6,23 +6,23 @@ import { useRouter } from 'next/router';
 const links = [
     {
         name: "home",
-        path: "/home",
+        path: "/Dulcinea",
     },
     {
         name: "gallery",
-        path: "/gallery",
+        path: "/Dulcinea/gallery",
     },
     {
         name: "contact",
-        path: "/contact",
+        path: "/Dulcinea/contact",
     },
     {
         name: "reservation",
-        path: "/reservation",
+        path: "/Dulcinea/reservation",
     },
     {
         name:"pruebas 2",
-        path:"/pruebas_2"
+        path:"/Dulcinea/pruebas_2"
     },
 
     

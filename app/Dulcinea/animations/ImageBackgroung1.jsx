@@ -6,8 +6,8 @@ const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
-  const [intervalId, setIntervalId] = useState(null);
   const containerRef = useRef(null);
+  const intervalRef = useRef(null);
 
   const backgrounds = [
     "linear-gradient(to right, #000000 0%, #737373 100%)",
@@ -20,17 +20,22 @@ const ImageBackground1 = () => {
   ];
 
   const startAutoChange = () => {
-    const id = setInterval(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
       setCurrentBackgroundIndex(prevIndex => (prevIndex + 1) % backgrounds.length); 
     }, 6000);
-    setIntervalId(id);
   };
 
   useEffect(() => {
-    startAutoChange(); 
+    startAutoChange();
 
     return () => {
-      if (intervalId) clearInterval(intervalId);  
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, []); 
 
@@ -56,7 +61,9 @@ const ImageBackground1 = () => {
   const changeBackground = (newIndex) => {
     setCurrentBackgroundIndex(newIndex);
 
-    if (intervalId) clearInterval(intervalId);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
     startAutoChange();
   };
 

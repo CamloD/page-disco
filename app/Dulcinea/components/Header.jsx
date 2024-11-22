@@ -72,7 +72,7 @@ const Header = () => {
       >
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
           <div className="flex items-center">
-            <Link href="/home" className="flex items-center justify-center space-x-2" prefetch={false}>
+            <Link href="/Dulcinea" className="flex items-center justify-center space-x-2" prefetch={false}>
               <img
                 src="logo.png"
                 alt="Dulcinea Logo"

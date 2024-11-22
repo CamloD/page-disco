@@ -12,14 +12,14 @@ import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, useRef } from 'react';
 
 
-import ScrollImage from "../animations/ScrollImage"
+import ScrollImage from "./animations/ScrollImage"
 import { Parallax } from "react-parallax"
 import styles1 from "@/app/Styles/principal.css"
-import PScrollVideo from "../animations/ScrollVideo"
-import ScrollVideo from "../animations/ScrollVideo"
-import Scroll_image from "../animations/scroll_image"
-import ImageBackgroung1 from "../animations/ImageBackgroung1"
-import VideoBackground from "../animations/VideoBackground"
+import PScrollVideo from "./animations/ScrollVideo"
+import ScrollVideo from "./animations/ScrollVideo"
+import Scroll_image from "./animations/scroll_image"
+import ImageBackgroung1 from "./animations/ImageBackgroung1"
+import VideoBackground from "./animations/VideoBackground"
 
 
 const Page = () => {
