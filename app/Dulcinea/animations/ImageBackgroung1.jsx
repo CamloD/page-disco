@@ -11,7 +11,7 @@ const ImageBackground1 = () => {
 
   const backgrounds = [
     //"linear-gradient(to right, #000000 0%, #737373 100%)",
-    "url('images1.jpg')",
+    //"url('images1.jpg')",
     "url('images/image1.jpg')",
     "url('images/image2.jpg')",
     "url('images/image3.jpg')",
