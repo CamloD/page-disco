@@ -118,7 +118,7 @@ const PagePrincipal = () => {
                 isMobile={isMobile}
                 setEsVisible={PonerVisible1}
                 esVisible={esVisible1}
-                imagenfondo="/images1.jpg"
+                imagenfondo="images1.jpg"
                 logo_imagen = "LOGODULCINEA_CONSOMBRA.png"
                 />
               </div>
@@ -128,7 +128,7 @@ const PagePrincipal = () => {
                   isMobile={isMobile}
                   setEsVisible={PonerVisible2}
                   esVisible={esVisible2}
-                  imagenfondo="/images/image1.jpg"
+                  imagenfondo="images/image1.jpg"
                   logo_imagen="LOGODULCINEA_CONSOMBRA.png"
                   />
               </div>

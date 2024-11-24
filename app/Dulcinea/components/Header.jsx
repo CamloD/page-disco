@@ -74,12 +74,12 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/Dulcinea" className="flex items-center justify-center space-x-2" prefetch={false}>
               <img
-                src="/logo.png"
+                src="logo.png"
                 alt="Dulcinea Logo"
                 className='h-14 w-[65px] -mt-1.5'
               />
               <img
-                src="/letras_logo.png"
+                src="letras_logo.png"
                 alt="Dulcinea Letras Logo"
                 className='h-10 w-56 -mt-2.5'
               />
