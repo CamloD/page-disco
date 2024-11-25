@@ -39,9 +39,9 @@ const BackgroundFigure = ({isMobile }) => (
   </div> 
 )
 
-const ImagenesFondo = ({href_fondo, isMobile, setEsVisible, esVisible, imagenfondo, logo_imagen}) => {
-  console.log("es mobile?:" ,isMobile)
-  console.log("visible?:",esVisible)
+const ImagenesFondo = ({href_fondo, isMobile, setEsVisible, esVisible, imagenfondo, logo_imagen, sizelogo}) => {
+  const logo_width = sizelogo?.width || 200;  
+  const logo_height = sizelogo?.height || 300;
   return(
     <Link href={href_fondo} passHref>
       <div
@@ -76,8 +76,8 @@ const ImagenesFondo = ({href_fondo, isMobile, setEsVisible, esVisible, imagenfon
             <Image
               src={logo_imagen}
               alt="Imagen central"
-              width={400}
-              height={450}
+              width={logo_width}
+              height={logo_height}
               className="rounded-lg z-10"
               priority 
               
@@ -112,25 +112,29 @@ const PagePrincipal = () => {
               />
             </div>
             <div className="absolute z-10 w-screen h-screen flex flex-col md:flex-row">
-              <div className="w-full h-1/2 md:w-1/2 md:h-full">
-                <ImagenesFondo
-                href_fondo = "/Dulcinea"
-                isMobile={isMobile}
-                setEsVisible={PonerVisible1}
-                esVisible={esVisible1}
-                imagenfondo="images1.jpg"
-                logo_imagen = "LOGODULCINEA_CONSOMBRA.png"
-                />
-              </div>
-              <div className="w-full md:w-1/2 h-1/2 md:h-full">
-                <ImagenesFondo
-                  href_fondo = "/Dulcinea/gallery"
-                  isMobile={isMobile}
-                  setEsVisible={PonerVisible2}
-                  esVisible={esVisible2}
-                  imagenfondo="images/image1.jpg"
-                  logo_imagen="LOGODULCINEA_CONSOMBRA.png"
+              <div className="absolute z-10 w-screen h-screen flex flex-wrap">
+                <div className="flex-1 w-full h-full">
+                  <ImagenesFondo
+                    href_fondo="/Dulcinea"
+                    isMobile={isMobile}
+                    setEsVisible={PonerVisible1}
+                    esVisible={esVisible1}
+                    imagenfondo="images1.jpg"
+                    logo_imagen="LOGODULCINEA_CONSOMBRA.png"
+                    sizelogo={{ width: 400, height: 450 }}
                   />
+                </div>
+                <div className="flex-1 w-full h-full">
+                  <ImagenesFondo
+                    href_fondo="/Dulcinea/gallery"
+                    isMobile={isMobile}
+                    setEsVisible={PonerVisible2}
+                    esVisible={esVisible2}
+                    imagenfondo="images/image1.jpg"
+                    logo_imagen="logo.png"
+                    sizelogo={{ width: 150, height: 150 }} 
+                  />
+                </div>
               </div>
             </div>
           </div>
