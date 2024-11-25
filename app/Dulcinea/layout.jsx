@@ -1,16 +1,7 @@
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import 'app/globals.css';
 
-// Componentes
-import Header from "@/app/Dulcinea/components/Header";
-
-// Fuentes
-const fontHeading = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
-});
+import Header from "@/app/Dulcinea/components/Header"
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -19,18 +10,16 @@ const fontBody = Inter({
   variable: '--font-body',
 });
 
-export const metadata = {
-  title: "Disco",
-  description: "Una plataforma para escuchar disco.",
-};
 
-export default function RootLayout({ children }) {
+export default function DiscoLayout({ children }) {
   return (
-    <html lang="es">
-      <body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
-        <Header />
+    <div>
+      <Header/>
+      <div className={cn('child-layout', fontBody.variable)}>
         {children}
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }
+
+

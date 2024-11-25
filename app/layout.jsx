@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import './globals.css';
 
 
+
 const fontHeading = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -25,8 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
-        
-        {children}
+          {children}
       </body>
     </html>
   );
