@@ -11,25 +11,24 @@ import { MenuIcon, XIcon } from "lucide-react";
 const links = [
   {
       name: "home",
-      path: "/",
+      path: "/Dulcinea",
   },
   {
       name: "gallery",
-      path: "/gallery",
+      path: "/Dulcinea/gallery",
   },
   {
       name: "contact",
-      path: "/contact",
+      path: "/Dulcinea/contact",
   },
   {
       name: "reservation",
-      path: "/reservation",
+      path: "/Dulcinea/reservation",
   },
   {
       name:"pruebas 2",
-      path:"/pruebas_2"
-  },
-  
+      path:"/Dulcinea/pruebas_2"
+  },   
 ]
 
 const MobileNav = () => {

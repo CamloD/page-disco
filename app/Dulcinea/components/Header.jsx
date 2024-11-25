@@ -1,12 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client"; 
+"use client";
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
-
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,30 +17,23 @@ const Header = () => {
     if (headerRef.current) {
       const height = headerRef.current.offsetHeight;
       setHeaderHeight(height);
-      //console.log('Altura del header (offsetHeight):', height);
-      //console.log('Posición del scroll:', window.scrollY); 
     }
   };
 
   const handleScroll = () => {
-    {/* en caso de ponerlo con referencia al tamaño del objeto
-      setIsScrolled(window.scrollY > headerHeight);*/}
-      const scrollTop = window.scrollY;
-      setIsScrolled(window.scrollY > headerHeight - 30);
-      setHeaderShadow(scrollTop > headerHeight - 30 ? 'shadow-xl' : 'shadow-sm');
-      //console.log('Posición del scroll:', window.scrollY); 
+    const scrollTop = window.scrollY;
+    setIsScrolled(scrollTop > headerHeight - 30);
+    setHeaderShadow(scrollTop > headerHeight - 30 ? 'shadow-xl' : 'shadow-sm');
   };
 
   useEffect(() => {
-    
-
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', () => {
       updateHeaderHeight();
       handleScroll();
-    }); 
-    updateHeaderHeight(); 
-     handleScroll();
+    });
+    updateHeaderHeight();
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -52,7 +44,7 @@ const Header = () => {
     };
   }, [handleScroll, headerHeight]);
 
-  const initialColor = 'rgba(26, 26, 26, 0)'; 
+  const initialColor = 'rgba(26, 26, 26, 0)';
   const scrolledColor = 'rgba(26, 26, 26, 0.97)';
 
   const headerStyle = {
@@ -61,60 +53,44 @@ const Header = () => {
     position: 'fixed',
     top: 0,
     left: 0,
-    width: '100%', 
+    width: '100%',
     zIndex: 2
   };
+
   return (
     <header 
       className={`fixed top-0 left-0 w-full text-white ${headerShadow}`} 
       ref={headerRef} 
       style={headerStyle}
-      >
-        <div className="container mx-auto flex items-center justify-between py-4 px-6">
-          <div className="flex items-center">
-            <Link href="/Dulcinea" className="flex items-center justify-center space-x-2" prefetch={false}>
-              <img
-                src="logo.png"
-                alt="Dulcinea Logo"
-                className='h-14 w-[65px] -mt-1.5'
-              />
-              <img
-                src="letras_logo.png"
-                alt="Dulcinea Letras Logo"
-                className='h-10 w-56 -mt-2.5'
-              />
-              
-              
-            </Link>
-          </div>
-          <Nav>
-          </Nav>
-          {/* Mobile nav */}
-            <div className="md:hidden">
-                <MobileNav />
-            </div>
+    >
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        <div className="flex items-center">
+          <Link href="/Dulcinea" className="flex items-center justify-center space-x-2" prefetch={false}>
+            <Image
+              src="/logo.png"
+              alt="Dulcinea Logo"
+              width={65}
+              height={56}
+              className='-mt-1.5'
+            />
+            <Image
+              src="/letras_logo.png"
+              alt="Dulcinea Letras Logo"
+              width={224}
+              height={40}
+              className='-mt-2.5'
+            />
+          </Link>
         </div>
-      </header>
-    
-  )
-}
-function Music2Icon(props) {
-    return (
-      <svg
-        {...props}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="8" cy="18" r="4" />
-        <path d="M12 18V2l7 4" />
-      </svg>
-    )
-  }
-export default Header
+        <Nav />
+        {/* Mobile nav */}
+        <div className="md:hidden">
+          <MobileNav />
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+

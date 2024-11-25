@@ -9,27 +9,26 @@ import { usePathname } from 'next/navigation';
 
 const links = [
   {
-    name: "home",
-    path: "/",
+      name: "home",
+      path: "/Dulcinea",
   },
   {
-    name: "gallery",
-    path: "/gallery",
+      name: "gallery",
+      path: "/Dulcinea/gallery",
   },
   {
-    name: "contact",
-    path: "/contact",
+      name: "contact",
+      path: "/Dulcinea/contact",
   },
   {
-    name: "reservation",
-    path: "/reservation",
+      name: "reservation",
+      path: "/Dulcinea/reservation",
   },
   {
-    name: "pruebas_2",
-    path: "/pruebas_2",
-  },
-
-];
+      name:"pruebas 2",
+      path:"/Dulcinea/pruebas_2"
+  },   
+]
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -41,13 +40,12 @@ const MobileNav = () => {
 
   return (
     <div>
-      {/* Botón de menú para abrir el panel lateral */}
+      
       <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSidebar}>
         <AlignJustify className="w-6 h-6" />
         <span className="sr-only">Toggle navigation menu</span>
       </Button>
       
-      {/* Overlay */}
       {isOpen && (
         <div
           onClick={toggleSidebar}
@@ -107,25 +105,5 @@ const MobileNav = () => {
     </div>
   );
 };
-
-function Music2Icon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="8" cy="18" r="4" />
-      <path d="M12 18V2l7 4" />
-    </svg>
-  );
-}
 
 export default MobileNav;

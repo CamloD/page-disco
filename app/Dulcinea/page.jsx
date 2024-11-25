@@ -189,16 +189,7 @@ const Page = () => {
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
                 />
               </div>
-              <div className="relative overflow-hidden rounded-xl">
-                <video
-                  autoPlay loop muted
-                  src="/video/video.mp4"
-                  width="600"  
-                  height="400"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                ></video>
-              </div>
+              
             </div>
           </div>
         </section>

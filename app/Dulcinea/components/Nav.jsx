@@ -23,9 +23,7 @@ const links = [
     {
         name:"pruebas 2",
         path:"/Dulcinea/pruebas_2"
-    },
-
-    
+    },   
 ]
 
 const Naveg = () => {

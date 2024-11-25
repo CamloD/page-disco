@@ -17,6 +17,11 @@ const fontBody = Inter({
   variable: '--font-body',
 });
 
+export const metadata = {
+  title: "Disco",
+  description: "Una plataforma para escuchar disco.",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="es">

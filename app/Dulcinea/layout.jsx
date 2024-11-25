@@ -10,6 +10,10 @@ const fontBody = Inter({
   variable: '--font-body',
 });
 
+export const metadata = {
+  title: "Dulcinea",
+  description: "Disco Dulcinea",
+};
 
 export default function DiscoLayout({ children }) {
   return (

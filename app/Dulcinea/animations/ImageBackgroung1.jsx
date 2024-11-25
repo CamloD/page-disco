@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -10,13 +11,11 @@ const ImageBackground1 = () => {
   const intervalRef = useRef(null);
 
   const backgrounds = [
-    //"linear-gradient(to right, #000000 0%, #737373 100%)",
-    //"url('images1.jpg')",
-    "url('images/image1.jpg')",
-    "url('images/image2.jpg')",
-    "url('images/image3.jpg')",
-    "url('images/image4.jpg')",
-    "url('images/image5.jpg')",
+    "/images/image1.jpg",
+    "/images/image2.jpg",
+    "/images/image3.jpg",
+    "/images/image4.jpg",
+    "/images/image5.jpg",
   ];
 
   const startAutoChange = () => {
@@ -91,13 +90,19 @@ const ImageBackground1 = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: bg,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
             transition: "opacity 1s ease-in-out",
             opacity: index === currentBackgroundIndex ? 1 : 0,
           }}
-        />
+        >
+          <Image
+            src={bg}
+            alt={`Background ${index + 1}`}
+            layout="fill"
+            objectFit="cover"
+            priority={index === 0}
+            quality={75}
+          />
+        </div>
       ))}
       <div
         style={{
@@ -107,15 +112,12 @@ const ImageBackground1 = () => {
           transition: "transform 0.01s"
         }}
       >
-        <img
-          src="LOGODULCINEA_CONSOMBRA.png"
+        <Image
+          src="/LOGODULCINEA_CONSOMBRA.png"
           alt="Dulcinea Logo"
-          style={{
-            width: "auto",
-            height: "auto",
-            maxWidth: "410px",
-            maxHeight: "500px"
-          }}
+          width={410}
+          height={500}
+          priority
         />
       </div>
       <div
@@ -149,3 +151,4 @@ const ImageBackground1 = () => {
 };
 
 export default ImageBackground1;
+
