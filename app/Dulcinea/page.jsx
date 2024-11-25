@@ -44,7 +44,7 @@ const Page = () => {
                   invitados.
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row ">
-                  <Link href="/reservation">
+                  <Link href="/Dulcinea/reservation">
                     <Button size="lg" className="bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
                   </Link>
                   <Button size="lg" className="bg-emerald-500 hover:bg-emerald-700">

@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
-
-import Header from "@/app/Dulcinea/components/Header"
+import Header from "@/app/Dulcinea/components/Header";
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -18,12 +17,11 @@ export const metadata = {
 export default function DiscoLayout({ children }) {
   return (
     <div>
-      <Header/>
+      <Header />
       <div className={cn('child-layout', fontBody.variable)}>
         {children}
       </div>
     </div>
   );
 }
-
 
