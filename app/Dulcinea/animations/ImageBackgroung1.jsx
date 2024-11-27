@@ -3,7 +3,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { getAssetPath } from 'app/utils/aseetsUtils';
 
 const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -89,13 +88,13 @@ const ImageBackground1 = () => {
         />
       ))}
       <div
-        className="relative z-10 transition-transform duration-100"
+        className="relative transition-transform duration-100"
         style={{
           transform: `translateY(${isInView ? Math.min(scrollY * 0.2, window.innerHeight * 0.2) : 0}px)`,
         }}
       >
         <Image
-          src={getAssetPath("LOGODULCINEA_CONSOMBRA.png")}
+          src="LOGODULCINEA_CONSOMBRA.png"
           alt="Dulcinea Logo"
           width={410}
           height={500}

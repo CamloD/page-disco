@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -6,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
-import { getAssetPath } from 'app/utils/aseetsUtils';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,6 +58,10 @@ const Header = () => {
     zIndex: 2
   };
 
+  const getImagePath = (path) => {
+    return `${basePath}/${path}`.replace(/\/+/g, '/');
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 w-full text-white ${headerShadow}`} 
@@ -70,14 +72,14 @@ const Header = () => {
         <div className="flex items-center">
           <Link href={`${basePath}/Dulcinea`} className="flex items-center justify-center space-x-2">
             <Image
-              src={getAssetPath("logo.png")}
+              src={getImagePath("logo.png")}
               alt="Dulcinea Logo"
               width={65}
               height={56}
               className='-mt-1.5'
             />
             <Image
-              src={getAssetPath("letras_logo.png")}
+              src={getImagePath("letras_logo.png")}
               alt="Dulcinea Letras Logo"
               width={224}
               height={40}
