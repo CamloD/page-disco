@@ -75,7 +75,7 @@ const Header = () => {
               loader={({ src }) => `${src}`}
             />
             <Image
-              src="letras_logo.png"
+              src="/letras_logo.png"
               alt="Dulcinea Letras Logo"
               width={224}
               height={40}
