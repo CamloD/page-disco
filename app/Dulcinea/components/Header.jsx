@@ -67,14 +67,15 @@ const Header = () => {
         <div className="flex items-center">
           <a href="/Dulcinea" className="flex items-center justify-center space-x-2">
             <Image
-              src="logo.png"
+              src="/logo.png"
               alt="Dulcinea Logo"
               width={65}
               height={56}
               className='-mt-1.5'
+              loader={({ src }) => `${src}`}
             />
             <Image
-              src="letras_logo.png"
+              src="/letras_logo.png"
               alt="Dulcinea Letras Logo"
               width={224}
               height={40}

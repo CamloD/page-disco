@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	 /*output: 'export', // Habilita la exportación estática*/
-	 images: {
-		domains: ['picsum.photos'],
-		unoptimized: true, // Deshabilita la optimización de imágenes
-	  },
-};
-
-export default nextConfig;
+	basePath: '/page-disco',  
+	assetPrefix: '/page-disco',
+	images: {
+	  domains: ['picsum.photos'], 
+	  unoptimized: true, 
+	},
+  };
+  
+  export default nextConfig;
+  
