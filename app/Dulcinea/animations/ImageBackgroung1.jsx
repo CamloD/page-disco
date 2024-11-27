@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { getAssetPath } from 'app/utils/aseetsUtils';
 
 const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -12,15 +12,14 @@ const ImageBackground1 = () => {
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
 
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
   const backgrounds = [
-     //"linear-gradient(to right, #000000 0%, #737373 100%)",
-    //"url('images1.jpg')",
-    
-    "/images/image1.jpg",
-    "/images/image2.jpg",
-    "/images/image3.jpg",
-    "/images/image4.jpg",
-    "/images/image5.jpg",
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    "images/image5.jpg",
   ];
 
   const startAutoChange = () => {
@@ -96,7 +95,7 @@ const ImageBackground1 = () => {
         }}
       >
         <Image
-          src="/LOGODULCINEA_CONSOMBRA.png"
+          src={getAssetPath("LOGODULCINEA_CONSOMBRA.png")}
           alt="Dulcinea Logo"
           width={410}
           height={500}

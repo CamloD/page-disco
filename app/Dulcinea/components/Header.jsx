@@ -6,12 +6,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
+import { getAssetPath } from 'app/utils/aseetsUtils';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [headerShadow, setHeaderShadow] = useState('shadow-sm');
   const headerRef = useRef(null);
+
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const updateHeaderHeight = () => {
     if (headerRef.current) {
@@ -65,16 +68,16 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-          <Link href="/Dulcinea" className="flex items-center justify-center space-x-2">
+          <Link href={`${basePath}/Dulcinea`} className="flex items-center justify-center space-x-2">
             <Image
-              src="/logo.png"
+              src={getAssetPath("logo.png")}
               alt="Dulcinea Logo"
               width={65}
               height={56}
               className='-mt-1.5'
             />
             <Image
-              src="/letras_logo.png"
+              src={getAssetPath("letras_logo.png")}
               alt="Dulcinea Letras Logo"
               width={224}
               height={40}
@@ -93,3 +96,4 @@ const Header = () => {
 };
 
 export default Header;
+
