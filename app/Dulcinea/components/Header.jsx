@@ -59,7 +59,7 @@ const Header = () => {
   };
 
   const getImagePath = (path) => {
-    return `${basePath}/${path}`.replace(/\/+/g, '/');
+    return `${basePath}${path}`.replace(/\+/g, '/');
   };
 
   return (
