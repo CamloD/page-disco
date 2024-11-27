@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	basePath: '/mi-app',
-	assetPrefix: '/mi-app',
+	basePath: '/page-disco',
+	assetPrefix: '/page-disco',
 	/*output: 'export', */
 	images: {
 	  domains: ['example.com'],
