@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
 
@@ -11,6 +12,7 @@ const Header = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [headerShadow, setHeaderShadow] = useState('shadow-sm');
   const headerRef = useRef(null);
+  const pathname = usePathname();
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
@@ -59,7 +61,11 @@ const Header = () => {
   };
 
   const getImagePath = (path) => {
-    return `${basePath}${path}`.replace(/\+/g, '/');
+    return `${basePath}/${path}`.replace(/\/+/g, '/');
+  };
+
+  const getLinkPath = (path) => {
+    return path.startsWith('/') ? path : `/${path}`;
   };
 
   return (
@@ -70,7 +76,7 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-          <Link href={`${basePath}/Dulcinea`} className="flex items-center justify-center space-x-2">
+          <Link href={getLinkPath('Dulcinea')} className="flex items-center justify-center space-x-2">
             <Image
               src={getImagePath("logo.png")}
               alt="Dulcinea Logo"
@@ -87,10 +93,10 @@ const Header = () => {
             />
           </Link>
         </div>
-        <Nav />
+        <Nav pathname={pathname} />
         {/* Mobile nav */}
         <div className="md:hidden">
-          <MobileNav />
+          <MobileNav pathname={pathname} />
         </div>
       </div>
     </header>
