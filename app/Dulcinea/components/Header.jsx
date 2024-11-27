@@ -42,7 +42,7 @@ const Header = () => {
         handleScroll();
       });
     };
-  }, [handleScroll, headerHeight]);
+  }, []);
 
   const initialColor = 'rgba(26, 26, 26, 0)';
   const scrolledColor = 'rgba(26, 26, 26, 0.97)';
@@ -65,14 +65,13 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-          <a href="/Dulcinea" className="flex items-center justify-center space-x-2">
+          <Link href="/Dulcinea" className="flex items-center justify-center space-x-2">
             <Image
-              src="logo.png"
+              src="/logo.png"
               alt="Dulcinea Logo"
               width={65}
               height={56}
               className='-mt-1.5'
-              loader={({ src }) => `${src}`}
             />
             <Image
               src="/letras_logo.png"
@@ -81,7 +80,7 @@ const Header = () => {
               height={40}
               className='-mt-2.5'
             />
-          </a>
+          </Link>
         </div>
         <Nav />
         {/* Mobile nav */}

@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	 /*output: 'export', */
-	 images: {
-		domains: ['picsum.photos'],
-		unoptimized: true,
-	  },
-};
-
-export default nextConfig;
+	basePath: '/mi-app',
+	assetPrefix: '/mi-app',
+	/*output: 'export', */
+	images: {
+	  domains: ['example.com'],
+	  unoptimized: true,
+	},
+  };
+  
+  export default nextConfig;
+  

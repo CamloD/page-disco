@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
+"use client";
+
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -10,13 +13,14 @@ const ImageBackground1 = () => {
   const intervalRef = useRef(null);
 
   const backgrounds = [
-    //"linear-gradient(to right, #000000 0%, #737373 100%)",
+     //"linear-gradient(to right, #000000 0%, #737373 100%)",
     //"url('images1.jpg')",
-    "url('images/image1.jpg')",
-    "url('images/image2.jpg')",
-    "url('images/image3.jpg')",
-    "url('images/image4.jpg')",
-    "url('images/image5.jpg')",
+    
+    "/images/image1.jpg",
+    "/images/image2.jpg",
+    "/images/image3.jpg",
+    "/images/image4.jpg",
+    "/images/image5.jpg",
   ];
 
   const startAutoChange = () => {
@@ -70,75 +74,44 @@ const ImageBackground1 = () => {
   return (
     <div
       ref={containerRef}
+      className="min-h-screen w-full relative overflow-hidden flex justify-center items-start pt-[15vh]"
       style={{
         background: "linear-gradient(to right, #000000 0%, #737373 100%)",
-        minHeight: "100vh",
-        width: "100%",
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        paddingTop: "15vh"
       }}
     >
       {backgrounds.map((bg, index) => (
         <div
           key={index}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundImage: bg,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            transition: "opacity 1s ease-in-out",
+            backgroundImage: `url(${bg})`,
             opacity: index === currentBackgroundIndex ? 1 : 0,
           }}
         />
       ))}
       <div
+        className="relative z-10 transition-transform duration-100"
         style={{
-          position: 'relative',
-          zIndex: 1,
           transform: `translateY(${isInView ? Math.min(scrollY * 0.2, window.innerHeight * 0.2) : 0}px)`,
-          transition: "transform 0.01s"
         }}
       >
-        <img
-          src="LOGODULCINEA_CONSOMBRA.png"
+        <Image
+          src="/LOGODULCINEA_CONSOMBRA.png"
           alt="Dulcinea Logo"
-          style={{
-            width: "auto",
-            height: "auto",
-            maxWidth: "410px",
-            maxHeight: "500px"
-          }}
+          width={410}
+          height={500}
+          className="w-auto h-auto max-w-[410px] max-h-[500px]"
         />
       </div>
       <div
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 2
-        }}
+        className="absolute bottom-5 flex justify-center items-center z-20"
       >
         {backgrounds.map((_, index) => (
           <button
             key={index}
+            className="w-2.5 h-2.5 rounded-full mx-1 border-none cursor-pointer"
             style={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
               backgroundColor: index === currentBackgroundIndex ? 'white' : 'rgba(255, 255, 255, 0.5)',
-              margin: '0 5px',
-              border: 'none',
-              cursor: 'pointer'
             }}
             onClick={() => changeBackground(index)}
           />
@@ -149,3 +122,4 @@ const ImageBackground1 = () => {
 };
 
 export default ImageBackground1;
+
