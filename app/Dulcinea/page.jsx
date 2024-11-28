@@ -22,7 +22,7 @@ import Scroll_image from "./animations/scroll_image"
 import ImageBackgroung1 from "./animations/ImageBackgroung1"
 import VideoBackground from "./animations/VideoBackground"
 
-import {ImageGrid} from "app/components/imagesgrid"
+import {Images_Header} from "app/components/imagesgrid"
 
 
 const Page = () => {
@@ -140,7 +140,7 @@ const Page = () => {
 
 
         <section>
-          <ImageGrid/>
+          <Images_Header/>
         </section>
 
         <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">

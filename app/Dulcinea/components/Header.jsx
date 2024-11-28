@@ -7,6 +7,7 @@ import Image from 'next/image'
 import MobileNav from './MobileNav';
 import Nav from './Nav';
 import MostrarImages from "@/app/components/MostrarImages"
+import {Images_Header} from "app/components/imagesgrid"
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -68,8 +69,12 @@ const Header = () => {
         <div className="flex items-center">
           <Link href="/Dulcinea" passHref>
             <div className="flex items-center justify-center space-x-2">
-              <Image src="logo.png" alt="Logo" width={65} height={56} className='-mt-1.5'/>
-              <Image src="letras_logo.png" alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
+              <Image 
+                src={`${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/logo.png`} 
+              alt="Logo" width={65} height={56} className='-mt-1.5'/>
+              <Image 
+                src={`${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/letras_logo.png`}
+                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
             </div>
           </Link>
         </div>
