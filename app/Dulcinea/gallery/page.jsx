@@ -7,7 +7,6 @@ const Gallery = () => {
   return (
     <div className="flex flex-col min-h-screen">    
     <title> Galería | Disco </title>
-    
       <div className="bg-[#2a2a2a] shadow-sm grid">
       <div className="bg-[#2a2a2a] top-0 left-0 w-full  mx-auto flex items-center justify-between py-9 px-6">
       </div>

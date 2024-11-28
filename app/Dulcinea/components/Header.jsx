@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
 
@@ -12,9 +12,6 @@ const Header = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [headerShadow, setHeaderShadow] = useState('shadow-sm');
   const headerRef = useRef(null);
-  const pathname = usePathname();
-
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   const updateHeaderHeight = () => {
     if (headerRef.current) {
@@ -45,7 +42,7 @@ const Header = () => {
         handleScroll();
       });
     };
-  }, []);
+  }, [handleScroll, headerHeight]);
 
   const initialColor = 'rgba(26, 26, 26, 0)';
   const scrolledColor = 'rgba(26, 26, 26, 0.97)';
@@ -60,14 +57,6 @@ const Header = () => {
     zIndex: 2
   };
 
-  const getImagePath = (path) => {
-    return `${basePath}/${path}`.replace(/\/+/g, '/');
-  };
-
-  const getLinkPath = (path) => {
-    return path.startsWith('/') ? path : `/${path}`;
-  };
-
   return (
     <header 
       className={`fixed top-0 left-0 w-full text-white ${headerShadow}`} 
@@ -76,27 +65,27 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-          <Link href={getLinkPath('Dulcinea')} className="flex items-center justify-center space-x-2">
+          <a href="/Dulcinea" className="flex items-center justify-center space-x-2">
             <Image
-              src={getImagePath("logo.png")}
+              src="logo.png"
               alt="Dulcinea Logo"
               width={65}
               height={56}
               className='-mt-1.5'
             />
             <Image
-              src={getImagePath("letras_logo.png")}
+              src="letras_logo.png"
               alt="Dulcinea Letras Logo"
               width={224}
               height={40}
               className='-mt-2.5'
             />
-          </Link>
+          </a>
         </div>
-        <Nav pathname={pathname} />
+        <Nav />
         {/* Mobile nav */}
         <div className="md:hidden">
-          <MobileNav pathname={pathname} />
+          <MobileNav />
         </div>
       </div>
     </header>
@@ -104,4 +93,3 @@ const Header = () => {
 };
 
 export default Header;
-
