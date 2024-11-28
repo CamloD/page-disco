@@ -3,9 +3,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/image'
 import MobileNav from './MobileNav';
 import Nav from './Nav';
+import MostrarImages from "@/app/components/MostrarImages"
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,12 +66,12 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-          <a className="flex items-center justify-center space-x-2">
-            <Link href="/Dulcinea" passHref>
+          <Link href="/Dulcinea" passHref>
+            <div className="flex items-center justify-center space-x-2">
               <Image src="logo.png" alt="Logo" width={65} height={56} className='-mt-1.5'/>
-              <Image src="letras_logo.png" alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' />
-            </Link>
-          </a>
+              <Image src="letras_logo.png" alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
+            </div>
+          </Link>
         </div>
         <Nav />
         {/* Mobile nav */}

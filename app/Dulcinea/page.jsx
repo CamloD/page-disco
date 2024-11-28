@@ -9,7 +9,8 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 
 
 import ScrollImage from "./animations/ScrollImage"
@@ -20,6 +21,8 @@ import ScrollVideo from "./animations/ScrollVideo"
 import Scroll_image from "./animations/scroll_image"
 import ImageBackgroung1 from "./animations/ImageBackgroung1"
 import VideoBackground from "./animations/VideoBackground"
+
+import {ImageGrid} from "app/components/imagesgrid"
 
 
 const Page = () => {
@@ -135,13 +138,18 @@ const Page = () => {
           </div>
         </section>
 
+
+        <section>
+          <ImageGrid/>
+        </section>
+
         <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div className="relative overflow-hidden rounded-lg">
-                <img
-                  src="/placeholder.svg?height=400&width=600"
+                <Image
+                  src="placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 1"
