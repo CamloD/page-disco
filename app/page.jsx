@@ -116,7 +116,7 @@ const PagePrincipal = () => {
             <BackgroundFigure isMobile={isMobile} />
           </div>
           <div className={`absolute z-10 w-full h-full flex ${isMobile ? 'flex-col' : 'flex-row'}`}>
-            <div className={`w-full ${isMobile ? 'h-1/2' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
+            <div className={`w-full ${isMobile ? /*'h-1/2'*/ 'h-full' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
               <ImagenesFondo
                 href_fondo="/Dulcinea"
                 isMobile={isTablet || isMobile}
