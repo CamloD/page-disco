@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
-import {Imagen, Videos} from "app/components/MostrarMedios"
+import {Imagen, Videos} from "app/components/mostrarmedios"
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
