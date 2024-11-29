@@ -107,7 +107,7 @@ const Page = () => {
                   Ven a disfrutar de una noche llena de música electrónica y ambiente de fiesta. Contaremos con la
                   presencia del DJ internacional Sasha.
                 </p>
-                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -120,7 +120,7 @@ const Page = () => {
                 <p className="text-muted-foreground mb-4">
                   Disfruta de una noche llena de ritmos latinos con la presentación del legendario grupo Niche.
                 </p>
-                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
                 <div className="flex items-center gap-4 mb-4">
@@ -133,7 +133,7 @@ const Page = () => {
                 <p className="text-muted-foreground mb-4">
                   Celebramos nuestro 5to aniversario con una fiesta espectacular con la presentación del DJ Tiësto.
                 </p>
-                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
               </div>
             </div>
           </div>
