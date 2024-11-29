@@ -127,7 +127,7 @@ const PagePrincipal = () => {
                 sizelogo={{ width: isMobile ? 200 : 400, height: isMobile ? 225 : 450 }}
               />
             </div>
-            <div className={`w-full ${isMobile ? 'h-1/2' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
+            {/*<div className={`w-full ${isMobile ? 'h-1/2' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
               <ImagenesFondo
                 href_fondo="/Dulcinea/gallery"
                 isMobile={isTablet || isMobile}
@@ -137,7 +137,7 @@ const PagePrincipal = () => {
                 logo_imagen="logo.png"
                 sizelogo={{ width: isMobile ? 75 : 150, height: isMobile ? 75 : 150 }}
               />
-            </div>
+            </div>*/}
           </div>
         </section>
       </main>
