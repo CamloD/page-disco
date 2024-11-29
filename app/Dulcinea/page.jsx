@@ -10,7 +10,8 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
+//import Image from 'next/image'
+import {Imagen, Videos} from "app/components/mostrarmedios"
 
 
 import ScrollImage from "./animations/ScrollImage"
@@ -25,7 +26,6 @@ import VideoBackground from "./animations/VideoBackground"
 
 
 const Page = () => {
-  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   return (
     <div className="dark:bg-[#1a1a1a]">
@@ -144,7 +144,7 @@ const Page = () => {
             <h2 className="text-3xl font-bold mb-8">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div className="relative overflow-hidden rounded-lg">
-                <Image
+                <Imagen
                   src="placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
@@ -154,18 +154,18 @@ const Page = () => {
                 />
               </div>
               <div className="relative overflow-hidden rounded-xl">
-                <video
+                <Videos
                   autoPlay loop muted
-                  src={`${images_dir}/video/video.mp4`}
+                  src="video/video.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                ></video>
+                />
               </div>
               <div className="relative overflow-hidden rounded-lg">
-                <img
-                  src={`${images_dir}/placeholder.svg?height=400&width=600`}
+                <Imagen
+                  src="placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 2"
@@ -174,23 +174,33 @@ const Page = () => {
                 />
               </div>
               <div className="relative overflow-hidden rounded-xl">
-                <video
+                <Videos
                   autoPlay loop muted
-                  src={`${images_dir}/video/video.mp4`}
+                  src="video/video.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                ></video>
+                />
               </div>
               <div className="relative overflow-hidden rounded-lg">
-                <img
-                  src={`${images_dir}/placeholder.svg?height=400&width=600`}
+                <Imagen
+                  src="placeholder.svg?height=400&width=600"
                   width={600}
                   height={400}
                   alt="Gallery Image 3"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
+                />
+              </div>
+              <div className="relative overflow-hidden rounded-xl">
+                <Videos
+                  autoPlay loop muted
+                  src="video/video.mp4"
+                  width="600"  
+                  height="400"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
                 />
               </div>
               

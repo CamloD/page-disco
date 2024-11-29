@@ -19,7 +19,7 @@ export function Imagen ({
     onClick,
     style,
     id,
-    decorative = false,
+    
 
 }) {
     const width_default = 200;
@@ -30,7 +30,7 @@ export function Imagen ({
         <>
             <Image
                 src={`${images_dir}/${src}`}
-                alt={decorative ? "" : (alt || "Image")}
+                alt={alt || "Image"}
                 width={width || width_default}
                 height={height || height_default}
                 className={className}
@@ -56,19 +56,20 @@ export function Videos ({
     width,
     height,
     className,
-    style = {},
-    autoPlay = false,
-    loop = false,
-    muted = false,
-    controls = false,
+    style,
+    autoPlay,
+    loop,
+    muted,
+    controls,
     poster,
     preload,
-    playsInline = false,
+    playsInline,
     crossOrigin,
     onEnded,
     onPlay,
     onPause,
     onTimeUpdate,
+    type,
 }) {
     const width_default = 200;
     const height_default = 300;
@@ -92,6 +93,7 @@ export function Videos ({
         onPlay,
         onPause,
         onTimeUpdate,
+        type,
     };
 
     const filteredProps = Object.fromEntries(
@@ -100,7 +102,7 @@ export function Videos ({
 
     return (
         <video
-            src={filteredProps.src}
+            //src={filteredProps.src}
             width={filteredProps.width}
             height={filteredProps.height}
             className={filteredProps.className}
@@ -117,6 +119,9 @@ export function Videos ({
             onPlay={filteredProps.onPlay}
             onPause={filteredProps.onPause}
             onTimeUpdate={filteredProps.onTimeUpdate}
-        />
+            typeof={filteredProps.type}
+        >
+            <source src={filteredProps.src} type={type || "video/mp4"} />
+        </video>
     );
 };
