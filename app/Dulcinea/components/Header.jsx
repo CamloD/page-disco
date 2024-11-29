@@ -3,17 +3,15 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'
 import MobileNav from './MobileNav';
 import Nav from './Nav';
-import {MostrarImages, MostrarVideos} from "app/components/MostrarMedios"
+import {Imagen, Videos} from "app/components/MostrarMedios"
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [headerShadow, setHeaderShadow] = useState('shadow-sm');
   const headerRef = useRef(null);
-  //const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const updateHeaderHeight = () => {
     if (headerRef.current) {
@@ -69,11 +67,11 @@ const Header = () => {
         <div className="flex items-center">
           <Link href="/Dulcinea" passHref>
             <div className="flex items-center justify-center space-x-2">
-              <MostrarImages
-                src={'/logo.png'}
-              alt="Logo" width={65} height={56} className='-mt-1.5'/>
-              <MostrarImages 
-                src={`etras_logo.png`}
+              <Imagen
+                src="logo.png"
+                alt="Logo" width={65} height={56} className='-mt-1.5'/>
+              <Imagen
+                src="letras_logo.png"
                 alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
             </div>
           </Link>

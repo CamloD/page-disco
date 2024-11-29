@@ -2,11 +2,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-export const MostrarImages = ({
-    Image_src,
-    Image_alt,
-    Image_width,
-    Image_height,
+export function Imagen ({
+    src,
+    alt,
+    width,
+    height,
     className,
     layout,
     priority,
@@ -20,93 +20,103 @@ export const MostrarImages = ({
     style,
     id,
     decorative = false,
-    ...props
-}) => {
+
+}) {
     const width_default = 200;
     const height_default = 300;
     const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : '';
 
-    
-    const imageProps = {
-        src: `${images_dir}/${Image_src}`,
-        alt: decorative ? "" : (Image_alt || "Image"),
-        width: Image_width || width_default,
-        height: Image_height || height_default,
-        className: className,
-        layout: layout || 'intrinsic',
-        priority: priority || false,
-        objectFit: objectFit || 'contain',
-        objectPosition: objectPosition || 'center',
-        quality: quality || 75,
-        placeholder: placeholder || 'empty',
-        blurDataURL: blurDataURL || undefined,
-        loading: loading || 'lazy',
-        onClick: onClick,
-        style: style || {},
-        id: id || undefined,
-        ...props
-    };
-
     return (
         <>
-            <Image {...imageProps} />
+            <Image
+                src={`${images_dir}/${src}`}
+                alt={decorative ? "" : (alt || "Image")}
+                width={width || width_default}
+                height={height || height_default}
+                className={className}
+                layout={layout}
+                priority={priority}
+                objectFit={objectFit}
+                objectPosition={objectPosition}
+                quality={quality}
+                placeholder={placeholder}
+                blurDataURL={blurDataURL}
+                loading={loading}
+                onClick={onClick}
+                style={style}
+                id={id}
+            />
         </>
     )
 }
 
 
-export const MostrarVideos = ({
+export function Videos ({
     src,
     width,
     height,
     className,
-    style,
-    autoPlay,
-    loop,
-    muted,
-    controls,
+    style = {},
+    autoPlay = false,
+    loop = false,
+    muted = false,
+    controls = false,
     poster,
     preload,
-    playsInline,
+    playsInline = false,
     crossOrigin,
     onEnded,
     onPlay,
     onPause,
     onTimeUpdate,
-    ...props
-}) => {
+}) {
     const width_default = 200;
     const height_default = 300;
     const video_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : '';
-    const video_style = style;
 
-    
     const videoProps = {
         src: `${video_dir}/${src}`,
         width: width || width_default,
         height: height || height_default,
         className,
-        style: video_style || {},
-        autoPlay: autoPlay ? true : false,
-        loop: loop ? true : false,
-        muted: muted ? true : false,
-        controls: controls ? true : false,
-        poster: poster || undefined,
-        preload: preload || undefined,
-        playsInline: playsInline ? true : false,
-        crossOrigin: crossOrigin || undefined,
+        style,
+        autoPlay,
+        loop,
+        muted,
+        controls,
+        poster,
+        preload,
+        playsInline,
+        crossOrigin,
         onEnded,
         onPlay,
         onPause,
         onTimeUpdate,
     };
 
-    
     const filteredProps = Object.fromEntries(
         Object.entries(videoProps).filter(([key, value]) => value !== undefined && value !== false)
     );
 
     return (
-        <video {...filteredProps} {...props} />
+        <video
+            src={filteredProps.src}
+            width={filteredProps.width}
+            height={filteredProps.height}
+            className={filteredProps.className}
+            style={filteredProps.style}
+            autoPlay={filteredProps.autoPlay}
+            loop={filteredProps.loop}
+            muted={filteredProps.muted}
+            controls={filteredProps.controls}
+            poster={filteredProps.poster}
+            preload={filteredProps.preload}
+            playsInline={filteredProps.playsInline}
+            crossOrigin={filteredProps.crossOrigin}
+            onEnded={filteredProps.onEnded}
+            onPlay={filteredProps.onPlay}
+            onPause={filteredProps.onPause}
+            onTimeUpdate={filteredProps.onTimeUpdate}
+        />
     );
-}
+};
