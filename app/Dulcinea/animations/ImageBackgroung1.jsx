@@ -20,6 +20,14 @@ const ImageBackground1 = () => {
     "images/image4.jpg",
     "images/image5.jpg",
   ];
+  const backgrounds1 = [
+    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image1.jpg`,
+    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image2.jpg`,
+    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image3.jpg`,
+    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image4.jpg`,
+    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image5.jpg`,
+  ];
+  
 
   const startAutoChange = () => {
     if (intervalRef.current) {
@@ -82,7 +90,7 @@ const ImageBackground1 = () => {
           key={index}
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url(${bg})`,
+            backgroundImage: `url(/${bg})`,
             opacity: index === currentBackgroundIndex ? 1 : 0,
           }}
         />
