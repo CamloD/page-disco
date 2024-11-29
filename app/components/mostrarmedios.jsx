@@ -19,7 +19,7 @@ export function Imagen ({
     onClick,
     style,
     id,
-    decorative = false,
+    
 
 }) {
     const width_default = 200;
@@ -30,7 +30,7 @@ export function Imagen ({
         <>
             <Image
                 src={`${images_dir}/${src}`}
-                alt={decorative ? "" : (alt || "Image")}
+                alt={alt || "Image"}
                 width={width || width_default}
                 height={height || height_default}
                 className={className}
