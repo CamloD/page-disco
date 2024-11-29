@@ -6,33 +6,20 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlignJustify, XIcon } from "lucide-react";
 import { usePathname } from 'next/navigation';
+import Image from 'next/image'
 
 const links = [
-  {
-      name: "home",
-      path: "/Dulcinea",
-  },
-  {
-      name: "gallery",
-      path: "/Dulcinea/gallery",
-  },
-  {
-      name: "contact",
-      path: "/Dulcinea/contact",
-  },
-  {
-      name: "reservation",
-      path: "/Dulcinea/reservation",
-  },
-  {
-      name:"pruebas 2",
-      path:"/Dulcinea/pruebas_2"
-  },   
+  { name: "home", path: "/Dulcinea"},
+  { name: "gallery", path: "/Dulcinea/gallery"},
+  { name: "contact", path: "/Dulcinea/contact"},
+  { name: "reservation", path: "/Dulcinea/reservation"},
+  { name:"pruebas 2", path:"/Dulcinea/pruebas_2"},   
 ]
 
 const MobileNav = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -72,17 +59,13 @@ const MobileNav = () => {
             <XIcon className="w-6 h-6" />
           </Button>
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
-            <Link href="/home" prefetch={false} className="flex items-center justify-center space-x-2">
-              <img
-                src="logo.png"
-                alt="Dulcinea Logo"
-                className='h-12 w-[55px] -mt-1.5'
-              />
-              <img
-                src="letras_logo.png"
-                alt="Dulcinea Letras Logo"
-                className='h-10 w-50 -mt-2.5'
-              />
+            <Link href="/Dulcinea" prefetch={false} className="flex items-center justify-center space-x-2">
+              <Image 
+                src={`${images_dir}/logo.png`} 
+              alt="Logo" width={65} height={56} className='h-12 w-[55px] -mt-1.5'/>
+              <Image 
+                src={`${images_dir}/letras_logo.png`}
+                alt="Dulcinea Letras Logo" width={224} height={40}  className='h-10 w-50 -mt-2.5'/> 
             </Link>
           </div>
           <nav className="flex flex-col justify-center items-center gap-4 p-4">

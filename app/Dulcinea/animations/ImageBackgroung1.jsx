@@ -10,9 +10,7 @@ const ImageBackground1 = () => {
   const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
-  const info_data = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
-
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const backgrounds = [
     "images/image1.jpg",
@@ -20,13 +18,6 @@ const ImageBackground1 = () => {
     "images/image3.jpg",
     "images/image4.jpg",
     "images/image5.jpg",
-  ];
-  const backgrounds1 = [
-    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image1.jpg`,
-    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image2.jpg`,
-    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image3.jpg`,
-    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image4.jpg`,
-    `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/images/image5.jpg`,
   ];
   
 
@@ -91,7 +82,7 @@ const ImageBackground1 = () => {
           key={index}
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url(${info_data}/${bg})`,
+            backgroundImage: `url(${images_dir}/${bg})`,
             opacity: index === currentBackgroundIndex ? 1 : 0,
           }}
         />

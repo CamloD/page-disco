@@ -22,10 +22,11 @@ import Scroll_image from "./animations/scroll_image"
 import ImageBackgroung1 from "./animations/ImageBackgroung1"
 import VideoBackground from "./animations/VideoBackground"
 
-import {Images_Header} from "app/components/imagesgrid"
 
 
 const Page = () => {
+  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
+
   return (
     <div className="dark:bg-[#1a1a1a]">
       <main className="flex-1">
@@ -138,11 +139,6 @@ const Page = () => {
           </div>
         </section>
 
-
-        <section>
-          <Images_Header/>
-        </section>
-
         <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8">Gallery</h2>
@@ -160,7 +156,7 @@ const Page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <video
                   autoPlay loop muted
-                  src="/video/video.mp4"
+                  src={`${images_dir}/video/video.mp4`}
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
@@ -169,7 +165,7 @@ const Page = () => {
               </div>
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src="/placeholder.svg?height=400&width=600"
+                  src={`${images_dir}/placeholder.svg?height=400&width=600`}
                   width={600}
                   height={400}
                   alt="Gallery Image 2"
@@ -180,7 +176,7 @@ const Page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <video
                   autoPlay loop muted
-                  src="/video/video.mp4"
+                  src={`${images_dir}/video/video.mp4`}
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
@@ -189,7 +185,7 @@ const Page = () => {
               </div>
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src="/placeholder.svg?height=400&width=600"
+                  src={`${images_dir}/placeholder.svg?height=400&width=600`}
                   width={600}
                   height={400}
                   alt="Gallery Image 3"
