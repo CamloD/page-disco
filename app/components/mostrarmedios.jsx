@@ -28,7 +28,7 @@ export const MostrarImages = ({
 
     
     const imageProps = {
-        src: {`${images_dir}/${Image_src}`},
+        src: `${images_dir}/${Image_src}`,
         alt: decorative ? "" : (Image_alt || "Image"),
         width: Image_width || width_default,
         height: Image_height || height_default,
