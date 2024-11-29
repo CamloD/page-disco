@@ -13,7 +13,7 @@ const Header = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [headerShadow, setHeaderShadow] = useState('shadow-sm');
   const headerRef = useRef(null);
-  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
+  //const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const updateHeaderHeight = () => {
     if (headerRef.current) {
@@ -73,7 +73,7 @@ const Header = () => {
                 src={'/logo.png'}
               alt="Logo" width={65} height={56} className='-mt-1.5'/>
               <MostrarImages 
-                src={`${images_dir}/letras_logo.png`}
+                src={`etras_logo.png`}
                 alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
             </div>
           </Link>
