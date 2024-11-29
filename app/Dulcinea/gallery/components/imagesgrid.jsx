@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { Play, Search, Image as ImageIcon, Info } from 'lucide-react'
 import { Lightbox } from './lightbox'
 import { motion } from 'framer-motion'
-import {Imagen, Videos} from "app/components/mostrarmedios"
 
 const mediaItems = [
   { id: 1, src: '../images/image1.jpg', type: 'image', alt: "Image 1", description: "A beautiful landscape with mountains and a lake" },
@@ -126,7 +125,7 @@ export function ImageGrid() {
             onClick={() => setSelectedIndex(index)}
             >
               {item.type === 'image' ? (
-                <Imagen
+                <Image
                 src={item.src}
                 alt={item.alt}
                 layout="fill"
