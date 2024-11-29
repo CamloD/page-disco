@@ -10,6 +10,7 @@ const ImageBackground1 = () => {
   const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
   const containerRef = useRef(null);
   const intervalRef = useRef(null);
+  const info_data = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
@@ -90,7 +91,7 @@ const ImageBackground1 = () => {
           key={index}
           className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url(/${bg})`,
+            backgroundImage: `url(${info_data}/${bg})`,
             opacity: index === currentBackgroundIndex ? 1 : 0,
           }}
         />
