@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlignJustify, XIcon } from "lucide-react";
 import { usePathname } from 'next/navigation';
-import Image from 'next/image'
+import {Imagen, Videos} from "app/components/mostrarmedios"
 
 const links = [
   { name: "home", path: "/Dulcinea"},
@@ -60,12 +60,12 @@ const MobileNav = () => {
           </Button>
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
             <Link href="/Dulcinea" prefetch={false} className="flex items-center justify-center space-x-2">
-              <Image 
-                src={`${images_dir}/logo.png`} 
-              alt="Logo" width={65} height={56} className='h-12 w-[55px] -mt-1.5'/>
-              <Image 
-                src={`${images_dir}/letras_logo.png`}
-                alt="Dulcinea Letras Logo" width={224} height={40}  className='h-10 w-50 -mt-2.5'/> 
+              <Imagen
+                src="logo.png" 
+                alt="Logo" width={65} height={56} className='h-12 w-[55px] -mt-1.5' loading="eager"/>
+              <Imagen
+                src="letras_logo.png"
+                alt="Dulcinea Letras Logo" width={224} height={40}  className='h-10 w-50 -mt-2.5' loading="eager"/> 
             </Link>
           </div>
           <nav className="flex flex-col justify-center items-center gap-4 p-4">

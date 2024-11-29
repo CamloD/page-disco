@@ -19,20 +19,19 @@ export function Imagen ({
     onClick,
     style,
     id,
-    
 
 }) {
-    const width_default = 200;
-    const height_default = 300;
     const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : '';
+    const imageLoading = 'eager';
+    
 
     return (
         <>
             <Image
                 src={`${images_dir}/${src}`}
                 alt={alt || "Image"}
-                width={width || width_default}
-                height={height || height_default}
+                width={width}
+                height={height}
                 className={className}
                 layout={layout}
                 priority={priority}
@@ -41,10 +40,11 @@ export function Imagen ({
                 quality={quality}
                 placeholder={placeholder}
                 blurDataURL={blurDataURL}
-                loading={loading}
+                loading={loading || imageLoading}
                 onClick={onClick}
                 style={style}
                 id={id}
+                
             />
         </>
     )

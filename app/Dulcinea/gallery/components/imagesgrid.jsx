@@ -4,9 +4,8 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Play, Search, Image as ImageIcon, Info } from 'lucide-react'
 import { Lightbox } from './lightbox'
-import { useSwipeable } from 'react-swipeable'
 import { motion } from 'framer-motion'
-import { getImageMetadata } from './lib/mediaUtils'
+import {Imagen, Videos} from "app/components/mostrarmedios"
 
 const mediaItems = [
   { id: 1, src: '../images/image1.jpg', type: 'image', alt: "Image 1", description: "A beautiful landscape with mountains and a lake" },
@@ -121,18 +120,18 @@ export function ImageGrid() {
         >
           {mediaItems.map((item, index) => (
             <motion.div
-              key={item.id}
-              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setSelectedIndex(index)}
+            key={item.id}
+            className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+            whileHover={{ scale: 1.05 }}
+            onClick={() => setSelectedIndex(index)}
             >
               {item.type === 'image' ? (
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 group-hover:scale-105"
+                <Imagen
+                src={item.src}
+                alt={item.alt}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
                 <VideoThumbnail src={item.src} alt={item.alt} />

@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import {Imagen} from "app/components/mostrarmedios"
 
 const ImageBackground1 = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -93,7 +93,7 @@ const ImageBackground1 = () => {
           transform: `translateY(${isInView ? Math.min(scrollY * 0.2, window.innerHeight * 0.2) : 0}px)`,
         }}
       >
-        <Image
+        <Imagen
           src="LOGODULCINEA_CONSOMBRA.png"
           alt="Dulcinea Logo"
           width={410}

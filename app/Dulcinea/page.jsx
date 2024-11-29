@@ -92,7 +92,52 @@ const Page = () => {
           </div>
         </section>
 
-        
+        <section id="events" className="py-12 md:py-20 lg:py-24 bg-[#1a1a1a]">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
+                    Próximo
+                  </div>
+                  <div className="text-sm text-muted-foreground">Sábado, 15 de julio</div>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Fiesta de Verano con DJ Sasha</h3>
+                <p className="text-muted-foreground mb-4">
+                  Ven a disfrutar de una noche llena de música electrónica y ambiente de fiesta. Contaremos con la
+                  presencia del DJ internacional Sasha.
+                </p>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+              </div>
+              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
+                    Próximo
+                  </div>
+                  <div className="text-sm text-muted-foreground">Viernes, 4 de agosto</div>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Noche Latina con Grupo Niche</h3>
+                <p className="text-muted-foreground mb-4">
+                  Disfruta de una noche llena de ritmos latinos con la presentación del legendario grupo Niche.
+                </p>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+              </div>
+              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
+                    Próximo
+                  </div>
+                  <div className="text-sm text-muted-foreground">Sábado, 26 de agosto</div>
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Fiesta de Aniversario con DJ Tiësto</h3>
+                <p className="text-muted-foreground mb-4">
+                  Celebramos nuestro 5to aniversario con una fiesta espectacular con la presentación del DJ Tiësto.
+                </p>
+                <Link href="/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">
           <div className="container mx-auto">

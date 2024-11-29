@@ -2,13 +2,14 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
-import Image from 'next/image'
+import {Imagen, Videos} from "app/components/mostrarmedios"
 import { ChevronLeft, ChevronRight, X, Download, Info, Volume2, VolumeX, Play, Pause, Minimize, Maximize, Settings, PictureInPicture2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 import { getImageMetadata, getVideoMetadata } from './lib/mediaUtils'
 import { useMediaQuery } from './hooks/useMediaQuery'
+import Image from 'next/image'
 
 export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
   const [showInfo, setShowInfo] = useState(false)
@@ -59,6 +60,8 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
         const data = await getImageMetadata(currentItem.src)
         setMetadata(data)
       } else if (currentItem.type === 'video') {
+        const videodata = currentItem.src
+        console.log(videodata)
         const data = await getVideoMetadata(currentItem.src)
         setMetadata(data)
       } else {

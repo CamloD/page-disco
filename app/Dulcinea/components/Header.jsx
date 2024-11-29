@@ -45,7 +45,7 @@ const Header = () => {
   }, [handleScroll, headerHeight]);
 
   const initialColor = 'rgba(26, 26, 26, 0)';
-  const scrolledColor = 'rgba(26, 26, 26, 0.97)';
+  const scrolledColor = 'rgba(26, 26, 26, 0.999)';
 
   const headerStyle = {
     backgroundColor: isScrolled ? scrolledColor : initialColor,
@@ -69,17 +69,17 @@ const Header = () => {
             <div className="flex items-center justify-center space-x-2">
               <Imagen
                 src="logo.png"
-                alt="Logo" width={65} height={56} className='-mt-1.5'/>
+                alt="Logo" width={65} height={56} className='-mt-1.5' loading="eager"/>
               <Imagen
                 src="letras_logo.png"
-                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' /> 
+                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' loading="eager"/> 
             </div>
           </Link>
         </div>
         <Nav />
         {/* Mobile nav */}
         <div className="md:hidden">
-          <MobileNav />
+          
         </div>
       </div>
     </header>
