@@ -79,7 +79,7 @@ const Header = () => {
         <Nav />
         {/* Mobile nav */}
         <div className="md:hidden">
-          
+          <MobileNav/>
         </div>
       </div>
     </header>
