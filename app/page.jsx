@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Imagen } from "app/components/mostrarmedios"
+import { Instagram, Facebook, Twitter } from 'app/components/icons'
 
 
 
@@ -13,7 +14,7 @@ const BACKGROUND_PATTERN = "data:image/svg+xml,%3Csvg width='6' height='6' viewB
 const BackgroundFigure = ({ isMobile }) => (
   <div className="relative w-full h-full overflow-hidden bg-gray-900 cursor-pointer flex flex-auto">
     {!isMobile && (
-      <div>
+      <>
         <div 
           className="absolute inset-0 flex items-center justify-center"
           style={{
@@ -32,23 +33,16 @@ const BackgroundFigure = ({ isMobile }) => (
           <div className="absolute inset-0 bg-gradient-to-b from-gray-700/50 to-gray-800/50" />
         </div> 
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-950/100" />
-      </div>
+      </>
     )}
   </div> 
 )
 
-const ImagenesFondo = ({ href_fondo, isMobile, setEsVisible, esVisible, imagenfondo, logo_imagen, sizelogo }) => {
-  const logo_width = sizelogo?.width || 200;  
-  const logo_height = sizelogo?.height || 300;
+
+const Fondo = ({ imagenfondo, esVisible, isMobile }) => {
   return (
-    <Link href={href_fondo} passHref>
+    <div>
       <div
-        className='relative w-full h-full'
-        onMouseEnter={() => !isMobile && setEsVisible(true)}
-        onMouseLeave={() => !isMobile && setEsVisible(false)}
-        aria-label={esVisible || isMobile ? "Imagen de fondo" : "Patrón de puntos de fondo"}
-      >
-        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url('${imagenfondo}')`,
@@ -70,53 +64,136 @@ const ImagenesFondo = ({ href_fondo, isMobile, setEsVisible, esVisible, imagenfo
             transition: 'opacity 0.6s ease-in-out',
           }}      
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Imagen
-            src={logo_imagen}
-            alt="Imagen central"
-            width={logo_width}
-            height={logo_height}
-            className="rounded-lg z-10"
-            priority 
-          />
-        </div> 
+    </div>
+  );
+};
+
+
+const ImagenesFondo = ({ href_fondo, isMobile, setEsVisible, esVisible, imagenfondo, logo_imagen, sizelogo }) => {
+  const logo_width = sizelogo?.width || 200;  
+  const logo_height = sizelogo?.height || 300;
+
+  
+  return (
+    <Link href={href_fondo} passHref>
+      <div
+        className='relative w-full h-full'
+        onMouseEnter={() => !isMobile && setEsVisible(true)}
+        onMouseLeave={() => !isMobile && setEsVisible(false)}
+        aria-label={esVisible || isMobile ? "Imagen de fondo" : "Patrón de puntos de fondo"}
+      >
+        <Fondo imagenfondo={imagenfondo} esVisible={esVisible} isMobile={isMobile} />
+        <div className="absolute inset-0 flex justify-center items-center my-12">
+          <div className="-mt-40">
+            <Imagen
+              src={logo_imagen}
+              alt="Imagen central"
+              width={logo_width}
+              height={logo_height}
+              className="rounded-lg z-10"
+              priority
+            />
+          </div>
+        </div>
       </div>
     </Link>
   )
 }
 
 const PagePrincipal = () => {
-  const [esVisible1, PonerVisible1] = useState(false)
-  const [esVisible2, PonerVisible2] = useState(false)
-  const [deviceType, setDeviceType] = useState('desktop')
+  const [esVisible1, PonerVisible1] = useState(false);
+  const [esVisible2, PonerVisible2] = useState(false);
+  const [deviceType, setDeviceType] = useState('desktop');
 
   useEffect(() => {
     const checkDeviceType = () => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        setDeviceType('mobile')
+        setDeviceType('mobile');
       } else if (window.innerWidth <= TABLET_BREAKPOINT) {
-        setDeviceType('tablet')
+        setDeviceType('tablet');
       } else {
-        setDeviceType('desktop')
+        setDeviceType('desktop');
       }
-    }
-    checkDeviceType()
-    window.addEventListener('resize', checkDeviceType)
-    return () => window.removeEventListener('resize', checkDeviceType)
-  }, [])
+    };
+    checkDeviceType();
+    window.addEventListener('resize', checkDeviceType);
+    return () => window.removeEventListener('resize', checkDeviceType);
+  }, []);
 
-  const isMobile = deviceType === 'mobile'
-  const isTablet = deviceType === 'tablet'
-    
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+
+  // Eventos para cambiar visibilidad
+  const handleMouseEnter1 = () => {
+    if (!isMobile) {
+      PonerVisible1(true); // Activamos la visibilidad de la primera imagen
+    }
+  };
+
+  const handleMouseLeave1 = () => {
+    if (!isMobile) {
+      PonerVisible1(false);
+    }
+  };
+
+  const handleMouseEnter2 = () => {
+    if (!isMobile) {
+      PonerVisible2(true);
+    }
+  };
+
+  const handleMouseLeave2 = () => {
+    if (!isMobile) {
+      PonerVisible2(false);
+    }
+  };
+
+  const handleMouseEnterAll = () => {
+    if (!isMobile) {
+      PonerVisible1(true);
+      PonerVisible2(true);
+    }
+  };
+
+  const handleMouseLeaveAll = () => {
+    if (!isMobile) {
+      PonerVisible1(false);
+      PonerVisible2(false);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         <section className="relative h-screen w-full overflow-hidden">
-          <div className='absolute z-0 w-full h-full'> 
+          <div className="absolute z-0 w-full h-full">
             <BackgroundFigure isMobile={isMobile} />
           </div>
-          <div className={`absolute z-10 w-full h-full flex ${isMobile ? 'flex-col' : 'flex-row'}`}>
-            <div className={`w-full ${isMobile ? /*'h-1/2'*/ 'h-full' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
+
+          
+          <div
+            className={`absolute z-10 w-full h-full flex ${isMobile ? 'flex-col' : 'flex-row'}`}
+             
+          >
+            <div className={` ${!isMobile? '': 'hidden' } absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-[-40px] flex justify-center items-end space-x-6 z-10 text-white pointer-events-auto `}
+              onMouseEnter={handleMouseEnterAll}
+              onMouseLeave={handleMouseLeaveAll}
+            >
+              <a href="https://www.instagram.com" className="pointer-events-auto" target="_blank">
+                <Instagram width="40" height="40" stroke="black" />
+              </a>
+              <a href="https://www.facebook.com" className="pointer-events-auto" target="_blank">
+                <Facebook width="40" height="40" stroke="black" />
+              </a>
+              <a href="https://x.com"className="pointer-events-auto" target="_blank">
+                <Twitter width="40" height="40" stroke="black" />
+              </a>
+            </div>
+            <div
+              className={`w-full ${isMobile ? 'h-full' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}
+              onMouseEnter={handleMouseEnter1}
+              onMouseLeave={handleMouseLeave1}
+            >
               <ImagenesFondo
                 href_fondo="/Dulcinea"
                 isMobile={isTablet || isMobile}
@@ -124,10 +201,15 @@ const PagePrincipal = () => {
                 esVisible={esVisible1}
                 imagenfondo="images1.jpg"
                 logo_imagen="LOGODULCINEA_CONSOMBRA.png"
-                sizelogo={{ width: isMobile ? 200 : 400, height: isMobile ? 225 : 450 }}
+                sizelogo={{ width: isMobile ? 325 : 400, height: isMobile ? 375 : 450 }}
               />
             </div>
-            {/*<div className={`w-full ${isMobile ? 'h-1/2' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}>
+
+          {/*<div
+              className={`w-full ${isMobile ? 'h-1/2' : isTablet ? 'h-full w-1/2' : 'h-full flex-1'}`}
+              onMouseEnter={handleMouseEnter2}
+              onMouseLeave={handleMouseLeave2}
+            >
               <ImagenesFondo
                 href_fondo="/Dulcinea/gallery"
                 isMobile={isTablet || isMobile}
@@ -141,6 +223,7 @@ const PagePrincipal = () => {
           </div>
         </section>
       </main>
+
       <footer className="bg-gray-900 py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -156,7 +239,8 @@ const PagePrincipal = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
+
 
 export default PagePrincipal
