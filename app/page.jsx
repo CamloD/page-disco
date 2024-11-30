@@ -180,13 +180,13 @@ const PagePrincipal = () => {
               onMouseLeave={handleMouseLeaveAll}
             >
               <a href="https://www.instagram.com" className="pointer-events-auto" target="_blank">
-                <Instagram width="40" height="40" stroke="black" />
+                <Instagram width="40" height="40"  />
               </a>
               <a href="https://www.facebook.com" className="pointer-events-auto" target="_blank">
-                <Facebook width="40" height="40" stroke="black" />
+                <Facebook width="40" height="40"  fill = "currentColor"/>
               </a>
               <a href="https://x.com"className="pointer-events-auto" target="_blank">
-                <Twitter width="40" height="40" stroke="black" />
+                <Twitter width="40" height="40" fill = "currentColor"/>
               </a>
             </div>
             <div

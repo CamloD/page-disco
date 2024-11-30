@@ -18,7 +18,6 @@ const links = [
 const MobileNav = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const images_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : ''
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
