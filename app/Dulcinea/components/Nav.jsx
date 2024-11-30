@@ -3,22 +3,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // Usando next/navigation para la ruta actual
 
 const links = [
-    {
-        name: "home",
-        path: "/Dulcinea",
-    },
-    {
-        name: "gallery",
-        path: "/Dulcinea/gallery",
-    },
-    {
-        name: "contact",
-        path: "/Dulcinea/contact",
-    },
-    {
-        name: "reservation",
-        path: "/Dulcinea/reservation",
-    },
+    { name: "home", path: "/Dulcinea"},
+    { name: "gallery", path: "/Dulcinea/gallery"},
+    { name: "contact", path: "/Dulcinea/contact"},
+    { name: "reservation", path: "/Dulcinea/reservation"},
 ];
 
 const Naveg = () => {

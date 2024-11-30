@@ -12,8 +12,7 @@ const links = [
   { name: "home", path: "/Dulcinea"},
   { name: "gallery", path: "/Dulcinea/gallery"},
   { name: "contact", path: "/Dulcinea/contact"},
-  { name: "reservation", path: "/Dulcinea/reservation"},
-  { name:"pruebas 2", path:"/Dulcinea/pruebas_2"},   
+  { name: "reservation", path: "/Dulcinea/reservation"},   
 ]
 
 const MobileNav = () => {
