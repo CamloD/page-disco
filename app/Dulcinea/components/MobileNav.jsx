@@ -61,11 +61,8 @@ const MobileNav = () => {
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
             <Link href="/Dulcinea" prefetch={false} className="flex items-center justify-center space-x-2">
               <Imagen
-                src="logo.png" 
-                alt="Logo" width={65} height={56} className='h-12 w-[55px] -mt-1.5' loading="eager"/>
-              <Imagen
-                src="letras_logo.png"
-                alt="Dulcinea Letras Logo" width={224} height={40}  className='h-10 w-50 -mt-2.5' loading="eager"/> 
+                src="LOGODULCINEA_CONSOMBRA.png"
+                alt="Logo" width={224} height={30} className='-mt-2.5 block md:hidden' loading="eager"/>
             </Link>
           </div>
           <nav className="flex flex-col justify-center items-center gap-4 p-4">

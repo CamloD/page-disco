@@ -69,10 +69,14 @@ const Header = () => {
             <div className="flex items-center justify-center space-x-2">
               <Imagen
                 src="logo.png"
-                alt="Logo" width={65} height={56} className='-mt-1.5' loading="eager"/>
+                alt="Logo" width={65} height={56} className='-mt-1.5 hidden md:block' loading="eager"/>
               <Imagen
                 src="letras_logo.png"
-                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5' loading="eager"/> 
+                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5 hidden md:block' loading="eager"
+                /> 
+               <Imagen
+                src="LOGODULCINEA_CONSOMBRA.png"
+                alt="Logo" width={115} height={15} className='-mt-2.5 block md:hidden' loading="eager"/>
             </div>
           </Link>
         </div>
