@@ -24,10 +24,6 @@ const links = [
   {
       name: "reservation",
       path: "/Dulcinea/reservation",
-  },
-  {
-      name:"pruebas 2",
-      path:"/Dulcinea/pruebas_2"
   },   
 ]
 
