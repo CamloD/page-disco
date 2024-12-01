@@ -17,7 +17,7 @@ export const Vestimenta_Code = () => {
               loop
               width={300}
               height={500}
-              src="video/video1.mp4"
+              src="video/video1(2).mp4"
               className="w-full h-auto object-cover"
             />
           </div>
