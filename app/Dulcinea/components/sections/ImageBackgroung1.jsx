@@ -102,7 +102,7 @@ const ImageBackground1 = () => {
         />
       </div>
       <div
-        className="absolute bottom-5 flex justify-center items-center z-20"
+        className="absolute bottom-5 flex justify-center items-center z-10"
       >
         {backgrounds.map((_, index) => (
           <button
@@ -116,8 +116,8 @@ const ImageBackground1 = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default ImageBackground1;
 

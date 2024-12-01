@@ -17,7 +17,9 @@ export const metadata = {
 export default function DiscoLayout({ children }) {
   return (
     <div>
+      <div className='absolute z-50'>
       <Header />
+      </div>
       <div className={cn('child-layout', fontBody.variable)}>
         {children}
       </div>

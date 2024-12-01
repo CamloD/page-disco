@@ -1,7 +1,41 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import styles from "@/app/Styles/ParallaxVideo.css";
+import {Imagen, Videos} from "app/components/mostrarmedios"
 
 export const Vestimenta_Code = () => {
-  return (
-    <div>vestimenta_code</div>
-  )
+  
+  
+    return (
+      <div className='w-screen bg-[#1a1a1a]'>
+        <div className='flex flex-col md:flex-row h-full w-full py-8'>
+          <div className='flex-1 h-full flex justify-center items-center '>
+            <Videos
+              autoPlay
+              muted
+              loop
+              src="video/video1.mp4"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+          <div className='flex-1 h-full flex justify-center items-center'>
+            <Videos
+              autoPlay
+              muted
+              loop
+              src="video/video2.mp4"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+          <div className='flex-1 h-full flex justify-center items-center'>
+            <Videos
+              autoPlay
+              muted
+              loop
+              src="video/video3.mp4"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    )
 }

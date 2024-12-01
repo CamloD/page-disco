@@ -21,7 +21,7 @@ import PScrollVideo from "./components/sections/ScrollVideo"
 import ScrollVideo from "./components/sections/ScrollVideo"
 import Scroll_image from "./components/sections/scroll_image"
 import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
-import VideoBackground from "./components/sections/VideoBackground"
+
 import {Vestimenta_Code} from "./components/sections/vestimenta_code"
 
 
@@ -32,13 +32,13 @@ const Page = () => {
     <div className="dark:bg-[#1a1a1a]">
       <main className="flex-1">
 
-        <section className="relative h-[100vh] overflow-hidden">
+        <section className="relative h-screen overflow-hidden">
           <ImageBackgroung1/>
         </section>
 
 
-        <section>
-          
+        <section className="relative">
+          <Vestimenta_Code/>
         </section>
 
 
@@ -180,7 +180,7 @@ const Page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <Videos
                   autoPlay loop muted
-                  src="video/video.mp4"
+                  src="video/video1.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
@@ -200,7 +200,7 @@ const Page = () => {
               <div className="relative overflow-hidden rounded-xl">
                 <Videos
                   autoPlay loop muted
-                  src="video/video.mp4"
+                  src="video/video2.mp4"
                   width="600"  
                   height="400"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"

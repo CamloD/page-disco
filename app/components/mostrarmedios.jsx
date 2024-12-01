@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import Image from 'next/image'
+import { useEffect, useState } from 'react';
 
 export function Imagen ({
     src,
@@ -51,7 +52,8 @@ export function Imagen ({
 }
 
 
-export function Videos ({
+
+export function Videos({
     src,
     width,
     height,
@@ -70,58 +72,44 @@ export function Videos ({
     onPause,
     onTimeUpdate,
     type,
-}) {
-    const width_default = 200;
-    const height_default = 300;
-    const video_dir = process.env.NODE_ENV === 'production' ? '/page-disco' : '';
-
-    const videoProps = {
-        src: `${video_dir}/${src}`,
-        width: width || width_default,
-        height: height || height_default,
-        className,
-        style,
-        autoPlay,
-        loop,
-        muted,
-        controls,
-        poster,
-        preload,
-        playsInline,
-        crossOrigin,
-        onEnded,
-        onPlay,
-        onPause,
-        onTimeUpdate,
-        type,
-    };
-
-    const filteredProps = Object.fromEntries(
-        Object.entries(videoProps).filter(([key, value]) => value !== undefined && value !== false)
-    );
-
+    alt,
+  }) {
+    const [isClient, setIsClient] = useState(false);
+    const [videoSrc, setVideoSrc] = useState(null);
+  
+    useEffect(() => {
+      setIsClient(true);
+      const videoURL = `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/${src}`;
+      setVideoSrc(videoURL);
+    }, [src]);
+  
+    if (!isClient || !videoSrc) {
+      return null;
+    }
+  
     return (
-        <video
-            //src={filteredProps.src}
-            width={filteredProps.width}
-            height={filteredProps.height}
-            className={filteredProps.className}
-            style={filteredProps.style}
-            autoPlay={filteredProps.autoPlay}
-            loop={filteredProps.loop}
-            muted={filteredProps.muted}
-            controls={filteredProps.controls}
-            poster={filteredProps.poster}
-            preload={filteredProps.preload}
-            playsInline={filteredProps.playsInline}
-            crossOrigin={filteredProps.crossOrigin}
-            onEnded={filteredProps.onEnded}
-            onPlay={filteredProps.onPlay}
-            onPause={filteredProps.onPause}
-            onTimeUpdate={filteredProps.onTimeUpdate}
-            typeof={filteredProps.type}
-        >
-            <source src={filteredProps.src} type={type || "video/mp4"} />
-        </video>
+      <video
+        width={width || 200}
+        height={height || 300}
+        className={className}
+        style={style}
+        autoPlay={autoPlay}
+        loop={loop}
+        muted={muted}
+        controls={controls}
+        poster={poster}
+        preload={preload}
+        playsInline={playsInline}
+        crossOrigin={crossOrigin}
+        onEnded={onEnded}
+        onPlay={onPlay}
+        onPause={onPause}
+        onTimeUpdate={onTimeUpdate}
+        typeof={type}
+        alt={alt}
+      >
+        <source src={videoSrc} type={type || "video/mp4"} />
+      </video>
     );
-};
+  };
+
