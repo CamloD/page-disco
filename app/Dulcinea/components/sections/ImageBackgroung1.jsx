@@ -88,7 +88,7 @@ const ImageBackground1 = () => {
         />
       ))}
       <div
-        className="relative transition-transform duration-100"
+        className="absolute transition-transform duration-100 inset-0 flex justify-center items-center"
         style={{
           transform: `translateY(${isInView ? Math.min(scrollY * 0.2, window.innerHeight * 0.2) : 0}px)`,
         }}
@@ -96,9 +96,9 @@ const ImageBackground1 = () => {
         <Imagen
           src="LOGODULCINEA_CONSOMBRA.png"
           alt="Dulcinea Logo"
-          width={410}
-          height={500}
-          className="w-auto h-auto max-w-[410px] max-h-[500px]"
+          width={380}
+          height={350}
+          className=" max-y-[400px] max-h-[400px]"
         />
       </div>
       <div

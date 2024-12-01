@@ -175,18 +175,18 @@ const PagePrincipal = () => {
             className={`absolute z-10 w-full h-full flex ${isMobile ? 'flex-col' : 'flex-row'}`}
              
           >
-            <div className={` ${!isMobile? '': 'hidden' } absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-[-40px] flex justify-center items-end space-x-6 z-10 text-white pointer-events-auto `}
+            <div className={` ${!isMobile? '': 'hidden' } absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-[-90px] flex justify-center items-end space-x-10 z-10 text-white pointer-events-auto `}
               onMouseEnter={handleMouseEnterAll}
               onMouseLeave={handleMouseLeaveAll}
             >
               <a href="https://www.instagram.com" className="pointer-events-auto" target="_blank">
-                <Instagram width="40" height="40"  />
+                <Instagram width="30" height="30"  />
               </a>
               <a href="https://www.facebook.com" className="pointer-events-auto" target="_blank">
-                <Facebook width="40" height="40"  fill = "currentColor"/>
+                <Facebook width="30" height="30"  fill = "currentColor"/>
               </a>
               <a href="https://x.com"className="pointer-events-auto" target="_blank">
-                <Twitter width="40" height="40" fill = "currentColor"/>
+                <Twitter width="30" height="30" fill = "currentColor"/>
               </a>
             </div>
             <div

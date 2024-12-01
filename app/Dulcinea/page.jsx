@@ -14,14 +14,15 @@ import { useState, useEffect, useRef } from 'react'
 import {Imagen, Videos} from "app/components/mostrarmedios"
 
 
-import ScrollImage from "./animations/ScrollImage"
+import ScrollImage from "./components/sections/ScrollImage"
 import { Parallax } from "react-parallax"
 import styles1 from "@/app/Styles/principal.css"
-import PScrollVideo from "./animations/ScrollVideo"
-import ScrollVideo from "./animations/ScrollVideo"
-import Scroll_image from "./animations/scroll_image"
-import ImageBackgroung1 from "./animations/ImageBackgroung1"
-import VideoBackground from "./animations/VideoBackground"
+import PScrollVideo from "./components/sections/ScrollVideo"
+import ScrollVideo from "./components/sections/ScrollVideo"
+import Scroll_image from "./components/sections/scroll_image"
+import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
+import VideoBackground from "./components/sections/VideoBackground"
+import {Vestimenta_Code} from "./components/sections/vestimenta_code"
 
 
 
@@ -30,14 +31,17 @@ const Page = () => {
   return (
     <div className="dark:bg-[#1a1a1a]">
       <main className="flex-1">
+
         <section className="relative h-[100vh] overflow-hidden">
           <ImageBackgroung1/>
-          <div className="absolute inset-0 bg-black/20 flex items-center justify-normal">
-            <div className="m-20 max-w-4xl text-left space-y-6 text-white flex flex-col justify-center">
-            </div>
-          </div>
         </section>
-        
+
+
+        <section>
+          
+        </section>
+
+
         <section className="bg-[#1a1a1a] py-12 md:py-24 lg:py-32 ">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 lg:grid-cols-2 items-center">
