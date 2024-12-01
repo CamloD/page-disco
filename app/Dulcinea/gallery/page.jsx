@@ -1,7 +1,8 @@
 "use client"
 
 import { ImageGrid } from './components/imagesgrid'
-import Header from "@/app/Dulcinea/components/Header"
+import {Imagen, Videos} from "app/components/mostrarmedios"
+
 const Gallery = () => {
 
   return (
@@ -19,7 +20,6 @@ const Gallery = () => {
       <main className="flex-1 bg-[#3a3a3a] py-8">
       <ImageGrid/>
       </main>
-      
     </div>
   )
 }

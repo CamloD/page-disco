@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 
+
 export function Imagen ({
     src,
     alt,
@@ -52,64 +53,65 @@ export function Imagen ({
 }
 
 
-
 export function Videos({
-    src,
-    width,
-    height,
-    className,
-    style,
-    autoPlay,
-    loop,
-    muted,
-    controls,
-    poster,
-    preload,
-    playsInline,
-    crossOrigin,
-    onEnded,
-    onPlay,
-    onPause,
-    onTimeUpdate,
-    type,
-    alt,
-  }) {
-    const [isClient, setIsClient] = useState(false);
-    const [videoSrc, setVideoSrc] = useState(null);
-  
-    useEffect(() => {
-      setIsClient(true);
-      const videoURL = `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/${src}`;
-      setVideoSrc(videoURL);
-    }, [src]);
-  
-    if (!isClient || !videoSrc) {
-      return null;
-    }
-  
-    return (
-      <video
-        width={width || 200}
-        height={height || 300}
-        className={className}
-        style={style}
-        autoPlay={autoPlay}
-        loop={loop}
-        muted={muted}
-        controls={controls}
-        poster={poster}
-        preload={preload}
-        playsInline={playsInline}
-        crossOrigin={crossOrigin}
-        onEnded={onEnded}
-        onPlay={onPlay}
-        onPause={onPause}
-        onTimeUpdate={onTimeUpdate}
-        typeof={type}
-        alt={alt}
-      >
-        <source src={videoSrc} type={type || "video/mp4"} />
-      </video>
-    );
-  };
+  src,
+  width,
+  height,
+  className,
+  style,
+  autoPlay,
+  loop,
+  muted,
+  controls,
+  poster,
+  preload,
+  playsInline,
+  crossOrigin,
+  onEnded,
+  onPlay,
+  onPause,
+  onTimeUpdate,
+  type,
+  alt,
+}) {
+  const [isClient, setIsClient] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(null);
+
+  useEffect(() => {
+    setIsClient(true);
+    const videoURL = `${process.env.NODE_ENV === 'production' ? '/page-disco' : ''}/${src}`;
+    setVideoSrc(videoURL);
+  }, [src]);
+
+  if (!isClient || !videoSrc) {
+    return null;
+  }
+
+  return (
+    <video
+      src={videoSrc}
+      width={width || 200}
+      height={height || 300}
+      className={className}
+      style={style}
+      autoPlay={autoPlay}
+      loop={loop}
+      muted={muted}
+      controls={controls}
+      poster={poster}
+      preload={preload}
+      playsInline={playsInline}
+      crossOrigin={crossOrigin}
+      onEnded={onEnded}
+      onPlay={onPlay}
+      onPause={onPause}
+      onTimeUpdate={onTimeUpdate}
+      typeof={type}
+      alt={alt}
+    >
+      <source src={videoSrc} type={type || ""} />
+    </video>
+  );
+};
+
 

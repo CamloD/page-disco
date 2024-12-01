@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, useRef } from 'react'
 //import Image from 'next/image'
 import {Imagen, Videos} from "app/components/mostrarmedios"
+import {ImageGrid} from "app/components/images_gallery/imagesgrid"
 
 
 import ScrollImage from "./components/sections/ScrollImage"
@@ -145,70 +146,11 @@ const Page = () => {
 
         <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-8">Gallery</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              <div className="relative overflow-hidden rounded-lg">
-                <Imagen
-                  src="placeholder.svg?height=400&width=600"
-                  width={600}
-                  height={400}
-                  alt="Gallery Image 1"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "600/400", objectFit: "cover" }}
-                />
-              </div>
-              <div className="relative overflow-hidden rounded-xl">
-                <Videos
-                  autoPlay loop muted
-                  src="video/video.mp4"
-                  width="600"  
-                  height="400"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                />
-              </div>
-              <div className="relative overflow-hidden rounded-lg">
-                <Imagen
-                  src="placeholder.svg?height=400&width=600"
-                  width={600}
-                  height={400}
-                  alt="Gallery Image 2"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "600/400", objectFit: "cover" }}
-                />
-              </div>
-              <div className="relative overflow-hidden rounded-xl">
-                <Videos
-                  autoPlay loop muted
-                  src="video/video1.mp4"
-                  width="600"  
-                  height="400"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                />
-              </div>
-              <div className="relative overflow-hidden rounded-lg">
-                <Imagen
-                  src="placeholder.svg?height=400&width=600"
-                  width={600}
-                  height={400}
-                  alt="Gallery Image 3"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "600/400", objectFit: "cover" }}
-                />
-              </div>
-              <div className="relative overflow-hidden rounded-xl">
-                <Videos
-                  autoPlay loop muted
-                  src="video/video2.mp4"
-                  width="600"  
-                  height="400"
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  style={{ aspectRatio: "3 / 2", objectFit: "cover" }} 
-                />
-              </div>
-              
-            </div>
+            <h2 className="text-5xl font-bold mb-6">Gallery</h2>    
+            <main >
+              <ImageGrid/>
+            </main>
+            
           </div>
         </section>
 
