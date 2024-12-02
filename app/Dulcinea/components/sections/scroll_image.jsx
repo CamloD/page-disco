@@ -5,7 +5,7 @@ import styles from "@/app/Styles/style_scroll_image.css"
 
 const scroll_image = () => {
   return (
-    <div className="bg-[#1a1a1a]">
+    <div className="bg-transparent">
     <div className="collage">
       <div className="photo-block">
         <div className="photo-grid">

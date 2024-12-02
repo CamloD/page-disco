@@ -25,25 +25,51 @@ import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
 
 import {Vestimenta_Code} from "./components/sections/vestimenta_code"
 
+const BACKGROUND_PATTERN = "data:image/svg+xml,%3Csvg width='6' height='6' viewBox='6 6 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='12' fill='%230a5770' fill-opacity='0.4'/%3E%3C/svg%3E"
+
+const BackgroundFigure = () => (
+  <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 cursor-pointer flex">
+    <div 
+      className="absolute inset-0 flex items-center justify-center"
+      style={{
+        transform: 'rotate(-46.60deg) scale(2)',
+        width: '400vw',
+        height: '800vh',
+        left: '50%',
+        top: '50%',
+        transform: 'rotate(-46.60deg) scale(2) translate(-5%, -30%)',
+        backgroundImage: `url("${BACKGROUND_PATTERN}")`,
+        backgroundSize: '3px 3px',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
+        transition: 'opacity 0.5s ease-in-out',
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-700/50 to-gray-800/80" />
+    </div> 
+    <div className="absolute inset-0 bg-gradient-to-b from-gray-950/50 to-gray-950/50" />
+  </div>
+)
 
 
 const Page = () => {
 
   return (
-    <div className="dark:bg-[#1a1a1a]">
-      <main className="flex-1">
+    <div className="bg-[#1a1a1a] max-w-[100wh] relative">
+      <BackgroundFigure />
+      <main className="flex-1 relative z-10">
 
-        <section className="relative h-screen overflow-hidden">
+        <section className="bg-transparent relative h-screen overflow-hidden">
           <ImageBackgroung1/>
         </section>
 
 
-        <section className="relative">
+        <section className="">
           <Vestimenta_Code/>
         </section>
 
 
-        <section className="bg-[#1a1a1a] py-12 md:py-24 lg:py-32 ">
+        <section className="bg-transparent py-12 md:py-24 lg:py-32 ">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 lg:grid-cols-2 items-center">
               <div className="space-y-4 ">
@@ -97,7 +123,7 @@ const Page = () => {
           </div>
         </section>
 
-        <section id="events" className="py-12 md:py-20 lg:py-24 bg-[#1a1a1a]">
+        <section id="events" className="py-12 md:py-20 lg:py-24 bg-transparent">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
@@ -144,7 +170,7 @@ const Page = () => {
           </div>
         </section>
 
-        <section id="gallery" className="py-16 bg-[#1a1a1a] text-white">
+        <section id="gallery" className="py-16 bg-transparent text-white">
           <div className="container mx-auto">
             <h2 className="text-5xl font-bold mb-6">Gallery</h2>    
             <main >
@@ -161,8 +187,7 @@ const Page = () => {
         <section>   
           <Scroll_image/>
         </section>
-
-        <section id="contact" className="py-16 bg-[#1a1a1a]">
+        <section id="contact" className="py-16 bg-transparent">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-white">Contact Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -205,7 +230,11 @@ const Page = () => {
           </div>
         </section>
       </main>
-      <footer className="bg-[#171922] py-8 text-white">
+      <footer className=" py-8 text-white relative"
+      style = {{
+        backgroundColor: 'rgba(212, 212, 212, 0.06'
+      }}
+      >  {/*bg-[#171922] */}
         <div className="container mx-auto text-center">
           <p>&copy; 2024 Discoteca Disco. All rights reserved.</p>
         </div>
