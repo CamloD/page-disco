@@ -46,7 +46,7 @@ export const Vestimenta_Code = () => {
             </div>
             
           </div>
-          <div className='flex flex-col md:flex-row h-screen w-screen '>
+          <div className='flex flex-col md:flex-row h-screen  '>
             <Videos
             autoPlay
             muted
