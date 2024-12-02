@@ -46,7 +46,7 @@ export const Vestimenta_Code = () => {
             </div>
             
           </div>
-          {/*<div className='flex flex-col md:flex-row h-screen w-screen '>
+          <div className='flex flex-col md:flex-row h-screen w-screen '>
             <Videos
             autoPlay
             muted
@@ -56,7 +56,7 @@ export const Vestimenta_Code = () => {
             src="video/video4.mp4"
             className="w-full h-auto object-cover"
             />
-          </div>*/}
+          </div>
         </div>
       </div>
     )
