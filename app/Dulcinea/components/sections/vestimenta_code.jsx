@@ -7,7 +7,7 @@ export const Vestimenta_Code = () => {
   
   
     return (
-      <div className='w-[100wh] bg-[#1a1a1a]'>
+      <div className='w-[100wh] bg-transparent'>
         <div className="max-w-full">
           <div className='flex flex-col md:flex-row h-full'>
             
