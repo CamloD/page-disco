@@ -11,7 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import eventData from "app/Dulcinea/data/eventdata.json"
-import { Imagen } from '@/app/components/mostrarmedios'
+import { Imagen } from 'app/components/mostrarmedios'
 
 export const CalendarioEventos = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
