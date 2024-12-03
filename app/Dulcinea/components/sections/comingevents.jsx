@@ -55,11 +55,16 @@ export function ProximosEventos({isMobile, isTablet, isDesktop}) {
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    const twoWeeksFromNow = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+    const oneWeekFromNow = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);  // 7 días desde ahora
+    const twoWeeksFromNow = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000); // 14 días desde ahora
+    const oneMonthFromNow = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);  // 30 días desde ahora
+    const twoMonthsFromNow = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000); // 60 días desde ahora (2 meses)
+    const threeMonthsFromNow = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 días desde ahora (3 meses)
+
     const filteredEvents = eventData.events
       .filter((event) => {
         const eventDate = new Date(event.date);
-        return eventDate >= new Date() && eventDate <= twoWeeksFromNow;
+        return eventDate >= new Date() && eventDate <= oneMonthFromNow;
       })
       .sort((a, b) => new Date(a.date) - new Date(b.date));
 
