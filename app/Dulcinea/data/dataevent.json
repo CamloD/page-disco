@@ -57,7 +57,7 @@
       "image": "images/image2.jpg?height=300&width=400",
       "dj": {
         "name": "DJ RockStar",
-        "avatar": "images/image2?height=40&width=40"
+        "avatar": "/placeholder.svg?height=40&width=40"
       }
     },
     {

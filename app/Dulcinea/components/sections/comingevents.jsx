@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -8,10 +8,10 @@ import eventData from "@/app/Dulcinea/data/dataevent.json";
 import Slider from "react-slick";
 import {Imagen, Videos} from "app/components/mostrarmedios"
 
-const EventCard = ({ event }) => (
-  <div className="event-card w-[300px] flex-shrink-0 px-2">
+const EventCard = ({ event, isMobile }) => (
+  <div className={`event-card ${isMobile ? 'w-full' : 'w-[300px]'} flex-shrink-0 px-2 pb-8`}>
     <div className="bg-white rounded-lg overflow-hidden shadow-lg h-[400px] flex flex-col">
-      <div className="h-[70%] relative">
+      <div className="h-[60%] relative">
         <Imagen
           src={event.image}
           alt={event.title}
@@ -22,24 +22,24 @@ const EventCard = ({ event }) => (
       <div className="p-4 flex-1 overflow-y-auto">
         <div className="flex mb-2">
           <div className="w-1/3 pr-2 flex flex-col items-center justify-center border-r border-gray-200">
-            <span className="text-3xl font-bold text-red-700">
+            <span className="text-2xl md:text-3xl font-bold text-red-700">
               {new Date(event.date).getDate()}
             </span>
-            <span className="text-sm text-gray-600">
+            <span className="text-xs md:text-sm text-gray-600">
               {new Date(event.date).toLocaleString("default", { month: "short" })}
             </span>
-            <span className="text-sm text-gray-600">{event.time}</span>
+            <span className="text-xs md:text-sm text-gray-600">{event.time}</span>
           </div>
           <div className="w-2/3 pl-2">
-            <h3 className="text-lg font-bold">{event.title}</h3>
-            <p className="text-sm text-gray-700 line-clamp-2">{event.description}</p>
+            <h3 className="text-base md:text-lg font-bold">{event.title}</h3>
+            <p className="text-xs md:text-sm text-gray-700 line-clamp-2">{event.description}</p>
             <div className="flex items-center gap-2 mt-2">
               <Avatar>
                 <AvatarImage src={event.dj.avatar} alt={event.dj.name} />
                 <AvatarFallback>DJ</AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">{event.dj.name}</p>
+                <p className="text-xs md:text-sm font-medium">{event.dj.name}</p>
                 <p className="text-xs text-gray-600">Artista Invitado</p>
               </div>
             </div>
@@ -50,9 +50,9 @@ const EventCard = ({ event }) => (
   </div>
 );
 
-export function ProximosEventos() {
+export function ProximosEventos({isMobile, isTablet, isDesktop}) {
   const [events, setEvents] = useState([]);
-  const sliderRef = useRef(null); // Referencia para el slider
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     const twoWeeksFromNow = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
@@ -70,87 +70,81 @@ export function ProximosEventos() {
   
   const settings = {
     infinite: true,
-    slidesToShow: 4,
+    slidesToShow: isMobile ? 1 : isTablet ? 2 : 3,
     slidesToScroll: 1,
     speed: 500,
     arrows: false,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
+    dots: false,
+    swipe: true,
   };
 
-  const movePrev = () => {
+  const movePrev = useCallback(() => {
     if (sliderRef.current) {
-      sliderRef.current.slickPrev(); 
+      sliderRef.current.slickPrev();
     }
-  };
+  }, []);
 
-  const moveNext = () => {
+  const moveNext = useCallback(() => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
     }
-  };
+  }, []);
 
   return (
-    <div className="relative min-h-screen ">
+    <div className="relative min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="container px-4 md:px-6 relative z-10">
-        <div className="text-center mb-12 pb-10">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-white mb-4">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-4">
             Próximos Eventos
           </h1>
-          <p className="text-xl text-white mb-8">
+          <p className="text-lg md:text-xl text-white mb-8">
             Descubre los próximos eventos en Club Nightlife. Disfruta de la mejor
             música, ambiente y artistas invitados.
           </p>
-          <div className="flex justify-center gap-4">
-            <Link href="/Dulcinea/reservation">
-              <Button size="lg" className="bg-red-700 hover:bg-red-900">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
+            <Link href="/Dulcinea/reservation" className="w-full sm:w-auto">
+              <Button size={isMobile ? "default" : "lg"} className="w-full bg-red-700 hover:bg-red-900">
                 Hacer Reservación
               </Button>
             </Link>
-            <Link href="/Dulcinea/calendario">
-              <Button size="lg" className="bg-emerald-500 hover:bg-emerald-700">
+            <Link href="/Dulcinea/calendario" className="w-full sm:w-auto">
+              <Button size={isMobile ? "default" : "lg"} className="w-full bg-emerald-500 hover:bg-emerald-700">
                 Ver Calendario
               </Button>
             </Link>
           </div>
         </div>
 
-        <div className="relative -mx-8">
-          <h2 className="text-3xl font-bold text-white mb-6">Eventos Destacados</h2>
-          <Slider ref={sliderRef} {...settings}>
-            {duplicatedEvents.map((event, index) => (
-              <EventCard key={`${event.id}-${index}`} event={event} />
-            ))}
-          </Slider>
-
-          <button
-            onClick={movePrev}
-            className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-red-700 hover:bg-red-900 rounded-full p-2 z-10"
-            aria-label="Evento anterior"
-          >
-            <ChevronLeft className="h-6 w-6 text-white" />
-          </button>
-          <button
-            onClick={moveNext}
-            className="absolute -right-10 top-1/2 transform -translate-y-1/2 bg-red-700 hover:bg-red-900 rounded-full p-2 z-10"
-            aria-label="Siguiente evento"
-          >
-            <ChevronRight className="h-6 w-6 text-white" />
-          </button>
+        <div className="relative mx-auto max-w-7xl">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Eventos Destacados</h2>
+          <div className="relative">
+            <Slider ref={sliderRef} {...settings}>
+              {duplicatedEvents.map((event, index) => (
+                <EventCard key={`${event.id}-${index}`} event={event} isMobile={isMobile} />
+              ))}
+            </Slider>
+            <div className="absolute inset-y-0 left-0 flex items-center">
+            <button
+              onClick={movePrev}
+              className="bg-red-700 hover:bg-red-900 rounded-full p-2 z-10 text-white -ml-4 md:-ml-6 lg:-ml-8 focus:outline-none focus:ring-2 focus:ring-red-500"
+              aria-label="Evento anterior"
+            >
+              <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10 md:h-6 md:w-6 lg:h-6 lg:w-6" />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <button
+                onClick={moveNext}
+                className="bg-red-700 hover:bg-red-900 rounded-full p-2 z-10 text-white -mr-4 md:-mr-6 lg:-mr-8 focus:outline-none focus:ring-2 focus:ring-red-500"
+                aria-label="Siguiente evento"
+              >
+                <ChevronRight className="h-8 w-8 sm:h-10 sm:w-10 md:h-6 md:w-6 lg:h-6 lg:w-6" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

@@ -95,6 +95,7 @@ const Page = () => {
 
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
   return (
     <div className="bg-[#1a1a1a] max-w-[100wh] relative">
       <BackgroundFigure  isMobile= {isMobile} isTablet={isTablet} />
@@ -111,7 +112,7 @@ const Page = () => {
 
 
         <section className="bg-transparent py-12 md:py-24 lg:py-32 ">
-          <ProximosEventos/>
+          <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         </section>
 
         <section id="events" className="py-12 md:py-20 lg:py-24 bg-transparent">
