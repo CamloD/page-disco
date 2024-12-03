@@ -10,7 +10,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import eventData from "../../data/eventdata.json"
+import eventData from "app/Dulcinea/data/eventdata.json"
 import { Imagen } from 'app/components/mostrarmedios'
 
 export const CalendarioEventos = () => {
