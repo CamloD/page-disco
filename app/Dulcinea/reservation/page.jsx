@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 "use client"
 
 import { useState, useEffect } from 'react'
@@ -102,12 +103,7 @@ export default function ReservationPage() {
     )
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Aquí iría la lógica para enviar la reservación
-    console.log('Reservación enviada:', { name, email, phone, selectedArea, specialRequests, eventTitle, eventDate, eventTime })
-    // Redireccionar o mostrar un mensaje de éxito
-  }
+
 
   return (
     <div>
