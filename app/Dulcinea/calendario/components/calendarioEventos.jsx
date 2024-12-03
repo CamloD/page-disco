@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import React, { useState, useEffect } from 'react'
@@ -9,7 +10,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import eventData from "@/app/Dulcinea/data/eventdata.json"
+import eventData from "app/Dulcinea/data/eventdata.json"
+import { Imagen } from '@/app/components/mostrarmedios'
 
 export const CalendarioEventos = () => {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -135,7 +137,7 @@ export const CalendarioEventos = () => {
           </CardHeader>
           <CardContent className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
-              <img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-64 object-cover rounded-lg shadow-lg" />
+              <Imagen src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-64 object-cover rounded-lg shadow-lg" />
             </div>
             <div className="flex-1 space-y-4">
               <p className="text-lg text-purple-600">{new Date(selectedEvent.date).toLocaleDateString()} - {selectedEvent.time}</p>
