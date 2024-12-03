@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import eventData from "app/Dulcinea/data/eventdata.json";
+import eventData from "@/app/Dulcinea/data/dataevent.json";
 import Slider from "react-slick";
 import {Imagen, Videos} from "app/components/mostrarmedios"
 
