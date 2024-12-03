@@ -8,85 +8,99 @@ import Nav from './Nav';
 import {Imagen, Videos} from "app/components/mostrarmedios"
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [headerHeight, setHeaderHeight] = useState(0);
-  const [headerShadow, setHeaderShadow] = useState('shadow-sm');
-  const headerRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollAccumulator, setScrollAccumulator] = useState(0);
+  const headerRef = useRef(null)
+  const lastScrollY = useRef(0)
+  
+  const SCROLL_THRESHOLD = 70
 
-  const updateHeaderHeight = () => {
+
+  useEffect(() => {
     if (headerRef.current) {
-      const height = headerRef.current.offsetHeight;
-      setHeaderHeight(height);
+      setHeaderHeight(headerRef.current.offsetHeight);
     }
-  };
+  }, []);
 
   const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    setIsScrolled(scrollTop > headerHeight - 30);
-    setHeaderShadow(scrollTop > headerHeight - 30 ? 'shadow-xl' : 'shadow-sm');
+    const currentScrollY = window.scrollY;
+    
+    setIsScrolled(currentScrollY > headerHeight);
+
+    const scrollDirection = currentScrollY > lastScrollY.current ? 'down' : 'up';
+
+    if (scrollDirection === 'up') {
+      setVisible(true);
+      setScrollAccumulator(0);
+    } else {
+      setScrollAccumulator(prev => prev + (currentScrollY - lastScrollY.current));
+
+      if (scrollAccumulator > SCROLL_THRESHOLD) {
+        setVisible(false);
+        setScrollAccumulator(0);
+      }
+    }
+
+    lastScrollY.current = currentScrollY;
   };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', () => {
-      updateHeaderHeight();
-      handleScroll();
-    });
-    updateHeaderHeight();
-    handleScroll();
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', () => {
-        updateHeaderHeight();
-        handleScroll();
-      });
     };
-  }, [handleScroll, headerHeight]);
+  }, [handleScroll]);
+
 
   const initialColor = 'rgba(26, 26, 26, 0)';
   const scrolledColor = 'rgba(26, 26, 26, 0.999)';
-
   const headerStyle = {
-    backgroundColor: isScrolled ? scrolledColor : initialColor,
-    transition: 'background-color 0.3s ease',
+    transform: `translateY(${visible ? '0' : '-100%'})`,
+    transition: 'transform 0.8s ease, background-color 0.4s ease',
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
-    zIndex: 2
+    zIndex: 2,
+    backgroundColor: isScrolled ? scrolledColor : initialColor,
   };
 
+  const esvisible = visible
+
   return (
-    <header 
-      className={`fixed top-0 left-0 w-full text-white ${headerShadow}`} 
-      ref={headerRef} 
-      style={headerStyle}
-    >
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
-        <div className="flex items-center">
-          <Link href="/Dulcinea" passHref>
-            <div className="flex items-center justify-center space-x-2">
-              <Imagen
-                src="logo.png"
-                alt="Logo" width={65} height={56} className='-mt-1.5 hidden md:block' loading="eager"/>
-              <Imagen
-                src="letras_logo.png"
-                alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5 hidden md:block' loading="eager"
-                /> 
-               <Imagen
-                src="LOGODULCINEA_CONSOMBRA.png"
-                alt="Logo" width={115} height={15} className='-mt-2.5 block md:hidden' loading="eager"/>
-            </div>
-          </Link>
+    <>      
+      <header 
+        className={`fixed top-0 left-0 w-full text-white ${isScrolled ? 'shadow-xl' : 'shadow-sm'}`}
+        ref={headerRef} 
+        style={headerStyle}
+      >
+        <div className="container mx-auto flex items-center justify-between py-4 px-6 ">
+          <div className="flex items-center">
+            <Link href="/Dulcinea" passHref>
+              <div className="flex items-center justify-center space-x-2">
+                <Imagen
+                  src="logo.png"
+                  alt="Logo" width={65} height={56} className='-mt-1.5 hidden md:block' loading="eager"/>
+                <Imagen
+                  src="letras_logo.png"
+                  alt="Dulcinea Letras Logo" width={224} height={40} className='-mt-2.5 hidden md:block' loading="eager"
+                  /> 
+                <Imagen
+                  src="LOGODULCINEA_CONSOMBRA.png"
+                  alt="Logo" width={115} height={15} className='-mt-2.5 block md:hidden' loading="eager"/>
+              </div>
+            </Link>
+          </div>
+          <Nav />
         </div>
-        <Nav />
-        {/* Mobile nav */}
-        <div className="md:hidden">
-          <MobileNav/>
-        </div>
+      </header>
+      {/* Mobile nav */}
+      <div className="md:hidden">
+        <MobileNav visible= {esvisible} />
       </div>
-    </header>
+    </>
   );
 };
 

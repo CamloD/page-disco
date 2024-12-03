@@ -22,22 +22,36 @@ import PScrollVideo from "./components/sections/ScrollVideo"
 import ScrollVideo from "./components/sections/ScrollVideo"
 import Scroll_image from "./components/sections/scroll_image"
 import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
+import {ProximosEventos} from "app/Dulcinea/components/sections/comingevents"
 
 import {Vestimenta_Code} from "./components/sections/vestimenta_code"
 
+const MOBILE_BREAKPOINT = 768
+const TABLET_BREAKPOINT = 990
 const BACKGROUND_PATTERN = "data:image/svg+xml,%3Csvg width='6' height='6' viewBox='6 6 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='12' fill='%230a5770' fill-opacity='0.4'/%3E%3C/svg%3E"
 
-const BackgroundFigure = () => (
+const BackgroundFigure = ({isMobile, isTablet}) => {
+  const width = isMobile ? '800vw' : (isTablet ? '600vw' : '400vw');
+  const height = isMobile ? '1600vh' : (isTablet ? '1200vh' : '800vh');
+  const trnansX = isMobile ? '-5%' : (isTablet ? '-5%' : '-5%');
+  const trnansY = isMobile ? '-30%' : (isTablet ? '-24%' : '-24%');
+
+  console.log( "width1",width)
+  console.log( "height1",height)
+  console.log( "trnansX1",trnansX)
+  console.log( "trnansY1",trnansY)
+  return(
   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 cursor-pointer flex">
     <div 
       className="absolute inset-0 flex items-center justify-center"
       style={{
         transform: 'rotate(-46.60deg) scale(2)',
-        width: '400vw',
-        height: '800vh',
+        width: width,  //'400vw'
+        height: height, // '800vh'
         left: '50%',
         top: '50%',
-        transform: 'rotate(-46.60deg) scale(2) translate(-5%, -30%)',
+        transform: `rotate(-46.60deg) scale(2) translate(${trnansX}, ${trnansY})`,
+      //transform: 'rotate(-46.60deg) scale(2) translate(-5%, -24%)',
         backgroundImage: `url("${BACKGROUND_PATTERN}")`,
         backgroundSize: '3px 3px',
         backgroundPosition: 'center',
@@ -45,21 +59,48 @@ const BackgroundFigure = () => (
         transition: 'opacity 0.5s ease-in-out',
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-700/50 to-gray-800/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-700/60 to-gray-800/60" />
     </div> 
     <div className="absolute inset-0 bg-gradient-to-b from-gray-950/50 to-gray-950/50" />
   </div>
-)
+  )
+}
 
 
 const Page = () => {
+  const [deviceType, setDeviceType] = useState('desktop');
+  const homeRef = useRef(null);
 
+  useEffect(() => {
+    // Eliminar la parte después del # en la URL
+    if (window.location.hash) {
+      window.history.replaceState(null, null, window.location.pathname + window.location.search);
+    }
+  }, []);
+
+  useEffect(() => {
+    const checkDeviceType = () => {
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        setDeviceType('mobile');
+      } else if (window.innerWidth <= TABLET_BREAKPOINT) {
+        setDeviceType('tablet');
+      } else {
+        setDeviceType('desktop');
+      }
+    };
+    checkDeviceType();
+    window.addEventListener('resize', checkDeviceType);
+    return () => window.removeEventListener('resize', checkDeviceType);
+  }, []);
+
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
   return (
     <div className="bg-[#1a1a1a] max-w-[100wh] relative">
-      <BackgroundFigure />
-      <main className="flex-1 relative z-10">
+      <BackgroundFigure  isMobile= {isMobile} isTablet={isTablet} />
+      <main className="flex-1 relative z-0">
 
-        <section className="bg-transparent relative h-screen overflow-hidden">
+        <section id="home" ref={homeRef} className="bg-transparent relative h-screen overflow-hidden">
           <ImageBackgroung1/>
         </section>
 
@@ -70,57 +111,7 @@ const Page = () => {
 
 
         <section className="bg-transparent py-12 md:py-24 lg:py-32 ">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 lg:grid-cols-2 items-center">
-              <div className="space-y-4 ">
-                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-white">Próximos Eventos</h1>
-                <p className="text-muted-foreground text-lg text-white">
-                  Descubre los próximos eventos en Club Nightlife. Disfruta de la mejor música, ambiente y artistas
-                  invitados.
-                </p>
-                <div className="flex flex-col gap-2 sm:flex-row ">
-                  <Link href="/Dulcinea/reservation">
-                    <Button size="lg" className="bg-red-700 hover:bg-red-900">Hacer Reservación</Button>
-                  </Link>
-                  <Button size="lg" className="bg-emerald-500 hover:bg-emerald-700">
-                    Ver Calendario
-                  </Button>
-                </div>
-              </div>
-              <div className="grid gap-4">
-                <div className="bg-[#d4d4d4] rounded-lg p-4 shadow-lg">
-                  <h3 className="text-2xl font-bold">Fiesta de Verano</h3>
-                  <p className="text-muted-foreground">Sábado, 15 de Julio - 22:00 hrs</p>
-                  <p>Disfruta de una noche llena de música, baile y diversión con los mejores DJs del momento.</p>
-                  <div className="flex items-center gap-2 mt-4">
-                    <Avatar>
-                      <AvatarImage src="placeholder-user.jpg" alt="DJ Name" />
-                      <AvatarFallback>DJ</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-medium">DJ Electro</p>
-                      <p className="text-muted-foreground text-sm">Artista Invitado</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-[#d4d4d4] rounded-lg p-4 shadow-lg">
-                  <h3 className="text-2xl font-bold">Fiesta Temática</h3>
-                  <p className="text-muted-foreground">Viernes, 28 de Julio - 23:00 hrs</p>
-                  <p>Ven disfrazado y disfruta de una noche llena de sorpresas y diversión.</p>
-                  <div className="flex items-center gap-2 mt-4">
-                    <Avatar>
-                      <AvatarImage src="placeholder-user.jpg" alt="DJ Name" />
-                      <AvatarFallback>DJ</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-medium">DJ Techno</p>
-                      <p className="text-muted-foreground text-sm">Artista Invitado</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ProximosEventos/>
         </section>
 
         <section id="events" className="py-12 md:py-20 lg:py-24 bg-transparent">
@@ -176,16 +167,7 @@ const Page = () => {
             <main >
               <ImageGrid/>
             </main>
-            
           </div>
-        </section>
-
-        <section>   
-          <ScrollVideo/>
-        </section>
-
-        <section>   
-          <Scroll_image/>
         </section>
         <section id="contact" className="py-16 bg-transparent">
           <div className="container mx-auto">

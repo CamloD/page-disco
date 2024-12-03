@@ -1,10 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { AlignJustify, XIcon } from "lucide-react";
+import { AlignJustify, XIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import {Imagen, Videos} from "app/components/mostrarmedios"
 
@@ -15,7 +14,7 @@ const links = [
   { name: "reservation", path: "/Dulcinea/reservation"},   
 ]
 
-const MobileNav = () => {
+const MobileNav = ({visible}) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,27 +23,29 @@ const MobileNav = () => {
   };
 
   return (
-    <div>
-      
-      <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSidebar}>
-        <AlignJustify className="w-6 h-6" />
+    <div className='fixed top-4 right-4 z-50'>
+      <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleSidebar}
+      style = {{
+        transform: `translateY(${visible ? '0' : '-120%'})`,
+        transition: 'transform 0.6s ease',
+      }}
+      >
+        <AlignJustify className="w-6 h-6 text-white" />
         <span className="sr-only">Toggle navigation menu</span>
       </Button>
       
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className={`fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300 ${
-            isOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className="fixed inset-0 bg-black bg-opacity-50 z-[9998] transition-opacity duration-300"
           aria-label="Close menu"
         />
       )}
       <div
-        className={`fixed z-50 inset-y-0 right-0 h-full w-3/4 bg-[#121212] text-white shadow-lg border-0 flex flex-col transition-transform duration-500 ease-in-out transform ${
+        className={`fixed top-0 right-0 h-full w-3/4 bg-[#121212] text-white shadow-lg border-0 flex flex-col transition-transform duration-500 ease-in-out transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } sm:max-w-sm`}
-        style={{ backgroundColor: 'rgba(18, 18, 18, 0.95)' }} // Aplicando fondo semi-translúcido
+        } sm:max-w-sm z-[9999]`}
+        style={{ backgroundColor: 'rgba(18, 18, 18, 0.95)' }}
       >
         <div className='relative w-full h-full bg-opacity-90 p-5'>
           <Button 
@@ -54,7 +55,7 @@ const MobileNav = () => {
             className="absolute top-4 right-4 text-white"
             aria-label="Close menu"
           >
-            <XIcon className="w-6 h-6" />
+            <XIcon className="w-10 h-10 text-white" />
           </Button>
           <div className="mt-9 mb-5 text-center text-2xl grid gap-6 p-6">
             <Link href="/Dulcinea" prefetch={false} className="flex items-center justify-center space-x-2">
@@ -85,3 +86,4 @@ const MobileNav = () => {
 };
 
 export default MobileNav;
+

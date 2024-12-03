@@ -1,0 +1,162 @@
+{
+  
+  "events": [
+    {
+      "id": 1,
+      "title": "Fiesta de Verano",
+      "date": "2024-12-09",
+      "time": "22:00",
+      "description": "Disfruta de una noche llena de música, baile y diversión con los mejores DJs del momento.",
+      "image": "events/agropecuario.jpg",
+      "dj": {
+        "name": "DJ Electro",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Fiesta Temática",
+      "date": "2024-12-04",
+      "time": "23:00",
+      "description": "Ven disfrazado y disfruta de una noche llena de sorpresas y diversión.",
+      "image": "events/nelson.jpg",
+      "dj": {
+        "name": "DJ Techno",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Noche de Salsa",
+      "date": "2024-12-5",
+      "time": "19:00",
+      "description": "Mueve tus caderas al ritmo de la mejor salsa en vivo.",
+      "image": "events/ryan.jpg",
+      "dj": {
+        "name": "DJ Sabor",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Retro Party",
+      "date": "2024-12-05",
+      "time": "22:00",
+      "description": "Revive los mejores éxitos de los 80s y 90s.",
+      "image": "images/image1.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Nostalgia",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 5,
+      "title": "Noche de Rock",
+      "date": "2024-12-11",
+      "time": "21:30",
+      "description": "Disfruta de las mejores bandas de rock en vivo.",
+      "image": "images/image2.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ RockStar",
+        "avatar": "images/image2?height=40&width=40"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Fiesta de Espuma",
+      "date": "2024-12-18",
+      "time": "22:00",
+      "description": "Una noche refrescante llena de espuma y diversión.",
+      "image": "images/image3.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Bubble",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 7,
+      "title": "Noche Latina",
+      "date": "2024-12-25",
+      "time": "21:00",
+      "description": "Baila al ritmo de reggaeton, bachata y merengue.",
+      "image": "images/image4.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Latino",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 8,
+      "title": "EDM Fest",
+      "date": "2024-12-03",
+      "time": "22:00",
+      "description": "Una noche llena de música electrónica y efectos visuales impresionantes.",
+      "image": "images/image5.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Beats",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 9,
+      "title": "Karaoke Night",
+      "date": "2024-12-14",
+      "time": "20:00",
+      "description": "Demuestra tus habilidades vocales en nuestra noche de karaoke.",
+      "image": "images/image6.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Sing",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 10,
+      "title": "Noche de Jazz",
+      "date": "2024-12-15",
+      "time": "21:00",
+      "description": "Disfruta de una velada sofisticada con los mejores músicos de jazz.",
+      "image": "images/image7.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Smooth",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 11,
+      "title": "Halloween Party",
+      "date": "2024-12-31",
+      "time": "22:00",
+      "description": "La fiesta de disfraces más terrorífica del año.",
+      "image": "images/image8.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Spooky",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Año Nuevo",
+      "date": "2024-12-31",
+      "time": "22:00",
+      "description": "Celebra la llegada del nuevo año con una fiesta inolvidable.",
+      "image": "images/image9.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Countdown",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 13,
+      "title": "vistass",
+      "date": "2024-12-24",
+      "time": "17:00",
+      "description": "Celebra la llegada del nuevo año con una fiesta inolvidable.",
+      "image": "images/image10.jpg?height=300&width=400",
+      "dj": {
+        "name": "DJ Countdown",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    }
+  ]
+}
+

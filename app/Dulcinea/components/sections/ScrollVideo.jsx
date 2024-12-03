@@ -36,7 +36,7 @@ const ScrollVideo = () => {
   //console.log("offset", scrollY);
   
   return (
-    <div ref={videoWrapperRef} className='video-container1 bg-[#1a1a1a]'>
+    <div ref={videoWrapperRef} className='video-container1 bg-transparent'>
       <div className='video-background1'>
         <div  className={styles.videoWrapper1}>
           <Videos

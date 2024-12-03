@@ -56,7 +56,7 @@ function VideoThumbnail({ src, alt }) {
 
   return (
     <div 
-      className="relative w-full h-full bg-gray-200"
+      className="relative w-full h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
