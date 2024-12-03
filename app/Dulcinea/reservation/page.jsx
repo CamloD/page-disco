@@ -2,7 +2,6 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,10 +11,6 @@ import SVG_Piso1 from "./components/svgpiso1"
 import SVG_Piso2 from "./components/svgpiso2"
 
 export default function ReservationPage() {
-  const searchParams = useSearchParams()
-  const eventTitle = searchParams.get('eventTitle')
-  const eventDate = searchParams.get('eventDate')
-  const eventTime = searchParams.get('eventTime')
   
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -103,7 +98,12 @@ export default function ReservationPage() {
     )
   }
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Aquí iría la lógica para enviar la reservación
+    console.log('Reservación enviada:', { name, email, phone, selectedArea, specialRequests, eventTitle, eventDate, eventTime })
+    // Redireccionar o mostrar un mensaje de éxito
+  }
 
   return (
     <div>
