@@ -1,10 +1,10 @@
 'use client'
-
-import { useState, useRef, useEffect } from 'react'
+import React, { createContext, useState, useContext, useRef, useEffect } from 'react';
 import Image from 'next/image'
 import { Play, Search, Image as ImageIcon, Info } from 'lucide-react'
 import { Lightbox } from './lightbox'
 import { motion } from 'framer-motion'
+import { useSeleccionContext } from "./hooks/useSeleccion"
 
 const mediaItems = [
   { id: 1, src: 'images/image1.jpg', type: 'image', alt: "Image 1", description: "A beautiful landscape with mountains and a lake" },
@@ -36,6 +36,8 @@ const mediaItems = [
   { id: 27, src: 'video/video_banner.mp4', type:  'video', alt: "Video 8" },
   { id: 28, src: 'images/image4.jpg', type: 'image', alt: "Image 20" },
 ]
+
+
 
 function VideoThumbnail({ src, alt }) {
   const videoRef = useRef(null)
@@ -80,32 +82,32 @@ function VideoThumbnail({ src, alt }) {
 }
 
 export function ImageGrid() {
-  const [selectedIndex, setSelectedIndex] = useState(-1)
-  const gridRef = useRef(null)
-  const [isGridMounted, setIsGridMounted] = useState(false)
+  const { selectedIndex, updateSelectedIndex } = useSeleccionContext(); 
+  const gridRef = useRef(null);
+  const [isGridMounted, setIsGridMounted] = useState(false);
 
   useEffect(() => {
-    setIsGridMounted(true)
-  }, [])
+    setIsGridMounted(true);
+  }, []);
 
   const handleDrag = (_, info) => {
-    const dragDistance = info.offset.x
-    const gridWidth = gridRef.current.offsetWidth
-    const threshold = gridWidth * 0.2 // 20% del ancho de la cuadrícula
+    const dragDistance = info.offset.x;
+    const gridWidth = gridRef.current.offsetWidth;
+    const threshold = gridWidth * 0.2; // 20% del ancho de la cuadrícula
 
     if (Math.abs(dragDistance) > threshold) {
       if (dragDistance > 0) {
         // Desplazamiento a la derecha
-        gridRef.current.scrollBy({ left: -gridWidth, behavior: 'smooth' })
+        gridRef.current.scrollBy({ left: -gridWidth, behavior: 'smooth' });
       } else {
         // Desplazamiento a la izquierda
-        gridRef.current.scrollBy({ left: gridWidth, behavior: 'smooth' })
+        gridRef.current.scrollBy({ left: gridWidth, behavior: 'smooth' });
       }
     } else {
       // Si el desplazamiento es menor que el umbral, volver a la posición original
-      gridRef.current.scrollBy({ left: -dragDistance, behavior: 'smooth' })
+      gridRef.current.scrollBy({ left: -dragDistance, behavior: 'smooth' });
     }
-  }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-0">
@@ -119,18 +121,18 @@ export function ImageGrid() {
         >
           {mediaItems.map((item, index) => (
             <motion.div
-            key={item.id}
-            className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
-            whileHover={{ scale: 1.05 }}
-            onClick={() => setSelectedIndex(index)}
+              key={item.id}
+              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              onClick={() => updateSelectedIndex(index)} // Actualiza el índice
             >
               {item.type === 'image' ? (
                 <Image
-                src={item.src}
-                alt={item.alt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 group-hover:scale-105"
+                  src={item.src}
+                  alt={item.alt}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
                 <VideoThumbnail src={item.src} alt={item.alt} />
@@ -157,10 +159,10 @@ export function ImageGrid() {
         <Lightbox
           mediaItems={mediaItems}
           selectedId={selectedIndex}
-          onClose={() => setSelectedIndex(-1)}
-          onNavigate={setSelectedIndex}
+          onClose={() => updateSelectedIndex(-1)}
+          onNavigate={updateSelectedIndex}
         />
       )}
     </div>
-  )
+  );
 }

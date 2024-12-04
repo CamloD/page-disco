@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react"; 
 
 const links = [
-    { name: "home", path: "/Dulcinea#home" }, 
+    { name: "Events", path: "/Dulcinea/calendario" }, 
     { name: "gallery", path: "/Dulcinea#gallery" },
     { name: "contact", path: "/Dulcinea#contact" },
     { name: "reservation", path: "/Dulcinea/reservation" },
@@ -53,23 +53,19 @@ const Naveg = () => {
 
     return (
         <nav className="hidden md:flex items-center space-x-6">
-            {links.map((link, index) => {
-                const targetId = link.path.split("#")[1];
-
-                return (
+            {links.map((link, index) => (
                     <Link
                         href={link.path} 
                         key={index}
                         onClick={(e) => handleLinkClick(e, link.path)}
                         className={`${
-                            pathname === link.path || pathname.startsWith(link.path) ? "text-sky-300 border-b-2 border-sky-600" : ""
+                            pathname === link.path || pathname.startsWith(link.path) ? "text-sky-300 border-b-2 border-sky-600" : "text-xl capitalize hover:text-blue-400"
                         } capitalize hover:text-blue-400 transition-all`}
                         aria-current={pathname === link.path || pathname.startsWith(link.path) ? "page" : undefined}
                     >
                         {link.name}
-                    </Link>
-                );
-            })}
+                    </Link> 
+            ))}
         </nav>
     );
 };

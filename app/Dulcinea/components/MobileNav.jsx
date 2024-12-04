@@ -4,19 +4,58 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlignJustify, XIcon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
 import {Imagen, Videos} from "app/components/mostrarmedios"
+import { usePathname, useRouter } from "next/navigation"; 
+import { useEffect } from "react";
 
 const links = [
-  { name: "home", path: "/Dulcinea"},
-  { name: "gallery", path: "/Dulcinea/gallery"},
-  { name: "contact", path: "/Dulcinea/contact"},
-  { name: "reservation", path: "/Dulcinea/reservation"},   
+  { name: "Events", path: "/Dulcinea/calendario" }, 
+  { name: "gallery", path: "/Dulcinea#gallery" },
+  { name: "contact", path: "/Dulcinea#contact" },
+  { name: "reservation", path: "/Dulcinea/reservation" },
 ]
 
 const MobileNav = ({visible}) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter(); 
+
+  const handleAnchorClick = (e, targetId) => {
+      if (targetId) {
+          e.preventDefault();
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+              targetElement.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start", 
+              });
+          }
+      }
+  }
+
+  const handleLinkClick = (e, path) => {
+    const targetId = path.split("#")[1]; 
+    if (targetId && pathname !== "/Dulcinea") {
+        e.preventDefault(); 
+        // Usar router.push en lugar de window.location.href
+        router.push("/Dulcinea#"+targetId); 
+    } else if (pathname === "/Dulcinea" && targetId) {
+        handleAnchorClick(e, targetId);
+    }
+  }
+
+  useEffect(() => {
+    if (pathname === "/Dulcinea" && window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: "smooth",
+                block: "start", 
+            });
+        }
+    }
+  }, [pathname]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -69,11 +108,13 @@ const MobileNav = ({visible}) => {
               <Link
                 href={link.path}
                 key={index}
+                onClick={(e) => handleLinkClick(e, link.path)}
                 className={`${
-                  link.path === pathname
+                  pathname === link.path || pathname.startsWith(link.path)
                     ? 'text-lg font-medium text-sky-300 border-b-2 border-sky-600'
                     : 'text-xl capitalize hover:text-blue-400'
                 } capitalize transition-all`}
+                aria-current={pathname === link.path || pathname.startsWith(link.path) ? "page" : undefined}
               >
                 {link.name}
               </Link>

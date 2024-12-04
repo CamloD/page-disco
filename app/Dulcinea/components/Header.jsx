@@ -6,17 +6,22 @@ import Link from 'next/link';
 import MobileNav from './MobileNav';
 import Nav from './Nav';
 import {Imagen, Videos} from "app/components/mostrarmedios"
+import {useSeleccionContext } from 'app/components/images_gallery/hooks/useSeleccion'
+
 
 const Header = () => {
+  
   const [visible, setVisible] = useState(true);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollAccumulator, setScrollAccumulator] = useState(0);
   const headerRef = useRef(null)
   const lastScrollY = useRef(0)
-  
-  const SCROLL_THRESHOLD = 70
 
+  const { selectedIndex } = useSeleccionContext();
+  const openimage = selectedIndex >= 0
+
+  const SCROLL_THRESHOLD = 70
 
   useEffect(() => {
     if (headerRef.current) {
@@ -55,9 +60,9 @@ const Header = () => {
 
 
   const initialColor = 'rgba(26, 26, 26, 0)';
-  const scrolledColor = 'rgba(26, 26, 26, 0.999)';
+  const scrolledColor = 'rgba(29, 38, 56, 0.999)';
   const headerStyle = {
-    transform: `translateY(${visible ? '0' : '-100%'})`,
+    transform: `translateY(${visible? openimage? '-100%' : '0' : '-100%'})`,
     transition: 'transform 0.8s ease, background-color 0.4s ease',
     position: 'fixed',
     top: 0,
@@ -76,7 +81,7 @@ const Header = () => {
         ref={headerRef} 
         style={headerStyle}
       >
-        <div className="container mx-auto flex items-center justify-between py-4 px-6 ">
+        <div className="container mx-auto flex items-center justify-between py-4 px-6">
           <div className="flex items-center">
             <Link href="/Dulcinea" passHref>
               <div className="flex items-center justify-center space-x-2">

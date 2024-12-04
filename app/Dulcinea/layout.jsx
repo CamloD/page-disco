@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import Header from "@/app/Dulcinea/components/Header";
+import {SeleccionProvider } from "app/components/images_gallery/hooks/useSeleccion"
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -17,12 +18,14 @@ export const metadata = {
 export default function DiscoLayout({ children }) {
   return (
     <div>
-      <div className='absolute z-50'>
-      <Header />
+      <SeleccionProvider>
+      <div>
+        <Header />
+        <div className={cn('child-layout', fontBody.variable)}>
+          {children}
+        </div>
       </div>
-      <div className={cn('child-layout', fontBody.variable)}>
-        {children}
-      </div>
+      </SeleccionProvider>
     </div>
   );
 }

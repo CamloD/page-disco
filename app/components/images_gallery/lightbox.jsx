@@ -61,7 +61,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
         setMetadata(data)
       } else if (currentItem.type === 'video') {
         const videodata = currentItem.src
-        console.log(videodata)
+        //console.log(videodata)
         const data = await getVideoMetadata(currentItem.src)
         setMetadata(data)
       } else {
@@ -560,7 +560,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
           >
             <div className={`absolute top-0 left-0 right-0 flex justify-between items-center p-4 z-30 ${isFullscreen ? 'hidden' : ''} ${showControls ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
               <button onClick={onClose} className="text-white hover:text-gray-300" aria-label="Close lightbox">
-                <X size={24} />
+                <X size={36} />
               </button>
               <div className="flex space-x-4">
                 <button className="text-white hover:text-gray-300" aria-label="Download" onClick={handleDownload}>
@@ -576,7 +576,7 @@ export function Lightbox({ mediaItems, selectedId, onClose, onNavigate }) {
                   }}
                   aria-label="Toggle information"
                 >
-                  <Info size={24} />
+                  <Info size={48} />
                 </Button>
               </div>
             </div>

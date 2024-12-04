@@ -31,15 +31,12 @@ const TABLET_BREAKPOINT = 990
 const BACKGROUND_PATTERN = "data:image/svg+xml,%3Csvg width='6' height='6' viewBox='6 6 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='12' fill='%230a5770' fill-opacity='0.4'/%3E%3C/svg%3E"
 
 const BackgroundFigure = ({isMobile, isTablet}) => {
-  const width = isMobile ? '800vw' : (isTablet ? '600vw' : '400vw');
-  const height = isMobile ? '1600vh' : (isTablet ? '1200vh' : '800vh');
-  const trnansX = isMobile ? '-5%' : (isTablet ? '-5%' : '-5%');
-  const trnansY = isMobile ? '-30%' : (isTablet ? '-24%' : '-24%');
+  const width = isMobile ? '1500vw' : (isTablet ? '900vw' : '600vw');
+  const height = isMobile ? '1000vh' : (isTablet ? '1200vh' : '800vh');
+  const trnansX = isMobile ? '11%' : (isTablet ? '-5%' : '-5%');
+  const trnansY = isMobile ? '-29%' : (isTablet ? '-24%' : '-24%');
 
-  console.log( "width1",width)
-  console.log( "height1",height)
-  console.log( "trnansX1",trnansX)
-  console.log( "trnansY1",trnansY)
+
   return(
   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 cursor-pointer flex">
     <div 
@@ -162,10 +159,10 @@ const Page = () => {
           </div>
         </section>
 
-        <section id="gallery" className="py-16 bg-transparent text-white">
+        <section id="gallery" className=" py-16 bg-transparent text-white">
           <div className="container mx-auto">
             <h2 className="text-5xl font-bold mb-6">Gallery</h2>    
-            <main >
+            <main className="relative">
               <ImageGrid/>
             </main>
           </div>
