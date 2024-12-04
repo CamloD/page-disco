@@ -55,7 +55,7 @@ const Naveg = () => {
                 const targetId = link.path.split("#")[1];
 
                 return (
-                    <a
+                    <Link
                         href={link.path} 
                         key={index}
                         onClick={(e) => handleLinkClick(e, link.path)}
@@ -65,7 +65,7 @@ const Naveg = () => {
                         aria-current={pathname === link.path || pathname.startsWith(link.path) ? "page" : undefined}
                     >
                         {link.name}
-                    </a>
+                    </Link>
                 );
             })}
         </nav>
