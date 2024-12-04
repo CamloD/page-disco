@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; 
+import { usePathname, useRouter } from "next/navigation"; 
 import { useEffect } from "react"; 
 
 const links = [
@@ -12,6 +12,7 @@ const links = [
 
 const Naveg = () => {
     const pathname = usePathname(); 
+    const router = useRouter(); 
 
     const handleAnchorClick = (e, targetId) => {
         if (targetId) {
@@ -30,7 +31,8 @@ const Naveg = () => {
         const targetId = path.split("#")[1]; 
         if (targetId && pathname !== "/Dulcinea") {
             e.preventDefault(); 
-            window.location.href = "/Dulcinea"; 
+            // Usar router.push en lugar de window.location.href
+            router.push("/Dulcinea#"+targetId); 
         } else if (pathname === "/Dulcinea" && targetId) {
             handleAnchorClick(e, targetId);
         }
