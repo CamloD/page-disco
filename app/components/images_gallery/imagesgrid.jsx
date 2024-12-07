@@ -19,7 +19,7 @@ const mediaItems = [
   { id: 10, src: 'images/image7.jpg', type: 'image', alt: "Image 7" },
   { id: 11, src: 'images/image8.jpg', type: 'image', alt: "Image 8" },
   { id: 12, src: 'images/image9.jpg', type: 'image', alt: "Image 9" },
-  { id: 13, src: 'video/video.mp4', type:  'video', alt: "Video 4" },
+  //{ id: 13, src: 'video/video.mp4', type:  'video', alt: "Video 4" },
   { id: 14, src: 'images/image10.jpg', type: 'image', alt: "Image 10" },
   { id: 15, src: 'images/image11.jpg', type: 'image', alt: "Image 11" },
   { id: 16, src: 'images/image12.jpg', type: 'image', alt: "Image 12" },
@@ -33,8 +33,9 @@ const mediaItems = [
   //{ id: 24, src: 'https://picsum.photos/1200/800?random=16', type: 'image', alt: "Image 17" },
   //{ id: 25, src: 'https://picsum.photos/600/800?random=17', type: 'image', alt: "Image 18" },
   //{ id: 26, src: 'https://picsum.photos/1200/800?random=18', type: 'image', alt: "Image 19" },
-  { id: 27, src: 'video/video_banner.mp4', type:  'video', alt: "Video 8" },
+  //{ id: 27, src: 'video/video_banner.mp4', type:  'video', alt: "Video 8" },
   { id: 28, src: 'images/image4.jpg', type: 'image', alt: "Image 20" },
+  { id: 29, src: 'images/image5.jpg', type: 'image', alt: "Image 21" },
 ]
 
 
