@@ -10,7 +10,7 @@ export const ListaEventos = ({ events, onEventClick }) => {
           key={index}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="bg-[#3a3a3a] p-4 rounded-lg shadow-md cursor-pointer flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4"
+          className="bg-[#152d4d] p-4 rounded-lg shadow-md cursor-pointer flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4"
           onClick={() => onEventClick(event)}
         >
           <div className="flex-shrink-0 w-20 h-20 sm:w-16 sm:h-16">

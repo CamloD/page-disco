@@ -72,7 +72,8 @@ const Header = () => {
     backgroundColor: isScrolled ? scrolledColor : initialColor,
   };
 
-  const esvisible = visible
+  const esvisible = visible? openimage? false : true : false
+  
 
   return (
     <>      
@@ -103,7 +104,7 @@ const Header = () => {
       </header>
       {/* Mobile nav */}
       <div className="md:hidden">
-        <MobileNav visible= {esvisible} />
+        <MobileNav visible = {esvisible}/>
       </div>
     </>
   );

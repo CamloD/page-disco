@@ -51,7 +51,7 @@ export const DetallesEvento = ({ event, onClose }) => {
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ type: 'spring', damping: 15, stiffness: 300 }}
         >
-          <Card className="bg-[#2a2a2a] text-[#e0e0e0] w-full max-w-2xl overflow-hidden">
+          <Card className="bg-[#0C213D] text-[#e0e0e0] w-full max-w-2xl overflow-hidden">
             <CardHeader className="relative">
               <Button
                 variant="ghost"
@@ -61,7 +61,7 @@ export const DetallesEvento = ({ event, onClose }) => {
               >
                 <X size={24} />
               </Button>
-              <CardTitle className="text-3xl font-bold text-[#a3a3a3]">{event.title}</CardTitle>
+              <CardTitle className="text-3xl font-bold text-white">{event.title}</CardTitle>
             </CardHeader>
             <CardContent>
               <Imagen
@@ -72,16 +72,16 @@ export const DetallesEvento = ({ event, onClose }) => {
                 className="w-full h-64 object-cover rounded-lg mb-4"
               />
               <div className="space-y-4">
-                <p className="text-lg text-[#a3a3a3]">
+                <p className="text-lg text-white">
                   <span className="font-semibold">Fecha:</span> {new Date(event.date).toLocaleDateString()}
                 </p>
-                <p className="text-lg text-[#a3a3a3]">
+                <p className="text-lg text-white">
                   <span className="font-semibold">Hora:</span> {event.time}
                 </p>
-                <p className="text-[#a3a3a3]">{event.description}</p>
+                <p className="text-white">{event.description}</p>
                 <Button 
                   onClick={handleReservation}
-                  className="w-full bg-[#4a4a4a] hover:bg-[#5a5a5a] text-[#e0e0e0] font-bold py-2 px-4 rounded"
+                  className="w-full bg-[#263A54] hover:bg-[#345177] text-white font-bold py-2 px-4 rounded"
                 >
                   Reservar para este evento
                 </Button>

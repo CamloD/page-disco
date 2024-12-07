@@ -224,7 +224,7 @@ const PagePrincipal = () => {
         </section>
       </main>
 
-      <footer className="bg-gray-900 py-8 md:py-12">
+      <footer className="bg-gray-950 py-8 md:py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-white text-center md:text-start">

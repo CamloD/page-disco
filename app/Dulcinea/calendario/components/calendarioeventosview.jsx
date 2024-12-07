@@ -87,7 +87,7 @@ export const CalendarioEventosView = ({ events, onEventClick, selectedDate, setS
             </div>
           )
         } else {
-          week.push(<div key={date.toISOString()} className="h-24 sm:h-32 md:h-48 border border-[#3a3a3a]"></div>)
+          week.push(<div key={date.toISOString()} className="h-24 sm:h-32 md:h-48 border border-[#162133]"></div>)
         }
         currentDate.setDate(currentDate.getDate() + 1)
       }
@@ -99,7 +99,7 @@ export const CalendarioEventosView = ({ events, onEventClick, selectedDate, setS
   }
 
   return (
-    <Card className="bg-[#2a2a2a] p-2 sm:p-4">
+    <Card className="bg-[#0C213D] p-2 sm:p-4">
       <div className="grid grid-cols-7 gap-1 mb-2">
         {DAYS_OF_WEEK.map(day => (
           <div key={day} className="text-center font-bold text-[#a3a3a3] text-xs sm:text-sm">{day}</div>

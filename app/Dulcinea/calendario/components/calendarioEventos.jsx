@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
 import React, { useState, useEffect } from 'react'
@@ -73,10 +74,10 @@ export const CalendarioEventos = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a] px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
+    <div className="min-h-screen bg-[#1C2638] px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
       <div className="container mx-auto p-2 sm:p-4 mt-16">
         <motion.h1 
-          className="text-3xl sm:text-5xl font-bold mb-6 sm:mb-12 text-center text-[#a3a3a3]"
+          className="text-3xl sm:text-5xl font-bold mb-6 sm:mb-12 text-center text-white"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -84,7 +85,7 @@ export const CalendarioEventos = () => {
           UPCOMING EVENTS
         </motion.h1>
 
-        <Card className="bg-[#2a2a2a] text-[#e0e0e0] backdrop-blur-sm border-[#3a3a3a] w-full max-w-6xl mx-auto">
+        <Card className="bg-[#16283F] text-[#e0e0e0] backdrop-blur-sm border-[#162133] w-full max-w-6xl mx-auto">
           <CardContent className="p-2 sm:p-4 md:p-6">
             <Tabs value={activeView} onValueChange={setActiveView} className="w-full">
               <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6 space-y-2 sm:space-y-0">
@@ -92,31 +93,31 @@ export const CalendarioEventos = () => {
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:w-[280px] justify-start text-left font-normal bg-[#3a3a3a] border-[#4a4a4a] hover:bg-[#4a4a4a] text-sm sm:text-base"
+                      className="w-full sm:w-[280px] justify-start text-left font-normal bg-[#16283F] border-[#263A54] hover:text-white hover:bg-[#254570] text-sm sm:text-base"
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {selectedDate ? formatDate(selectedDate) : 'Seleccionar fecha'}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-[#2a2a2a] border-[#3a3a3a]">
+                  <PopoverContent className="w-auto p-0 bg-[#16283F] border-[#263A54]">
                     <Calendar
                       mode="single"
                       selected={selectedDate}
                       onSelect={handleSelect}
                       initialFocus
-                      className="rounded-md border-[#3a3a3a]"
+                      className="rounded-md border-[#263A54]"
                     />
                   </PopoverContent>
                 </Popover>
 
-                <TabsList className="grid w-full sm:w-auto grid-cols-3 bg-[#3a3a3a]">
-                <TabsTrigger value="agenda" className="data-[state=active]:bg-[#4a4a4a]">
+                <TabsList className="grid w-full sm:w-auto grid-cols-3 bg-[#263A54] data-[state=active]:text-white">
+                <TabsTrigger value="agenda" className="data-[state=active]:bg-[#16283F] data-[state=active]:text-white">
                     <LayoutGridIcon className="w-5 h-5" />
                   </TabsTrigger>
-                  <TabsTrigger value="calendario" className="data-[state=active]:bg-[#4a4a4a]">
+                  <TabsTrigger value="calendario" className="data-[state=active]:bg-[#16283F] data-[state=active]:text-white">
                     <CalendarIcon className="w-5 h-5" />
                   </TabsTrigger>
-                  <TabsTrigger value="lista" className="data-[state=active]:bg-[#4a4a4a]">
+                  <TabsTrigger value="lista" className="data-[state=active]:bg-[#16283F] data-[state=active]:text-white">
                     <ListIcon className="w-5 h-5" />
                   </TabsTrigger>
                 </TabsList>

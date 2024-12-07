@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import Header from "@/app/Dulcinea/components/Header";
 import {SeleccionProvider } from "app/components/images_gallery/hooks/useSeleccion"
+import Footer from "./components/footer"
 
 const fontBody = Inter({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function DiscoLayout({ children }) {
         </div>
       </div>
       </SeleccionProvider>
+      <Footer/>
     </div>
   );
 }

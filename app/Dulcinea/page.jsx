@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from 'react'
 //import Image from 'next/image'
 import {Imagen, Videos} from "app/components/mostrarmedios"
 import {ImageGrid} from "app/components/images_gallery/imagesgrid"
+import Preguntas from "app/Dulcinea/components/sections/preguntas"
 
 
 import ScrollImage from "./components/sections/ScrollImage"
@@ -108,11 +109,11 @@ const Page = () => {
         </section>
 
 
-        <section className="bg-transparent py-12 md:py-24 lg:py-32 ">
+        <section className="bg-transparent py-12 md:py-8 lg:py-12 ">
           <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         </section>
 
-        <section id="events" className="py-12 md:py-20 lg:py-24 bg-transparent">
+        <section id="events" className="py-12 md:py-20 lg:py-8 bg-transparent">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
@@ -167,6 +168,11 @@ const Page = () => {
             </main>
           </div>
         </section>
+
+        <section>
+          <Preguntas/>
+        </section>
+
         <section id="contact" className="py-16 bg-transparent">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-white">Contact Us</h2>
@@ -210,15 +216,6 @@ const Page = () => {
           </div>
         </section>
       </main>
-      <footer className=" py-8 text-white relative"
-      style = {{
-        backgroundColor: 'rgba(212, 212, 212, 0.06'
-      }}
-      >  {/*bg-[#171922] */}
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 Discoteca Disco. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   )
 }

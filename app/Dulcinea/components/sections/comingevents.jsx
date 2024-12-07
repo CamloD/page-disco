@@ -96,7 +96,7 @@ export function ProximosEventos({isMobile, isTablet, isDesktop}) {
   }, []);
 
   return (
-    <div className="relative min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative py-12 px-4 sm:px-6 lg:px-8">
       <div className="container px-4 md:px-6 relative z-10">
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-white mb-4">

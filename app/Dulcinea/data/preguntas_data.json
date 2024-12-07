@@ -1,0 +1,64 @@
+{
+  "faqs": [
+    {
+      "question": "¿Cuál es el horario de atención de la discoteca?",
+      "answer": "Nuestra discoteca está abierta de jueves a sábado, de 22:00 a 06:00 horas. Los domingos abrimos de 20:00 a 02:00 horas."
+    },
+    {
+      "question": "¿Cuál es el código de vestimenta?",
+      "answer": "Requerimos vestimenta elegante. No se permiten zapatillas deportivas, camisetas sin mangas, pantalones rotos o shorts. Se recomienda ropa de noche elegante."
+    },
+    {
+      "question": "¿Cuál es la edad mínima para entrar?",
+      "answer": "La edad mínima para ingresar es de 18 años. Se requiere presentar una identificación válida con foto para verificar la edad."
+    },
+    {
+      "question": "¿Tienen área VIP?",
+      "answer": "Sí, contamos con un área VIP exclusiva. Para reservas, por favor contacta a nuestro equipo de reservaciones con anticipación."
+    },
+    {
+      "question": "¿Cuál es el costo de la entrada?",
+      "answer": "El costo de entrada varía según la noche y los eventos especiales. Generalmente, el precio oscila entre $20 y $40. Consulta nuestra página web para precios específicos."
+    },
+    {
+      "question": "¿Ofrecen descuentos para grupos?",
+      "answer": "Sí, ofrecemos descuentos para grupos de 10 o más personas. Contacta a nuestro equipo de reservaciones para más detalles."
+    },
+    {
+      "question": "¿Tienen guardarropa?",
+      "answer": "Sí, ofrecemos servicio de guardarropa por una tarifa nominal de $5 por artículo."
+    },
+    {
+      "question": "¿Cuál es su política de cancelación para reservas?",
+      "answer": "Las reservas pueden ser canceladas hasta 24 horas antes sin cargo. Cancelaciones posteriores o no presentarse pueden resultar en un cargo."
+    },
+    {
+      "question": "¿Tienen estacionamiento?",
+      "answer": "Ofrecemos servicio de valet parking por $15. También hay estacionamientos públicos cercanos."
+    },
+    {
+      "question": "¿Qué tipos de música tocan?",
+      "answer": "Nuestra selección musical varía según la noche, pero generalmente incluye una mezcla de pop, electrónica, hip-hop y éxitos latinos."
+    },
+    {
+      "question": "¿Se permiten fumadores?",
+      "answer": "Contamos con un área designada para fumadores en nuestra terraza exterior. No se permite fumar en el interior del local."
+    },
+    {
+      "question": "¿Tienen eventos especiales?",
+      "answer": "Sí, regularmente organizamos noches temáticas y presentaciones de DJs invitados. Consulta nuestra agenda en la página web o redes sociales."
+    },
+    {
+      "question": "¿Cómo puedo hacer una reserva?",
+      "answer": "Puedes hacer reservas a través de nuestra página web, llamando al +1 234 567 8900, o por email a reservas@discoteca.com."
+    },
+    {
+      "question": "¿Tienen menú de comidas?",
+      "answer": "Ofrecemos un menú limitado de aperitivos y snacks. No servimos comidas completas."
+    },
+    {
+      "question": "¿Cuál es su política de bebidas?",
+      "answer": "No se permite la entrada de bebidas externas. Ofrecemos una amplia selección de cócteles, cervezas y bebidas sin alcohol en nuestros bares."
+    }
+  ]
+}
