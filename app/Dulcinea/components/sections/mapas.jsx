@@ -42,7 +42,7 @@ const options = {
 
 function InteractiveMap() {
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || 'AIzaSyD7cEmO7KhrZ55sr6azFsCSyIdFmDrKie0',
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
     libraries,
   })
 
