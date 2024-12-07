@@ -57,7 +57,7 @@ const Footer = () => {
 
           <div className='text-center md:text-left'>
             <h3 className="text-3xl font-bold mb-6">Contactanos</h3> 
-            <p>Npumero: +1 234 567 890</p>
+            <p>Teléfono: +1 234 567 890</p>
             <p>Correo: info@discotecadisco.com</p>
             <p>Ubicacion: Cl 44 #69-96, Laureles - Estadio, Medellín, Laureles, Medellín, Antioquia</p>
             <h3 className="text-2xl font-bold mt-8 mb-4">Horarios</h3>
