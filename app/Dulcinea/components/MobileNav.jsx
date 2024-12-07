@@ -124,8 +124,8 @@ const MobileNav = ({visible}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default MobileNav;
 
