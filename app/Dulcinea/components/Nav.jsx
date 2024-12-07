@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const links = [
     { name: "Eventos", path: "/Dulcinea/calendario" }, 
-    //{ name: "Galería", path: "/Dulcinea#gallery" },
+    { name: "Galería", path: "/Dulcinea#gallery" },
     { name: "Contactos", path: "/Dulcinea#contact" },
     { name: "Reservación", path: "/Dulcinea/reservation" },
     { name: "Preguntas Frecuentes", path: "/Dulcinea/preguntasfrecuentes" },
