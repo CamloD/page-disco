@@ -104,16 +104,16 @@ const Page = () => {
         </section>
 
 
-        <section className="">
+        <section className="min-h-[240vh]">
           <Vestimenta_Code/>
         </section>
 
 
-        <section className="bg-transparent py-12 md:py-8 lg:py-12 ">
+        <section className="bg-transparent py-12 md:py-8 lg:py-12 min-h-[140vh]">
           <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         </section>
 
-        <section id="events" className="py-12 md:py-20 lg:py-8 bg-transparent">
+        <section id="events" className="py-12 md:py-20 lg:py-8 bg-transparent min-h-[60vh]">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
@@ -160,8 +160,8 @@ const Page = () => {
           </div>
         </section>
 
-        <section id="gallery" className=" py-16 bg-transparent text-white">
-          <div className="container mx-auto">
+        <section id="gallery" className=" py-12 bg-transparent text-white">
+          <div className="container mx-auto min-h-[165vh]">
             <h2 className="text-5xl font-bold mb-6">Gallery</h2>    
             <main className="relative">
               <ImageGrid/>
@@ -169,11 +169,11 @@ const Page = () => {
           </div>
         </section>
 
-        <section>
+        <section className="min-h-[76vh]">
           <Preguntas/>
         </section>
 
-        <section id="contact" className="py-16 bg-transparent">
+        <section id="contact" className="py-16 bg-transparent min-h-[70vh]">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-white">Contact Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
