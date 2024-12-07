@@ -4,10 +4,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react"; 
 
 const links = [
-    { name: "Events", path: "/Dulcinea/calendario" }, 
-    { name: "gallery", path: "/Dulcinea#gallery" },
-    { name: "contact", path: "/Dulcinea#contact" },
-    { name: "reservation", path: "/Dulcinea/reservation" },
+    { name: "Eventos", path: "/Dulcinea/calendario" }, 
+    //{ name: "Galería", path: "/Dulcinea#gallery" },
+    { name: "Contactos", path: "/Dulcinea#contact" },
+    { name: "Reservación", path: "/Dulcinea/reservation" },
     { name: "Preguntas Frecuentes", path: "/Dulcinea/preguntasfrecuentes" },
 ];
 

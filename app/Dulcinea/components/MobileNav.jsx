@@ -9,10 +9,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const links = [
-  { name: "Events", path: "/Dulcinea/calendario" }, 
-  { name: "gallery", path: "/Dulcinea#gallery" },
-  { name: "contact", path: "/Dulcinea#contact" },
-  { name: "reservation", path: "/Dulcinea/reservation" },
+  { name: "Eventos", path: "/Dulcinea/calendario" }, 
+  //{ name: "Galería", path: "/Dulcinea#gallery" },
+  { name: "Contactos", path: "/Dulcinea#contact" },
+  { name: "Reservación", path: "/Dulcinea/reservation" },
   { name: "Preguntas Frecuentes", path: "/Dulcinea/preguntasfrecuentes" },
 ];
 
@@ -77,14 +77,14 @@ const MobileNav = ({visible}) => {
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="fixed inset-0 bg-black bg-opacity-50 z-[9998] transition-opacity duration-300"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
           aria-label="Close menu"
         />
       )}
       <div
-        className={`fixed top-0 right-0 h-full w-3/4 bg-[#121212] text-white shadow-lg border-0 flex flex-col transition-transform duration-500 ease-in-out transform ${
+        className={`fixed top-0 right-0 h-full w-[85%] bg-[#121212] text-white shadow-lg border-0 flex flex-col transition-transform duration-500 ease-in-out transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } sm:max-w-sm z-[9999]`}
+        } sm:max-w-sm z-50`}
         style={{ backgroundColor: 'rgba(18, 18, 18, 0.95)' }}
       >
         <div className='relative w-full h-full bg-opacity-90 p-5'>
