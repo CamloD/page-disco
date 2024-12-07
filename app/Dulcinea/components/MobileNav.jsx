@@ -13,7 +13,8 @@ const links = [
   { name: "gallery", path: "/Dulcinea#gallery" },
   { name: "contact", path: "/Dulcinea#contact" },
   { name: "reservation", path: "/Dulcinea/reservation" },
-]
+  { name: "Preguntas Frecuentes", path: "/Dulcinea/preguntasfrecuentes" },
+];
 
 const MobileNav = ({visible}) => {
   const pathname = usePathname();
