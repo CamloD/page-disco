@@ -38,7 +38,6 @@ const MobileNav = ({visible}) => {
     const targetId = path.split("#")[1]; 
     if (targetId && pathname !== "/Dulcinea") {
         e.preventDefault(); 
-        // Usar router.push en lugar de window.location.href
         router.push("/Dulcinea#"+targetId); 
     } else if (pathname === "/Dulcinea" && targetId) {
         handleAnchorClick(e, targetId);

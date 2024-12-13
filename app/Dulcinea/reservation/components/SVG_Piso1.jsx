@@ -1,0 +1,161 @@
+import React, { useState, useEffect } from 'react';
+import { scale, LayoutBlock, LayoutBlock2 } from './LayoutUtils';
+
+const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection }) => {
+  const [selected, setSelected] = useState(null);
+
+  const handleBlockClick = (blockId) => {
+    setSelected(blockId);
+    if (onClick) onClick(blockId);
+  };
+
+  useEffect(() => {
+    if (resetSelection) {
+      setSelected(null);
+    }
+  }, [resetSelection]);
+
+  const palcoData = [
+    { id: 'Palco 1', x: 26.944, y: 581.987, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "1" } } },
+    { id: 'Palco 2', x: 26.944, y: 521.121, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "2" } } },
+    { id: 'Palco 3', x: 26.944, y: 460.255, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "3" } } },
+    { id: 'Palco 4', x: 26.944, y: 399.097, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "4" } } },
+    { id: 'Palco 5', x: 26.944, y: 337.940, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "5" } } },
+    { id: 'Palco 6', x: 26.944, y: 276.783, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "6" } } },
+    { id: 'Palco 7', x: 26.944, y: 215.625, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "7" } } },
+    { id: 'Palco 8', x: 26.944, y: 154.468, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "8" } } },
+    { id: 'Palco 9', x: 515.944, y: 581.987, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "9" } } },
+    { id: 'Palco 10', x: 515.944, y: 521.121, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "10" } } },
+    { id: 'Palco 11', x: 515.944, y: 460.255, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "11" } } },
+    { id: 'Palco 12', x: 515.944, y: 399.097, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "12" } } },
+    { id: 'Palco 13', x: 515.944, y: 337.94, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "13" } } },
+    { id: 'Palco 14', x: 515.944, y: 276.783, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "14" } } },
+    { id: 'Palco 15', x: 515.944, y: 215.625, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "15" } } },
+    { id: 'Palco 16', x: 515.944, y: 154.468, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "16" } } },
+  ];
+
+  const vipData = [
+    { id: 'Vip 1', x: 208.814, y: 550.535, width: 59.701, height: 61.157 },
+    { id: 'Vip 2', x: 332.585, y: 550.535, width: 59.701, height: 61.157 },
+    { id: 'Vip 3', x: 208.814, y: 489.377, width: 59.701, height: 61.157 },
+    { id: 'Vip 4', x: 332.585, y: 489.377, width: 59.701, height: 61.157 },
+    { id: 'Vip 5', x: 208.814, y: 428.22, width: 59.701, height: 61.157 },
+    { id: 'Vip 6', x: 332.585, y: 428.22, width: 59.701, height: 61.157 },
+    { id: 'Vip 7', x: 208.814, y: 367.063, width: 59.701, height: 61.157 },
+    { id: 'Vip 8', x: 332.585, y: 368.519, width: 59.701, height: 61.157 },
+    { id: 'Vip 9', x: 208.814, y: 305.905, width: 59.701, height: 61.157 },
+    { id: 'Vip 10', x: 332.585, y: 307.361, width: 59.701, height: 61.157 },
+    { id: 'Vip 11', x: 208.814, y: 244.748, width: 59.701, height: 61.157 },
+    { id: 'Vip 12', x: 332.585, y: 246.204, width: 59.701, height: 61.157 },
+    { id: 'Vip 13', x: 208.814, y: 185.047, width: 59.701, height: 61.157 },
+    { id: 'Vip 14', x: 332.585, y: 185.047, width: 59.701, height: 61.157 },
+  ];
+  
+
+  const Elements = [
+    { id: 'puerta-1', title: 'Puerta 1', x: 87.956, y: 629.165,
+        pathConfig: { d: "813.163h61.157v28.727H0z", className: "fill-none stroke-current stroke-[1.5]" },
+        textConfig: [
+          { x: 30.27, y: 828.13, content: "Puerta 1", className: "fill-current font-[Calistoga] text-[14px]" },
+        ],
+        colorBlock: '#2EE1A7', colorText: '#2EE1A7',
+    },
+    { id: 'puerta-2', title: 'Puerta 2', x: 450.531, y: 629.165,
+        pathConfig: { d: "813.163h61.157v28.727H0z", className: "fill-none stroke-current stroke-[1.5]" },
+        textConfig: [
+          { x: 30.27, y: 828.13, content: "Puerta 2", className: "fill-current font-[Calistoga] text-[14px]" },
+        ],
+        colorBlock: '#2EE1A7', colorText: '#2EE1A7',
+    },
+    { id: 'Barra', title: 'Barra', x: 232.849, y: 82.767,
+        pathConfig: { d: "782.645h150.402v60.245H0z", className: "fill-none stroke-current stroke-[2.25]" },
+        textConfig: [
+          { x: 72.78, y: 814.57, content: "Barra", className: "fill-current font-[Calistoga] text-[36px]" },
+        ]
+    },
+    { id: 'Tarima', title: 'Tarima', x: 174.48, y: 628.36,
+        pathConfig: { d: "746.792h256.613v95.098H0z", className: "fill-none stroke-current stroke-[3]" },
+        textConfig: [
+          { x: 128, y: 796.24, content: "Tarima", className: "fill-current font-[Calistoga] text-[48px]" },
+        ],
+        colorBlock: "#ffffff", colorText : '#ffffff'
+    },
+    
+    { id: 'bathrooms-men', title: 'Baño Hombres', x: 74.85, y: 105.365,
+      pathConfig: { d: "807.057h93.192v34.833H0z", className: "fill-none stroke-current stroke-[1.5]" },
+      textConfig: [
+        { x: 46, y: 818.27, content: "Baño ", className: "fill-current font-[Calistoga] text-[14px]", },
+        { x: 46, y: 833.27, content: "Hombres", className: "fill-current font-[Calistoga] text-[12px]",}
+      ],
+      colorBlock: "#E69C2B", colorText : '#E69C2B'
+    },
+
+    { id: 'bathrooms-women', title: 'Baño Mujeres', x: 433.058, y: 105.365,
+        pathConfig: { d: "807.057h93.192v34.833H0z", className: "fill-none stroke-current stroke-[1.5]" },
+        textConfig: [
+          { x: 46, y: 818.27, content: "Baño ", className: "fill-current font-[Calistoga] text-[14px]", },
+          { x: 46, y: 833.27, content: "Mujeres", className: "fill-current font-[Calistoga] text-[12px]",}
+        ],
+        colorBlock: "#E69C2B", colorText : '#E69C2B'
+      },
+  ];
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      width={793.701 * scale}
+      height={1122.518 * scale}
+      viewBox="0 0 595.276 841.89"
+      className={className}
+    >
+        <g>
+            {palcoData.map((palco) => (
+            <LayoutBlock
+                key={palco.id}
+                id={palco.id}
+                title={palco.id}
+                x={palco.x}
+                y={palco.y}
+                width={palco.width}
+                height={palco.height}
+                selected={selected}
+                onClick={handleBlockClick}
+                pathD={palco.pathD}
+                textConfig={palco.textConfig}
+            />
+            ))}
+            {vipData.map((vip) => (
+            <LayoutBlock
+                key={vip.id}
+                id={vip.id}
+                title={vip.id}
+                x={vip.x}
+                y={vip.y}
+                width={vip.width}
+                height={vip.height}
+                selected={selected}
+                onClick={handleBlockClick}
+            />
+            ))}
+            {Elements.map((element) => (
+            <LayoutBlock2
+                key={element.id}
+                {...element}
+                
+            />
+            ))}
+            <g id="shape128-127" transform="translate(203.811 -747.977)" style={{ cursor: 'default', userSelect: 'none'  }}>
+                <title>{"1er piso"}</title>
+                <path d="M0 785.394h211.117v56.496H0z" className="fill-none stroke-none stroke-[0.75]"/>
+                <text x={24.32} y={827.44} className="fill-current font-[Calistoga] text-[46px]">
+                    {"1er piso"}
+                </text>
+            </g>
+        </g>
+    </svg>
+  );
+};
+
+export default SVG_Piso1;
+

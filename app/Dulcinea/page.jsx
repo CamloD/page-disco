@@ -39,7 +39,7 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
 
 
   return(
-  <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 cursor-pointer flex">
+  <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 flex">
     <div 
       className="absolute inset-0 flex items-center justify-center"
       style={{

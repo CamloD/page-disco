@@ -45,7 +45,15 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection }) => {
       viewBox="0 0 595.276 841.89"
       className={className}
     >
+      
       <g >
+        <g id="shape116-113" transform="translate(87.956 -629.165)">
+          <title>{"Hoja.116"}</title>
+          <path d="M0 813.163h61.157v28.727H0z" className="fill-none stroke-current stroke-[1.5]" />
+          <text x={7.67} y={831.13} className="fill-current font-[Calistoga] text-[12px]">
+            {"Puerta 1"}
+          </text>
+        </g>
         <g id="shape83-1" transform="translate(450.531 -629.166)">
           <title>{"Hoja.83"}</title>
           <path d="M0 813.163h61.157v28.727H0z" className="fill-none stroke-current stroke-[1.5]" />
@@ -53,6 +61,8 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection }) => {
             {"Puerta 2"}
           </text>
         </g>
+        
+        
         <g id="shape108-81" transform="translate(26.944 -581.987)" onClick={() => handleBlockClick('Palco 1')}>
           <title>{"Palco 1"}</title>
           <rect x={0} y={780.732} width={49.508} height={61.157} fill="transparent" pointerEvents="all"/>
@@ -417,13 +427,7 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection }) => {
           </text>
         </g>
         
-        <g id="shape116-113" transform="translate(87.956 -629.165)">
-          <title>{"Hoja.116"}</title>
-          <path d="M0 813.163h61.157v28.727H0z" className="fill-none stroke-current stroke-[1.5]" />
-          <text x={7.67} y={831.13} className="fill-current font-[Calistoga] text-[12px]">
-            {"Puerta 2"}
-          </text>
-        </g>
+        
         <g id="shape117-116" transform="translate(74.85 -105.365)">
           <title>{"Hoja.117"}</title>
           <path d="M0 807.057h93.192v34.833H0z" className="fill-none stroke-current stroke-[1.5]" />
