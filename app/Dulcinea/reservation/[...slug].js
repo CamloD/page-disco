@@ -1,28 +1,29 @@
 // pages/Dulcinea/reservation/[...slug].js
-import eventsData from '@/app/Dulcinea/data/dataevent.json';  // Asegúrate de que el archivo esté correctamente importado
+import eventsData from '@/app/Dulcinea/data/dataevent.json'; // Asegúrate de que el archivo esté correctamente importado
 
-// Función para generar los parámetros estáticos para las rutas dinámicas
+// Esta función generará las rutas estáticas para los eventos
 export async function generateStaticParams() {
-  // Obtener todos los slugs de los eventos disponibles
-  const slugs = eventsData.events.map(event => event.slug);
+  // Generar los slugs a partir de los eventos. Aquí concatenamos el id y el título para formar el slug.
+  const slugs = eventsData.events.map(event => `${event.id}-${event.title.toLowerCase().replace(/\s+/g, '-')}`);
 
-  // Devolver los slugs como un array de objetos para Next.js
+  // Devolvemos los slugs como objetos que Next.js puede usar para generar las rutas estáticas.
   return slugs.map(slug => ({
-    slug: [slug],  // El valor debe ser un array para que coincida con la ruta '[...slug]'
+    slug: [slug],  // `slug` debe ser un array para que coincida con la ruta '[...slug]'
   }));
 }
 
 // Página de detalles del evento
 export default function Page({ params }) {
-  // Buscar el evento correspondiente al slug
-  const event = eventsData.events.find(e => e.slug === params.slug[0]);
+  // Extraemos el id y el título del slug
+  const [eventId, eventTitle] = params.slug[0].split('-');
+  const event = eventsData.events.find(e => e.id.toString() === eventId && e.title.toLowerCase().replace(/\s+/g, '-') === eventTitle);
 
-  // Si no se encuentra el evento, mostrar un mensaje
+  // Si no se encuentra el evento, mostramos un mensaje de error
   if (!event) {
     return <div>No se encontró el evento</div>;
   }
 
-  // Renderizar los detalles del evento
+  // Renderizamos los detalles del evento
   return (
     <div>
       <h1>{event.title}</h1>
