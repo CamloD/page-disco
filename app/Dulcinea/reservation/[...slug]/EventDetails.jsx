@@ -68,7 +68,7 @@ export function EventDetails({ slug }) {
 
   const handleGoToMap = () => {
     if (event) {
-      router.push(`/map?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
+      router.push(`/Dulcinea/map?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
     }
   }
 

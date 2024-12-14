@@ -1,17 +1,17 @@
 'use client'
 
+import { Suspense } from 'react';
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { format } from 'date-fns'
 import Head from "next/head"
-import { useSearchParams } from 'next/navigation'
 import SVG_Piso1 from "./components/SVG_Piso1"
 import SVG_Piso2 from "./components/SVG_Piso2"
 import { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
 import { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
+import { SearchParamsHandler } from './components/SearchParamsHandler'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -222,16 +222,7 @@ export default function ReservationPage() {
   const [selectedTime, setSelectedTime] = useState('')
   const [viewMode, setViewMode] = useState('map')
 
-  const searchParams = useSearchParams()
-  const eventTitle = searchParams.get('eventTitle')
-  const eventDate = searchParams.get('eventDate')
-  const eventTime = searchParams.get('eventTime')
-  const selectedAreaFromParams = searchParams.get('selectedArea')
-  const guestCountFromParams = searchParams.get('guestCount')
-
-  const mapRef = useRef(null)
-
-  useEffect(() => {
+  const handleSearchParamsChange = ({ eventTitle, eventDate, eventTime, selectedArea, guestCount }) => {
     if (eventTitle && eventDate && eventTime) {
       setSelectedEvent({
         title: eventTitle,
@@ -239,16 +230,18 @@ export default function ReservationPage() {
         time: eventTime
       })      
     }
-    if (selectedAreaFromParams) {
-      setSelectedArea(selectedAreaFromParams)
+    if (selectedArea) {
+      setSelectedArea(selectedArea)
     }
-    if (guestCountFromParams) {
+    if (guestCount) {
       setSelectedPositions((prev) => ({
         ...prev,
-        [currentFloor]: { ...prev[currentFloor], area: selectedAreaFromParams },
+        [currentFloor]: { ...prev[currentFloor], area: selectedArea },
       }))
     }
-  }, [eventTitle, eventDate, eventTime, selectedAreaFromParams, guestCountFromParams])
+  }
+
+  const mapRef = useRef(null)
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -314,7 +307,6 @@ export default function ReservationPage() {
     }, 50)
   }
 
-
   const toggleViewMode = () => {
     setViewMode(viewMode === 'map' ? 'list' : 'map')
   }
@@ -324,7 +316,7 @@ export default function ReservationPage() {
     return (
       <div 
         ref={mapRef}
-        className={`relative flex justify-center items-center `} 
+        className={`relative flex justify-center items-center`} 
         style={{ width: "100%", height: isMobile ? "auto" : "680px" }}
       >
         <SVGComponent
@@ -355,116 +347,119 @@ export default function ReservationPage() {
   }
 
   return (
-    <div className='relative'>
-      <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
-      <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet" />
-      </Head>
-      <title>Reservación | Disco</title>
-      <section id="reservations" className="min-h-screen py-24 px-4 relative z-0">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative grid gap-4">
-            <div className="flex justify-center items-center space-x-4 mb-8">
-              <Button 
-                onClick={() => handleFloorChange(1)} 
-                className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 1 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
-              >
-                1er Piso
-              </Button>
-              <Button 
-                onClick={() => handleFloorChange(2)} 
-                className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 2 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
-              >
-                2do Piso
-              </Button>
-            </div>
-            <div className={`p-6 border border-gray-800 rounded-lg bg-white/[5%] shadow-xl`}>
-              <div className="mb-4 flex justify-between">
-                <Button onClick={toggleViewMode} className="bg-blue-600 hover:bg-blue-700 text-white">
-                  {viewMode === 'map' ? 'Ver como lista' : 'Ver como mapa'}
+    <Suspense fallback={<div>Cargando...</div>}>
+      <SearchParamsHandler onParamsChange={handleSearchParamsChange} />
+      <div className='relative'>
+        <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
+        <Head>
+          <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet" />
+        </Head>
+        <title>Reservación | Disco</title>
+        <section id="reservations" className="min-h-screen py-24 px-4 relative z-0">
+          <div className="max-w-5xl mx-auto">
+            <div className="relative grid gap-4">
+              <div className="flex justify-center items-center space-x-4 mb-8">
+                <Button 
+                  onClick={() => handleFloorChange(1)} 
+                  className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 1 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
+                >
+                  1er Piso
+                </Button>
+                <Button 
+                  onClick={() => handleFloorChange(2)} 
+                  className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 2 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
+                >
+                  2do Piso
                 </Button>
               </div>
-              {renderSVG(currentFloor)}
+              <div className={`p-6 border border-gray-800 rounded-lg bg-white/[5%] shadow-xl`}>
+                <div className="mb-4 flex justify-between">
+                  <Button onClick={toggleViewMode} className="bg-blue-600 hover:bg-blue-700 text-white">
+                    {viewMode === 'map' ? 'Ver como lista' : 'Ver como mapa'}
+                  </Button>
+                </div>
+                {renderSVG(currentFloor)}
+              </div>
+            </div>
+            <div className="container px-4 md:px-6 py-12 mt-12">
+              <h2 className="text-4xl font-bold mb-8 text-center text-white">Hacer una Reservación</h2>
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto grid gap-6 text-white">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Teléfono</label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="Tu número de teléfono"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-1">Lugar</label>
+                  <Input
+                    id="area"
+                    type="text"
+                    placeholder="Área seleccionada"
+                    value={selectedArea}
+                    readOnly
+                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-300 mb-1">Solicitudes Especiales</label>
+                  <Textarea
+                    id="specialRequests"
+                    placeholder="Alguna solicitud especial..."
+                    value={specialRequests}
+                    onChange={(e) => setSpecialRequests(e.target.value)}
+                    className="w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300">
+                  Enviar Reservación
+                </Button>
+              </form>
             </div>
           </div>
-          <div className="container px-4 md:px-6 py-12 mt-12">
-            <h2 className="text-4xl font-bold mb-8 text-center text-white">Hacer una Reservación</h2>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto grid gap-6 text-white">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Tu nombre"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="tu@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Teléfono</label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="Tu número de teléfono"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-1">Lugar</label>
-                <Input
-                  id="area"
-                  type="text"
-                  placeholder="Área seleccionada"
-                  value={selectedArea}
-                  readOnly
-                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-300 mb-1">Solicitudes Especiales</label>
-                <Textarea
-                  id="specialRequests"
-                  placeholder="Alguna solicitud especial..."
-                  value={specialRequests}
-                  onChange={(e) => setSpecialRequests(e.target.value)}
-                  className="w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500"
-                />
-              </div>
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300">
-                Enviar Reservación
-              </Button>
-            </form>
-          </div>
-        </div>
-      </section>
-      <ReservationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        selectedArea={selectedArea}
-        areaInfo={selectedAreaInfo}
-        onclickbutton={handleClearSelection}
-        selectedEvent={selectedEvent}
-        selectedDate={selectedEvent ? new Date(selectedEvent.date) : selectedDate}
-        selectedTime={selectedEvent ? selectedEvent.time : selectedTime}
-      />
-    </div>
+        </section>
+        <ReservationModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedArea={selectedArea}
+          areaInfo={selectedAreaInfo}
+          onclickbutton={handleClearSelection}
+          selectedEvent={selectedEvent}
+          selectedDate={selectedEvent ? new Date(selectedEvent.date) : selectedDate}
+          selectedTime={selectedEvent ? selectedEvent.time : selectedTime}
+        />
+      </div>
+    </Suspense>
   )
 }
 

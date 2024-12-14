@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: 'export', // Esto indica que usarás exportación estática
+	reactStrictMode: true, // Este es el modo estricto de React
+	swcMinify: true, // Usar SWC para minimizar el código
+	output: 'export', // Si estás utilizando el modo de exportación estática
 	experimental: {
-		staticPageGenerationTimeout: 60, // Esto le da más tiempo para generar las páginas estáticas si tienes muchas
+	  appDir: true, // Habilitar el enrutamiento de la carpeta app
 	},
 	basePath: process.env.NODE_ENV === 'production' ? '/page-disco' : '',
 	assetPrefix: process.env.NODE_ENV === 'production' ? '/page-disco/' : '',
