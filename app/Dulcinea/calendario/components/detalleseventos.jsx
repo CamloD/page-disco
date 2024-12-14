@@ -11,7 +11,12 @@ export const DetallesEvento = ({ event, onClose }) => {
   const modalRef = useRef(null)
 
   const handleReservation = () => {
-    router.push(`/reservations?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
+    if (event) {
+      const eventDate = event.date.replace(/-/g, '')
+      const eventCode = `evento${eventDate}${event.id.toString().padStart(4, '0')}`
+      const eventTitle = event.title.toLowerCase().replace(/\s+/g, '-')
+      router.push(`/Dulcinea/reservation/${eventCode}/${eventTitle}`)
+    }
   }
 
   useEffect(() => {
@@ -35,6 +40,8 @@ export const DetallesEvento = ({ event, onClose }) => {
       document.removeEventListener('keydown', handleEscapeKey)
     }
   }, [onClose])
+
+  if (!event) return null
 
   return (
     <AnimatePresence>

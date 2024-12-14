@@ -4,27 +4,14 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, useRef } from 'react'
-//import Image from 'next/image'
-import {Imagen, Videos} from "app/components/mostrarmedios"
 import {ImageGrid} from "app/components/images_gallery/imagesgrid"
 import Preguntas from "app/Dulcinea/components/sections/preguntas"
 
-
-import ScrollImage from "./components/sections/ScrollImage"
-import { Parallax } from "react-parallax"
-import styles1 from "@/app/Styles/principal.css"
-import PScrollVideo from "./components/sections/ScrollVideo"
-import ScrollVideo from "./components/sections/ScrollVideo"
-import Scroll_image from "./components/sections/scroll_image"
 import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
 import {ProximosEventos} from "app/Dulcinea/components/sections/comingevents"
-
 import {Vestimenta_Code} from "./components/sections/vestimenta_code"
 
 const MOBILE_BREAKPOINT = 768
@@ -36,7 +23,6 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
   const height = isMobile ? '1000vh' : (isTablet ? '1200vh' : '800vh');
   const trnansX = isMobile ? '11%' : (isTablet ? '-5%' : '-5%');
   const trnansY = isMobile ? '-29%' : (isTablet ? '-24%' : '-24%');
-
 
   return(
   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 flex">
@@ -70,7 +56,10 @@ const Page = () => {
   const homeRef = useRef(null);
 
   useEffect(() => {
-    // Eliminar la parte después del # en la URL
+    if (typeof window !== 'undefined') {
+      window.history.scrollRestoration = 'manual'
+    }
+    window.scrollTo(0, 0)
     if (window.location.hash) {
       window.history.replaceState(null, null, window.location.pathname + window.location.search);
     }
@@ -103,11 +92,9 @@ const Page = () => {
           <ImageBackgroung1/>
         </section>
 
-
         <section className="min-h-[1200px]">
           <Vestimenta_Code/>
         </section>
-
 
         <section className="bg-transparent py-12 md:py-8 lg:py-12 min-h-[930px]">
           <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />

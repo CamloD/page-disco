@@ -31,6 +31,8 @@ export const LayoutBlock = ({
   height, 
   selected, 
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   pathConfig,
   textConfig,
   className
@@ -58,6 +60,8 @@ export const LayoutBlock = ({
       id={`shape-${id}`} 
       transform={`translate(${x} -${y})`} 
       onClick={() => onClick && onClick(id)} 
+      onMouseEnter={(e) => onMouseEnter && onMouseEnter(e)}
+      onMouseLeave={() => onMouseLeave && onMouseLeave()}
       className={className}
       style={{ cursor: 'pointer', userSelect: 'none' }}
     >

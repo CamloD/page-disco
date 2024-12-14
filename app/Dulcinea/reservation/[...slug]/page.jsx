@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { Suspense, useState, useEffect } from 'react'
+import { useRouter, useParams } from 'next/navigation'  // Usamos useParams en vez de React.use
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -11,40 +11,37 @@ import { Imagen } from '@/app/components/mostrarmedios'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import eventsData from '@/app/Dulcinea/data/dataevent.json'
 
-export default function Page({ params }) {
+function EventDetails({ slug }) {
+  const [event, setEvent] = useState(null)
   const [showCheckout, setShowCheckout] = useState(false)
   const [selectedArea, setSelectedArea] = useState('')
   const [guestCount, setGuestCount] = useState(1)
   const [selectionMethod, setSelectionMethod] = useState('list')
   const router = useRouter()
 
-  const [event, setEvent] = useState(null)
-
   useEffect(() => {
-    if (params.slug && params.slug.length > 0) {
-      const eventCode = params.slug[0]
+    if (slug && slug.length > 0) {
+      const eventCode = slug[0]
       if (eventCode && eventCode.startsWith('evento')) {
         const eventInfo = eventCode.substring(6)
-        const [year, month, day, id] = [
-          eventInfo.substr(0, 4),
-          eventInfo.substr(4, 2),
-          eventInfo.substr(6, 2),
-          eventInfo.substr(8)
-        ]
+        const date = eventInfo.substr(0, 8)
+        const id = parseInt(eventInfo.substr(8), 10)
+        
         const matchedEvent = eventsData.events.find(e => 
-          e.id.toString() === id &&
-          e.date === `${year}-${month}-${day}`
+          e.id === id &&
+          e.date.replace(/-/g, '') === date
         )
+        
         if (matchedEvent) {
           setEvent(matchedEvent)
         } else {
-          router.push('/calendario')
+          console.error('Event not found:', { date, id })
         }
       } else {
-        router.push('/calendario')
+        console.error('Invalid event code:', eventCode)
       }
     }
-  }, [params.slug, router])
+  }, [slug])
 
   const handleReserve = () => {
     setShowCheckout(true)
@@ -71,12 +68,12 @@ export default function Page({ params }) {
 
   const handleGoToMap = () => {
     if (event) {
-      router.push(`/map?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
+      router.push(`/Dulcinea/map?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
     }
   }
 
   if (!event) {
-    return <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Cargando detalles del evento...</div>
+    return <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Evento no encontrado</div>
   }
 
   return (
@@ -180,5 +177,15 @@ export default function Page({ params }) {
         )}
       </div>
     </div>
+  )
+}
+
+export default function Page() {
+  const params = useParams()  // Usamos useParams para obtener los parámetros
+
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Cargando...</div>}>
+      {params.slug && <EventDetails slug={params.slug} />}
+    </Suspense>
   )
 }
