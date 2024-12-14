@@ -5,7 +5,7 @@ import Tooltip from './tooltip';
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-export const getAreaInfo_SVG1 = (area) => {
+export const getAreaInfo_SVG1 = (area, isMobile) => {
   const areaInfo = {
     'Palco 1': { precio: '$500', capacidad: '10 personas', extras: 'Vista premium' },
     'Palco 2': { precio: '$450', capacidad: '8 personas', extras: 'Servicio de mesero dedicado' },
@@ -208,7 +208,7 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
   const renderListView = () => {
     const allAreas = [...palcoData, ...vipData];
     return (
-      <ScrollArea className="h-[calc(150vh-300px)] w-full rounded-md border p-4">
+      <ScrollArea className={`${isMobile? "h-[calc(870px-200px)]":'h-[calc(960px-300px)]'}  w-full rounded-md border p-4`}>
         <div className="grid grid-cols-1 gap-4">
           {allAreas.map((area) => (
             <div
