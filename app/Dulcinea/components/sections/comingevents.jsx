@@ -107,7 +107,7 @@ export function ProximosEventos({isMobile, isTablet, isDesktop}) {
             música, ambiente y artistas invitados.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
-            <Link href="/Dulcinea/reservation" className="w-full sm:w-auto">
+            <Link href="/Dulcinea/map" className="w-full sm:w-auto">
               <Button size={isMobile ? "default" : "lg"} className="w-full bg-red-700 hover:bg-red-900">
                 Hacer Reservación
               </Button>
