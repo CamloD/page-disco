@@ -5,13 +5,14 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { format } from 'date-fns'
 import Head from "next/head"
+import { useSearchParams } from 'next/navigation'
 import SVG_Piso1 from "./components/SVG_Piso1"
 import SVG_Piso2 from "./components/SVG_Piso2"
 import { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
 import { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
-import { SearchParamsHandler } from './components/SearchParamsHandler'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -222,7 +223,16 @@ export default function ReservationPage() {
   const [selectedTime, setSelectedTime] = useState('')
   const [viewMode, setViewMode] = useState('map')
 
-  const handleSearchParamsChange = ({ eventTitle, eventDate, eventTime, selectedArea, guestCount }) => {
+  const searchParams = useSearchParams()
+  const eventTitle = searchParams.get('eventTitle')
+  const eventDate = searchParams.get('eventDate')
+  const eventTime = searchParams.get('eventTime')
+  const selectedAreaFromParams = searchParams.get('selectedArea')
+  const guestCountFromParams = searchParams.get('guestCount')
+
+  const mapRef = useRef(null)
+
+  useEffect(() => {
     if (eventTitle && eventDate && eventTime) {
       setSelectedEvent({
         title: eventTitle,
@@ -230,18 +240,16 @@ export default function ReservationPage() {
         time: eventTime
       })      
     }
-    if (selectedArea) {
-      setSelectedArea(selectedArea)
+    if (selectedAreaFromParams) {
+      setSelectedArea(selectedAreaFromParams)
     }
-    if (guestCount) {
+    if (guestCountFromParams) {
       setSelectedPositions((prev) => ({
         ...prev,
-        [currentFloor]: { ...prev[currentFloor], area: selectedArea },
+        [currentFloor]: { ...prev[currentFloor], area: selectedAreaFromParams },
       }))
     }
-  }
-
-  const mapRef = useRef(null)
+  }, [eventTitle, eventDate, eventTime, selectedAreaFromParams, guestCountFromParams])
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -348,7 +356,6 @@ export default function ReservationPage() {
 
   return (
     <Suspense fallback={<div>Cargando...</div>}>
-      <SearchParamsHandler onParamsChange={handleSearchParamsChange} />
       <div className='relative'>
         <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
         <Head>
@@ -462,4 +469,3 @@ export default function ReservationPage() {
     </Suspense>
   )
 }
-
