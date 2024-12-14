@@ -1,18 +1,17 @@
 'use client'
 
 import { Suspense } from 'react';
-import { useState, useEffect, useRef } from 'react'
+import React,{ useState, useEffect, useRef, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { format } from 'date-fns'
 import Head from "next/head"
-import { useSearchParams } from 'next/navigation'
 import SVG_Piso1 from "./components/SVG_Piso1"
 import SVG_Piso2 from "./components/SVG_Piso2"
 import { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
 import { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
+import { SearchParamsHandler } from './components/SearchParamsHandler'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -202,6 +201,8 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
   )
 }
 
+const MemoizedReservationModal = React.memo(ReservationModal);
+
 export default function ReservationPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -209,7 +210,7 @@ export default function ReservationPage() {
   const [selectedArea, setSelectedArea] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [currentFloor, setCurrentFloor] = useState(1)
-  const [selectedPositions, setSelectedPositions] = useState({
+  const selectedPositionsRef = useRef({
     1: { x: 0, y: 0, area: "", color: "" },
     2: { x: 0, y: 0, area: "", color: "" },
   })
@@ -223,16 +224,7 @@ export default function ReservationPage() {
   const [selectedTime, setSelectedTime] = useState('')
   const [viewMode, setViewMode] = useState('map')
 
-  const searchParams = useSearchParams()
-  const eventTitle = searchParams.get('eventTitle')
-  const eventDate = searchParams.get('eventDate')
-  const eventTime = searchParams.get('eventTime')
-  const selectedAreaFromParams = searchParams.get('selectedArea')
-  const guestCountFromParams = searchParams.get('guestCount')
-
-  const mapRef = useRef(null)
-
-  useEffect(() => {
+  const handleSearchParamsChange = useCallback(({ eventTitle, eventDate, eventTime, selectedArea, guestCount }) => {
     if (eventTitle && eventDate && eventTime) {
       setSelectedEvent({
         title: eventTitle,
@@ -240,16 +232,18 @@ export default function ReservationPage() {
         time: eventTime
       })      
     }
-    if (selectedAreaFromParams) {
-      setSelectedArea(selectedAreaFromParams)
+    if (selectedArea) {
+      setSelectedArea(selectedArea)
     }
-    if (guestCountFromParams) {
+    if (guestCount) {
       setSelectedPositions((prev) => ({
         ...prev,
-        [currentFloor]: { ...prev[currentFloor], area: selectedAreaFromParams },
+        [currentFloor]: { ...prev[currentFloor], area: selectedArea },
       }))
     }
-  }, [eventTitle, eventDate, eventTime, selectedAreaFromParams, guestCountFromParams])
+  }, [setSelectedEvent, setSelectedArea, currentFloor])
+
+  const mapRef = useRef(null)
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -277,7 +271,7 @@ export default function ReservationPage() {
     setTimeout(() => setResetSelection(false), 50)
   }
 
-  const handleAreaClick = (area, event) => {
+  const handleAreaClick = useCallback((area, event) => {
     if (area.toLowerCase().includes("palco") || area.toLowerCase().includes("vip")) {
       const floorLabel = currentFloor === 1 ? "1er piso" : "2do piso"
       const newArea = `${area} (${floorLabel})`
@@ -293,21 +287,21 @@ export default function ReservationPage() {
 
         const selectedColor = "#FF5733"
 
-        setSelectedPositions((prev) => ({
-          ...prev,
+        selectedPositionsRef.current = {
+          ...selectedPositionsRef.current,
           [currentFloor]: { x, y, area: newArea, color: selectedColor },
-        }))
+        }
       }
       setIsModalOpen(true)
     }
-  }
+  }, [currentFloor, setSelectedArea, setSelectedAreaInfo, setIsModalOpen])
 
   const handleClearSelection = () => {
     setResetSelection(true)
-    setSelectedPositions((prev) => ({
-      ...prev,
+    selectedPositionsRef.current = {
+      ...selectedPositionsRef.current,
       [currentFloor]: { x: 0, y: 0, area: "", color: "" },
-    }))
+    }
     setSelectedArea("")
 
     setTimeout(() => {
@@ -330,18 +324,18 @@ export default function ReservationPage() {
         <SVGComponent
           onClick={handleAreaClick}
           resetSelection={resetSelection}
-          selectedBlock={selectedPositions[floor]?.area}
+          selectedBlock={selectedPositionsRef.current[floor]?.area}
           className="text-white w-full h-full"
           ViewMode={viewMode}
         />
 
-        {selectedPositions[floor]?.x !== 0 && selectedPositions[floor]?.y !== 0 && (
+        {selectedPositionsRef.current[floor]?.x !== 0 && selectedPositionsRef.current[floor]?.y !== 0 && (
           <div
             className="absolute w-6 h-6 rounded-full transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             style={{
-              left: selectedPositions[floor].x,
-              top: selectedPositions[floor].y,
-              backgroundColor: selectedPositions[floor].color,
+              left: selectedPositionsRef.current[floor].x,
+              top: selectedPositionsRef.current[floor].y,
+              backgroundColor: selectedPositionsRef.current[floor].color,
             }}
           />
         )}
@@ -356,6 +350,7 @@ export default function ReservationPage() {
 
   return (
     <Suspense fallback={<div>Cargando...</div>}>
+      <SearchParamsHandler onParamsChange={handleSearchParamsChange} />
       <div className='relative'>
         <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
         <Head>
@@ -455,7 +450,7 @@ export default function ReservationPage() {
             </div>
           </div>
         </section>
-        <ReservationModal
+        <MemoizedReservationModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           selectedArea={selectedArea}
@@ -469,3 +464,4 @@ export default function ReservationPage() {
     </Suspense>
   )
 }
+
