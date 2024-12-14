@@ -4,7 +4,7 @@ import eventsData from '@/app/Dulcinea/data/dataevent.json'; // Asegúrate de qu
 // Esta función generará las rutas estáticas para los eventos
 export async function generateStaticParams() {
   // Generar los slugs a partir de los eventos. Aquí concatenamos el id y el título para formar el slug.
-  const slugs = eventsData.events.map(event => `${event.id}-${event.title.toLowerCase().replace(/\s+/g, '-')}`);
+  const slugs = eventsData.events.map(event => `${event.id}`); // Solo usamos el ID del evento
 
   // Devolvemos los slugs como objetos que Next.js puede usar para generar las rutas estáticas.
   return slugs.map(slug => ({
@@ -14,9 +14,9 @@ export async function generateStaticParams() {
 
 // Página de detalles del evento
 export default function Page({ params }) {
-  // Extraemos el id y el título del slug
-  const [eventId, eventTitle] = params.slug[0].split('-');
-  const event = eventsData.events.find(e => e.id.toString() === eventId && e.title.toLowerCase().replace(/\s+/g, '-') === eventTitle);
+  // Extraemos solo el ID del evento
+  const eventId = params.slug[0];
+  const event = eventsData.events.find(e => e.id.toString() === eventId);
 
   // Si no se encuentra el evento, mostramos un mensaje de error
   if (!event) {
