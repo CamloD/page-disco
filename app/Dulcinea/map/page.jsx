@@ -304,12 +304,15 @@ export default function ReservationPage() {
     setViewMode(viewMode === 'map' ? 'list' : 'map')
   }
 
-  const renderSVG = (floor) => {
+  const comprobeView = viewMode == 'map' ? true : false
+
+
+  const renderSVG = (floor, ) => {
     const SVGComponent = floor === 1 ? SVG_Piso1 : SVG_Piso2
     return (
       <div 
         ref={mapRef}
-        className={`relative flex justify-center items-center`} 
+        className={`${comprobeView? "relative flex justify-center items-center":""}`} 
         style={{ width: "100%", height: isMobile ? "auto" : "680px" }}
       >
         <SVGComponent

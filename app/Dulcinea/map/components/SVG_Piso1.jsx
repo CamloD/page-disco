@@ -208,7 +208,7 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
   const renderListView = () => {
     const allAreas = [...palcoData, ...vipData];
     return (
-      <ScrollArea className="h-[calc(100vh-200px)] w-full rounded-md border p-4">
+      <ScrollArea className="h-[calc(150vh-300px)] w-full rounded-md border p-4">
         <div className="grid grid-cols-1 gap-4">
           {allAreas.map((area) => (
             <div
