@@ -10,12 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Imagen } from '@/app/components/mostrarmedios'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import eventsData from '@/app/Dulcinea/data/dataevent.json'
+import { useReservation } from '../../context/ReservationContext'
 
 export function EventDetails({ slug }) {
+  const { setEventDetails, setSelectedArea, setGuestCount } = useReservation()
   const [event, setEvent] = useState(null)
   const [showCheckout, setShowCheckout] = useState(false)
-  const [selectedArea, setSelectedArea] = useState('')
-  const [guestCount, setGuestCount] = useState(1)
+  const [selectedArea, setLocalSelectedArea] = useState('')
+  const [guestCount, setLocalGuestCount] = useState(1)
   const [selectionMethod, setSelectionMethod] = useState('list')
   const router = useRouter()
 
@@ -34,6 +36,11 @@ export function EventDetails({ slug }) {
         
         if (matchedEvent) {
           setEvent(matchedEvent)
+          setEventDetails({
+            title: matchedEvent.title,
+            date: matchedEvent.date,
+            time: matchedEvent.time,
+          })
         } else {
           console.error('Event not found:', { date, id })
         }
@@ -41,35 +48,20 @@ export function EventDetails({ slug }) {
         console.error('Invalid event code:', eventCode)
       }
     }
-  }, [slug])
+  }, [slug, setEventDetails])
 
   const handleReserve = () => {
-    setShowCheckout(true)
+    if (event) {
+      setSelectedArea(selectedArea)
+      setGuestCount(guestCount)
+      router.push('/Dulcinea/map')
+    }
   }
 
   const handleCancel = () => {
     setShowCheckout(false)
     setSelectedArea('')
-    setGuestCount(1)
-  }
-
-  const handleCheckout = () => {
-    if (event) {
-      const reservationDetails = {
-        eventTitle: event.title,
-        eventDate: event.date,
-        eventTime: event.time,
-        selectedArea,
-        guestCount
-      }
-      router.push(`/checkout?${new URLSearchParams(reservationDetails).toString()}`)
-    }
-  }
-
-  const handleGoToMap = () => {
-    if (event) {
-      router.push(`/Dulcinea/map?eventTitle=${encodeURIComponent(event.title)}&eventDate=${encodeURIComponent(event.date)}&eventTime=${encodeURIComponent(event.time)}`)
-    }
+    setLocalGuestCount(1)
   }
 
   if (!event) {
@@ -115,7 +107,7 @@ export function EventDetails({ slug }) {
                       <TabsTrigger value="map">Mapa</TabsTrigger>
                     </TabsList>
                     <TabsContent value="list">
-                      <Select value={selectedArea} onValueChange={setSelectedArea}>
+                      <Select value={selectedArea} onValueChange={setLocalSelectedArea}>
                         <SelectTrigger className="w-full mb-4 bg-gray-800 text-white border-gray-700">
                           <SelectValue placeholder="Selecciona un área" />
                         </SelectTrigger>
@@ -127,7 +119,7 @@ export function EventDetails({ slug }) {
                       </Select>
                     </TabsContent>
                     <TabsContent value="map">
-                      <Button onClick={handleGoToMap} className="w-full mb-4 bg-blue-600 hover:bg-blue-700">
+                      <Button onClick={handleReserve} className="w-full mb-4 bg-blue-600 hover:bg-blue-700">
                         Ir al mapa interactivo
                       </Button>
                     </TabsContent>
@@ -138,7 +130,7 @@ export function EventDetails({ slug }) {
                     type="number"
                     min="1"
                     value={guestCount}
-                    onChange={(e) => setGuestCount(parseInt(e.target.value))}
+                    onChange={(e) => setLocalGuestCount(parseInt(e.target.value))}
                     className="w-full mb-8 bg-gray-800 text-white border-gray-700"
                     placeholder="Número de invitados"
                   />
@@ -168,7 +160,7 @@ export function EventDetails({ slug }) {
                 <Button variant="outline" onClick={handleCancel} className="border-gray-600 text-gray-300 hover:bg-gray-700">
                   Cancelar
                 </Button>
-                <Button onClick={handleCheckout} className="bg-blue-600 hover:bg-blue-700">
+                <Button onClick={handleReserve} className="bg-blue-600 hover:bg-blue-700">
                   Proceder al Checkout
                 </Button>
               </div>

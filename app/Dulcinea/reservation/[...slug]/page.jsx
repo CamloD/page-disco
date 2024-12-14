@@ -15,8 +15,9 @@ export async function generateStaticParams() {
 
 export default function Page({ params }) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Cargando...</div>}>
-      <EventDetails slug={params.slug} />
-    </Suspense>
+      <Suspense fallback={<div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Cargando...</div>}>
+        <EventDetails slug={params.slug} />
+      </Suspense>
   )
 }
+

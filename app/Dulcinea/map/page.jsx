@@ -1,17 +1,16 @@
 'use client'
 
-import { Suspense } from 'react';
-import React,{ useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { format } from 'date-fns'
-import Head from "next/head"
 import SVG_Piso1 from "./components/SVG_Piso1"
 import SVG_Piso2 from "./components/SVG_Piso2"
 import { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
 import { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
-import { SearchParamsHandler } from './components/SearchParamsHandler'
+import { useReservation } from '../context/ReservationContext'
+import Link from 'next/link'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -161,7 +160,7 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
             />
             {isSubmitted && (phone.length < 10 && phone.length > 0) && <p className="text-red-500 text-sm">El número de teléfono debe tener 10 dígitos.</p>}
           </div>
-          <div>
+          {/*<div>
             <label htmlFor="area" className="text-white">Área seleccionada</label>
             <Input
               id="area"
@@ -181,7 +180,7 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
               onChange={(e) => setSpecialRequests(e.target.value)}
               className="w-full bg-gray-800 text-white border-gray-700 rounded-md p-2"
             />
-          </div>
+          </div>*/}
           <div className="flex justify-end space-x-4">
             <Button onClick={handleCancel} className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2">
               Cancelar
@@ -210,6 +209,7 @@ export default function ReservationPage() {
   const [selectedArea, setSelectedArea] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [currentFloor, setCurrentFloor] = useState(1)
+  const [localGuestCount, setLocalGuestCount] = useState(0); // Added state for guest count
   const selectedPositionsRef = useRef({
     1: { x: 0, y: 0, area: "", color: "" },
     2: { x: 0, y: 0, area: "", color: "" },
@@ -219,29 +219,8 @@ export default function ReservationPage() {
   const [deviceType, setDeviceType] = useState('desktop')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedAreaInfo, setSelectedAreaInfo] = useState({})
-  const [selectedEvent, setSelectedEvent] = useState(null)
-  const [selectedDate, setSelectedDate] = useState(new Date())
-  const [selectedTime, setSelectedTime] = useState('')
   const [viewMode, setViewMode] = useState('map')
-
-  const handleSearchParamsChange = useCallback(({ eventTitle, eventDate, eventTime, selectedArea, guestCount }) => {
-    if (eventTitle && eventDate && eventTime) {
-      setSelectedEvent({
-        title: eventTitle,
-        date: new Date(eventDate),
-        time: eventTime
-      })      
-    }
-    if (selectedArea) {
-      setSelectedArea(selectedArea)
-    }
-    if (guestCount) {
-      setSelectedPositions((prev) => ({
-        ...prev,
-        [currentFloor]: { ...prev[currentFloor], area: selectedArea },
-      }))
-    }
-  }, [setSelectedEvent, setSelectedArea, currentFloor])
+  const { eventDetails, selectedArea: contextSelectedArea, guestCount } = useReservation()
 
   const mapRef = useRef(null)
 
@@ -263,6 +242,18 @@ export default function ReservationPage() {
     window.addEventListener('resize', checkDeviceType)
     return () => window.removeEventListener('resize', checkDeviceType)
   }, [])
+
+  useEffect(() => {
+    if (eventDetails) {
+      console.log("Event details received:", eventDetails)
+    }
+    if (contextSelectedArea) {
+      setSelectedArea(contextSelectedArea)
+    }
+    if (guestCount) {
+      setLocalGuestCount(guestCount)
+    }
+  }, [eventDetails, contextSelectedArea, guestCount, setLocalGuestCount])
 
   const handleFloorChange = (floor) => {
     setCurrentFloor(floor)
@@ -345,123 +336,142 @@ export default function ReservationPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Reservación enviada:', { name, email, phone, selectedArea, specialRequests, selectedEvent, selectedDate, selectedTime })
+    console.log('Reservación enviada:', { 
+      name, 
+      email, 
+      phone, 
+      selectedArea, 
+      specialRequests, 
+      eventDetails: eventDetails ? {
+        title: eventDetails.title,
+        date: eventDetails.date,
+        time: eventDetails.time
+      } : 'No event details available'
+    })
   }
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
-      <SearchParamsHandler onParamsChange={handleSearchParamsChange} />
-      <div className='relative'>
-        <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
-        <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet" />
-        </Head>
-        <title>Reservación | Disco</title>
-        <section id="reservations" className="min-h-screen py-24 px-4 relative z-0">
-          <div className="max-w-5xl mx-auto">
-            <div className="relative grid gap-4">
-              <div className="flex justify-center items-center space-x-4 mb-8">
-                <Button 
-                  onClick={() => handleFloorChange(1)} 
-                  className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 1 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
-                >
-                  1er Piso
-                </Button>
-                <Button 
-                  onClick={() => handleFloorChange(2)} 
-                  className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 2 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
-                >
-                  2do Piso
-                </Button>
-              </div>
-              <div className={`p-6 border border-gray-800 rounded-lg bg-white/[5%] shadow-xl`}>
-                <div className="mb-4 flex justify-between">
-                  <Button onClick={toggleViewMode} className="bg-blue-600 hover:bg-blue-700 text-white">
-                    {viewMode === 'map' ? 'Ver como lista' : 'Ver como mapa'}
-                  </Button>
-                </div>
-                {renderSVG(currentFloor)}
-              </div>
+    <div className='relative'>
+      <BackgroundFigure isMobile={isMobile} isTablet={deviceType === 'tablet'}/>
+      <title>Reservación | Disco</title>
+      <section id="reservations" className="min-h-screen py-24 px-4 relative z-0">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-8 flex justify-between items-center">
+            <Link href="calendario">
+              <Button variant="outline">Regresar al Calendario</Button>
+            </Link>
+            <h1 className="text-3xl font-bold text-white">Reservación</h1>
+          </div>
+          <div className="relative grid gap-4">
+            <div className="flex justify-center items-center space-x-4 mb-8">
+              <Button 
+                onClick={() => handleFloorChange(1)} 
+                className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 1 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
+              >
+                1er Piso
+              </Button>
+              <Button 
+                onClick={() => handleFloorChange(2)} 
+                className={`px-6 py-2 text-lg font-semibold transition-all duration-300 ${currentFloor === 2 ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"}`}
+              >
+                2do Piso
+              </Button>
             </div>
-            <div className="container px-4 md:px-6 py-12 mt-12">
-              <h2 className="text-4xl font-bold mb-8 text-center text-white">Hacer una Reservación</h2>
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto grid gap-6 text-white">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Tu nombre"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Teléfono</label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="Tu número de teléfono"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-1">Lugar</label>
-                  <Input
-                    id="area"
-                    type="text"
-                    placeholder="Área seleccionada"
-                    value={selectedArea}
-                    readOnly
-                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-300 mb-1">Solicitudes Especiales</label>
-                  <Textarea
-                    id="specialRequests"
-                    placeholder="Alguna solicitud especial..."
-                    value={specialRequests}
-                    onChange={(e) => setSpecialRequests(e.target.value)}
-                    className="w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300">
-                  Enviar Reservación
+            <div className={`p-6 border border-gray-800 rounded-lg bg-white/[5%] shadow-xl`}>
+              <div className="mb-4 flex justify-between">
+                <Button onClick={toggleViewMode} className="bg-blue-600 hover:bg-blue-700 text-white">
+                  {viewMode === 'map' ? 'Ver como lista' : 'Ver como mapa'}
                 </Button>
-              </form>
+              </div>
+              {renderSVG(currentFloor)}
             </div>
           </div>
-        </section>
-        <MemoizedReservationModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          selectedArea={selectedArea}
-          areaInfo={selectedAreaInfo}
-          onclickbutton={handleClearSelection}
-          selectedEvent={selectedEvent}
-          selectedDate={selectedEvent ? new Date(selectedEvent.date) : selectedDate}
-          selectedTime={selectedEvent ? selectedEvent.time : selectedTime}
-        />
-      </div>
-    </Suspense>
+          {eventDetails && (
+            <div className="mb-8 p-6 border border-gray-800 rounded-lg bg-white/[5%] shadow-xl text-white">
+              <h3 className="text-2xl font-bold mb-4">Detalles del Evento</h3>
+              <p><strong>Título:</strong> {eventDetails.title}</p>
+              <p><strong>Fecha:</strong> {new Date(eventDetails.date).toLocaleDateString()}</p>
+              <p><strong>Hora:</strong> {eventDetails.time}</p>
+            </div>
+          )}
+          {/*<div className="container px-4 md:px-6 py-12 mt-12">
+            <h2 className="text-4xl font-bold mb-8 text-center text-white">Hacer una Reservación</h2>
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto grid gap-6 text-white">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Tu nombre"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="tu@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">Teléfono</label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="Tu número de teléfono"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="area" className="block text-sm font-medium text-gray-300 mb-1">Lugar</label>
+                <Input
+                  id="area"
+                  type="text"
+                  placeholder="Área seleccionada"
+                  value={selectedArea}
+                  readOnly
+                  className="bg-gray-800 border-gray-700 text-white placeholder-gray-500"
+                />
+              </div>
+              <div>
+                <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-300 mb-1">Solicitudes Especiales</label>
+                <Textarea
+                  id="specialRequests"
+                  placeholder="Alguna solicitud especial..."
+                  value={specialRequests}
+                  onChange={(e) => setSpecialRequests(e.target.value)}
+                  className="w-full bg-gray-800 border-gray-700 text-white placeholder-gray-500 rounded-md p-2 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-colors duration-300">
+                Enviar Reservación
+              </Button>
+            </form>
+          </div>*/}
+        </div>
+      </section>
+      <MemoizedReservationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedArea={selectedArea}
+        areaInfo={selectedAreaInfo}
+        onclickbutton={handleClearSelection}
+        selectedEvent={eventDetails}
+        selectedDate={eventDetails ? new Date(eventDetails.date) : new Date()}
+        selectedTime={eventDetails ? eventDetails.time : ''}
+      />
+    </div>
   )
 }
 
