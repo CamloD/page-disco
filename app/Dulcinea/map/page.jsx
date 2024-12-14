@@ -5,10 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { format } from 'date-fns'
-import SVG_Piso1 from "./components/SVG_Piso1"
-import SVG_Piso2 from "./components/SVG_Piso2"
-import { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
-import { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
+import SVG_Piso1, { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
+import SVG_Piso2, { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
 import { useReservation } from '../context/ReservationContext'
 import Link from 'next/link'
 

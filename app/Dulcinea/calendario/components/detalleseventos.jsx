@@ -14,8 +14,7 @@ export const DetallesEvento = ({ event, onClose }) => {
     if (event) {
       const eventDate = event.date.replace(/-/g, '')
       const eventCode = `evento${eventDate}${event.id.toString().padStart(4, '0')}`
-      const eventTitle = event.title.toLowerCase().replace(/\s+/g, '-')
-      router.push(`/Dulcinea/reservation/${eventCode}/${eventTitle}`)
+      router.push(`/Dulcinea/reservation?event=${eventCode}`)
     }
   }
 
@@ -100,4 +99,3 @@ export const DetallesEvento = ({ event, onClose }) => {
     </AnimatePresence>
   )
 }
-
