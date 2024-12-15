@@ -11,7 +11,7 @@ import { format } from 'date-fns'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { selectedArea, selectedDate, reservationType } = useReservation()
+  const { selectedArea, selectedDate, reservationType, eventDetails, attendees, guestCount, clearReservation } = useReservation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,19 +23,23 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     const storedData = localStorage.getItem('reservationFormData')
-    const reservationInfo = localStorage.getItem('reservationInfo')
     if (storedData) {
       const parsedData = JSON.parse(storedData)
-      setReservationDetails(parsedData)
-      setFormData({
+      setFormData(prevState => ({
+        ...prevState,
         name: parsedData.name,
         email: parsedData.email,
-      })
-    } else if (reservationInfo) {
-      const parsedInfo = JSON.parse(reservationInfo)
-      setReservationDetails(parsedInfo)
+      }))
     }
-  }, [])
+    setReservationDetails({
+      selectedArea,
+      selectedDate,
+      reservationType,
+      eventDetails,
+      attendees,
+      guestCount
+    })
+  }, [selectedArea, selectedDate, reservationType, eventDetails, attendees, guestCount])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -50,9 +54,9 @@ export default function CheckoutPage() {
     // Here you would typically process the payment
     console.log('Payment processed:', formData)
     console.log('Reservation details:', reservationDetails)
-    // Clear the localStorage after successful payment
+    // Clear the localStorage and context after successful payment
     localStorage.removeItem('reservationFormData')
-    localStorage.removeItem('reservationInfo')
+    clearReservation()
     // Redirect to a confirmation page
     router.push('/Dulcinea/confirmation')
   }
@@ -70,9 +74,13 @@ export default function CheckoutPage() {
               <p><strong>Fecha:</strong> {reservationDetails.selectedDate ? format(new Date(reservationDetails.selectedDate), 'dd/MM/yyyy') : 'No seleccionada'}</p>
               <p><strong>Área:</strong> {reservationDetails.selectedArea}</p>
               <p><strong>Tipo de reserva:</strong> {reservationDetails.reservationType === 'general' ? 'General' : 'Específica'}</p>
-              {reservationDetails.attendees && (
-                <p><strong>Número de asistentes:</strong> {reservationDetails.attendees}</p>
+              {reservationDetails.eventDetails && (
+                <>
+                  <p><strong>Evento:</strong> {reservationDetails.eventDetails.title}</p>
+                  <p><strong>Hora:</strong> {reservationDetails.eventDetails.time}</p>
+                </>
               )}
+              <p><strong>Número de asistentes:</strong> {reservationDetails.attendees || reservationDetails.guestCount}</p>
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -143,3 +151,4 @@ export default function CheckoutPage() {
     </div>
   )
 }
+

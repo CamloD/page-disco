@@ -47,7 +47,6 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
   )
 }
 
-
 const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutton, selectedEvent, selectedDate, selectedTime }) => {
   const [attendees, setAttendees] = useState('1')
   const [name, setName] = useState('')
@@ -55,7 +54,7 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
   const [phone, setPhone] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const { setAttendees: setContextAttendees, setSelectedArea: setContextSelectedArea } = useReservation()
+  const { updateReservation } = useReservation()
   const router = useRouter()
 
   useEffect(() => {
@@ -84,9 +83,14 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
     e.preventDefault()
     setIsSubmitted(true)
     if (attendees && name && email && phone) {
-      setContextAttendees(attendees)
-      setContextSelectedArea(selectedArea)
-      console.log('Reservación enviada:', { selectedArea, selectedEvent, selectedDate, selectedTime, attendees, name, email, phone, specialRequests })
+      updateReservation({
+        selectedArea,
+        attendees,
+        guestCount: parseInt(attendees),
+        selectedDate: selectedEvent ? new Date(selectedEvent.date) : selectedDate,
+        reservationType: selectedEvent ? 'specific' : 'general',
+        eventDetails: selectedEvent
+      })
       localStorage.setItem('reservationFormData', JSON.stringify({ name, email, phone, specialRequests }))
       onClose()
       router.push('/Dulcinea/checkout')
@@ -102,8 +106,8 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
-      <div className="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 my-8 text-white">
+    <div className="fixed inset-0 top-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
+      <div className="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 my-8 text-white mt-[240px]">
         <h2 className="text-3xl font-bold mb-6">{selectedArea}</h2>
         <div className="grid grid-cols-1 gap-6 mb-6">
           <div className='flex flex-col md:flex-row md:space-x-20'>
@@ -125,20 +129,23 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="attendees" className="block text-sm font-medium mb-1">Número de asistentes</Label>
-            <Select value={attendees} onValueChange={setAttendees}>
-              <SelectTrigger className="w-full bg-gray-700 text-white border-gray-600 focus:ring-blue-500 focus:border-blue-500">
-                <SelectValue placeholder="Selecciona el número de asistentes" />
-              </SelectTrigger>
-              <SelectContent className="bg-gray-700 text-white border-gray-600">
-                {[...Array(10)].map((_, i) => (
-                  <SelectItem key={i + 1} value={(i + 1).toString()}>
-                    {i + 1}
-                  </SelectItem>
-                ))}
-                <SelectItem value="10+">Más de 10</SelectItem>
-              </SelectContent>
-            </Select>
+          <Label htmlFor="attendees" className="block text-sm font-medium mb-1">Número de asistentes</Label>
+          <Select value={attendees} onValueChange={setAttendees}>
+            <SelectTrigger className="w-full bg-gray-700 text-white border-gray-600 focus:ring-blue-500 focus:border-blue-500">
+              <SelectValue placeholder="Selecciona el número de asistentes" />
+            </SelectTrigger>
+            <SelectContent 
+              className="bg-gray-700 text-white border-gray-600"
+              style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1000 }}
+            >
+              {[...Array(10)].map((_, i) => (
+                <SelectItem key={i + 1} value={(i + 1).toString()}>
+                  {i + 1}
+                </SelectItem>
+              ))}
+              <SelectItem value="10+">Más de 10</SelectItem>
+            </SelectContent>
+          </Select>
             {isSubmitted && !attendees && <p className="text-red-500 text-sm">Por favor, selecciona el número de asistentes.</p>}
           </div>
           <div>
@@ -228,13 +235,13 @@ export default function ReservationPage() {
     const checkDeviceType = () => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
         setDeviceType('mobile')
-        setViewMode('list')
+        //setViewMode('list')
       } else if (window.innerWidth <= TABLET_BREAKPOINT) {
         setDeviceType('tablet')
-        setViewMode('map')
+        //setViewMode('map')
       } else {
         setDeviceType('desktop')
-        setViewMode('map')
+        //setViewMode('map')
       }
     }
 
@@ -244,7 +251,7 @@ export default function ReservationPage() {
   }, [])
 
   useEffect(() => {
-    const loadReservationInfo = () => {
+    /*const loadReservationInfo = () => {
       const storedInfo = localStorage.getItem('reservationInfo')
       if (storedInfo) {
         const parsedInfo = JSON.parse(storedInfo)
@@ -259,9 +266,9 @@ export default function ReservationPage() {
       } else {
         setHasReservationInfo(false)
       }
-    }
+    }*/
 
-    loadReservationInfo()
+    //loadReservationInfo()
   }, [])
 
   useEffect(() => {

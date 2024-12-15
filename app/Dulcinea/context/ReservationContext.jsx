@@ -20,6 +20,10 @@ export const ReservationProvider = ({ children }) => {
   const [reservationType, setReservationType] = useState(null)
   const [attendees, setAttendees] = useState(null)
 
+  // Bandera para controlar cuando los datos se cargan inicialmente
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  // Cargar datos de localStorage solo cuando el componente se monta por primera vez
   useEffect(() => {
     const storedInfo = localStorage.getItem('reservationInfo')
     if (storedInfo) {
@@ -31,27 +35,45 @@ export const ReservationProvider = ({ children }) => {
       setReservationType(parsedInfo.reservationType)
       setAttendees(parsedInfo.attendees)
     }
-  }, [])
+    setIsLoaded(true) // Esto se asegura de que los efectos de guardado no se ejecuten hasta que los datos estén cargados.
+  }, []) // Este efecto se ejecuta solo una vez
 
+  // Guardar datos en localStorage solo cuando los datos se han cargado completamente
   useEffect(() => {
-    const reservationInfo = {
-      eventDetails,
-      selectedArea,
-      guestCount,
-      selectedDate,
-      reservationType,
-      attendees
+    if (isLoaded) { // Solo ejecuta este efecto cuando los datos se hayan cargado
+      const reservationInfo = {
+        eventDetails,
+        selectedArea,
+        guestCount,
+        selectedDate,
+        reservationType,
+        attendees
+      }
+      // Solo actualiza localStorage cuando los datos cambian, evitando actualizaciones infinitas
+      localStorage.setItem('reservationInfo', JSON.stringify(reservationInfo))
     }
-    localStorage.setItem('reservationInfo', JSON.stringify(reservationInfo))
-  }, [eventDetails, selectedArea, guestCount, selectedDate, reservationType, attendees])
+  }, [isLoaded, eventDetails, selectedArea, guestCount, selectedDate, reservationType, attendees])  // Dependencias bien controladas
 
   const updateReservation = (newData) => {
-    setEventDetails(newData.eventDetails || eventDetails)
-    setSelectedArea(newData.selectedArea || selectedArea)
-    setGuestCount(newData.guestCount || guestCount)
-    setSelectedDate(newData.selectedDate || selectedDate)
-    setReservationType(newData.reservationType || reservationType)
-    setAttendees(newData.attendees || attendees)
+    // Actualiza solo si hay un cambio en el estado
+    if (newData.eventDetails !== eventDetails) {
+      setEventDetails(newData.eventDetails)
+    }
+    if (newData.selectedArea !== selectedArea) {
+      setSelectedArea(newData.selectedArea)
+    }
+    if (newData.guestCount !== guestCount) {
+      setGuestCount(newData.guestCount)
+    }
+    if (newData.selectedDate !== selectedDate) {
+      setSelectedDate(newData.selectedDate)
+    }
+    if (newData.reservationType !== reservationType) {
+      setReservationType(newData.reservationType)
+    }
+    if (newData.attendees !== attendees) {
+      setAttendees(newData.attendees)
+    }
   }
 
   const clearReservation = () => {
@@ -87,4 +109,3 @@ export const ReservationProvider = ({ children }) => {
     </ReservationContext.Provider>
   )
 }
-
