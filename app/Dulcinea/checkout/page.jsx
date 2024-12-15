@@ -54,7 +54,7 @@ export default function CheckoutPage() {
     
     // Redirect to a confirmation page
     router.push('/Dulcinea/confirmation')
-    clearReservation()
+    //clearReservation()
   }
 
   if (loading) {
