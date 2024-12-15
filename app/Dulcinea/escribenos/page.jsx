@@ -79,7 +79,6 @@ export default function Contacto() {
                             <Textarea
                                 placeholder="Mensaje"
                                 className="w-full bg-[#2D3748] border-none text-white focus:ring-[#ff6b6b] focus:ring-2 px-4 py-2 rounded-md"
-                                required
                             />
                             <Button
                                 type="submit"
