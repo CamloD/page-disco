@@ -7,6 +7,8 @@ import MobileNav from './MobileNav';
 import Nav from './Nav';
 import {Imagen, Videos} from "app/components/mostrarmedios"
 import {useSeleccionContext } from 'app/components/images_gallery/hooks/useSeleccion'
+import { Button } from "@/components/ui/button"
+import { Calendar } from 'lucide-react'
 
 
 const Header = () => {
@@ -59,7 +61,7 @@ const Header = () => {
   }, [handleScroll]);
 
 
-  const initialColor = 'rgba(26, 26, 26, 0)';
+  const initialColor = 'rgba(26, 26, 26, 0.40)';
   const scrolledColor = 'rgba(29, 38, 56, 0.999)';
   const headerStyle = {
     transform: `translateY(${visible? openimage? '-100%' : '0' : '-100%'})`,
@@ -83,7 +85,7 @@ const Header = () => {
         style={headerStyle}
       >
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
-          <div className="flex items-center">
+          <div className="flex items-center mr-[25px]">
             <Link href="/Dulcinea" passHref>
               <div className="flex items-center justify-center space-x-2">
                 <Imagen
@@ -99,7 +101,20 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <Nav />
+          <div className="flex items-center space-x-4">
+            <Nav />
+          </div>
+          <div className="hidden md:block ml-[25px]">
+              <Link href="/Dulcinea/reserve">
+                <Button 
+                  size="sm" 
+                  className="bg-rose-600 hover:bg-rose-700 text-white rounded-[8px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-2"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Reservar</span>
+                </Button>
+              </Link>
+            </div>
         </div>
       </header>
       {/* Mobile nav */}
@@ -111,3 +126,4 @@ const Header = () => {
 };
 
 export default Header;
+

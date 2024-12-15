@@ -11,9 +11,10 @@ import { useEffect } from "react";
 const links = [
   { name: "Eventos", path: "/Dulcinea/calendario" }, 
   { name: "Galería", path: "/Dulcinea#gallery" },
-  { name: "Contactos", path: "/Dulcinea#contact" },
+  { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" },
+  { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },
+  { name: "Contactanos", path: "/Dulcinea/escribenos" },
   //{ name: "Reservación", path: "/Dulcinea/reservation" },
-  { name: "Preguntas Frecuentes", path: "/Dulcinea/preguntasfrecuentes" },
 ];
 
 const MobileNav = ({visible}) => {
@@ -112,8 +113,8 @@ const MobileNav = ({visible}) => {
                 className={`${
                   pathname === link.path || pathname.startsWith(link.path)
                     ? 'text-lg font-medium text-sky-300 border-b-2 border-sky-600'
-                    : 'text-xl capitalize hover:text-blue-400'
-                } capitalize transition-all`}
+                    : 'text-xl  hover:text-blue-400'
+                }  transition-all`}
                 aria-current={pathname === link.path || pathname.startsWith(link.path) ? "page" : undefined}
               >
                 {link.name}

@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { useReservation } from '../context/ReservationContext'
+import { format } from 'date-fns'
 
 export default function CheckoutPage() {
   const router = useRouter()
+  const { selectedArea, selectedDate, reservationType } = useReservation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +19,15 @@ export default function CheckoutPage() {
     expiryDate: '',
     cvv: ''
   })
+  const [reservationDetails, setReservationDetails] = useState(null)
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('reservationFormData')
+    if (storedData) {
+      const parsedData = JSON.parse(storedData)
+      setReservationDetails(parsedData)
+    }
+  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -29,17 +41,28 @@ export default function CheckoutPage() {
     e.preventDefault()
     // Here you would typically process the payment
     console.log('Payment processed:', formData)
+    console.log('Reservation details:', reservationDetails)
+    // Clear the localStorage after successful payment
+    localStorage.removeItem('reservationFormData')
     // Redirect to a confirmation page
     router.push('/Dulcinea/confirmation')
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center ">
+    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
       <Card className="w-full max-w-md bg-gray-800 border-gray-700 text-white">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center text-white">Checkout</CardTitle>
         </CardHeader>
         <CardContent>
+          {reservationDetails && (
+            <div className="mb-6 p-4 bg-gray-700 rounded-lg">
+              <h3 className="text-lg font-semibold mb-2">Detalles de la reserva:</h3>
+              <p><strong>Fecha:</strong> {format(new Date(reservationDetails.selectedDate), 'dd/MM/yyyy')}</p>
+              <p><strong>Área:</strong> {reservationDetails.selectedArea}</p>
+              <p><strong>Tipo de reserva:</strong> {reservationDetails.reservationType === 'general' ? 'General' : 'Específica'}</p>
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Label htmlFor="name">Nombre completo</Label>

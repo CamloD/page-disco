@@ -48,7 +48,7 @@ function VideoThumbnail({ src, alt }) {
   useEffect(() => {
     if (isHovered && videoRef.current && !hasError) {
       videoRef.current.play().catch(error => {
-        console.error('Error playing video:', error)
+        //console.error('Error playing video:', error)
         setHasError(true)
       });
     } else if (videoRef.current) {

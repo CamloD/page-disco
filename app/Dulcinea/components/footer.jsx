@@ -12,7 +12,7 @@ const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleSubscribe = useCallback((email) => {
-    console.log(`Subscribed with email: ${email}`)
+    //console.log(`Subscribed with email: ${email}`)
   }, [])
 
   return (

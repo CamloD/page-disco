@@ -4,8 +4,6 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { useState, useEffect, useRef } from 'react'
 import {ImageGrid} from "app/components/images_gallery/imagesgrid"
 import Preguntas from "app/Dulcinea/components/sections/preguntas"
@@ -13,6 +11,7 @@ import Preguntas from "app/Dulcinea/components/sections/preguntas"
 import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
 import {ProximosEventos} from "app/Dulcinea/components/sections/comingevents"
 import {Vestimenta_Code} from "./components/sections/vestimenta_code"
+import { Calendar } from 'lucide-react'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -54,6 +53,7 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
 const Page = () => {
   const [deviceType, setDeviceType] = useState('desktop');
   const homeRef = useRef(null);
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -80,6 +80,22 @@ const Page = () => {
     return () => window.removeEventListener('resize', checkDeviceType);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      //console.log( "scroll:  ", window.scrollY)
+      if (window.scrollY > 199) {
+        setShowFloatingButton(true);
+        //console.log("button on")
+      } else {
+        setShowFloatingButton(false);
+        //console.log("button off")
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -92,7 +108,7 @@ const Page = () => {
           <ImageBackgroung1/>
         </section>
 
-        <section className="min-h-[1200px]">
+        <section id="vestimentacode" className="min-h-[1200px]">
           <Vestimenta_Code/>
         </section>
 
@@ -160,113 +176,28 @@ const Page = () => {
           <Preguntas/>
         </section>
 
-        <section id="contact" className="py-16 bg-transparent min-h-[410px]">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-white">Contact Us</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="text-white">
-                <div className="flex items-center space-x-4 mb-6">
-                  <PhoneIcon className="w-6 h-6" />
-                  <span>+57 (123) 456-7890</span>
-                </div>
-                <div className="flex items-center space-x-4 mb-6">
-                  <MailIcon className="w-6 h-6" />
-                  <span>info@discoteca.com</span>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <LocateIcon className="w-6 h-6" />
-                  <span>1234, Anywhere Medellin, Colombia</span>
-                </div>
-              </div>
-              <div>
-                <form id="reservation" className="space-y-4">
-                  <Input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full bg-[#d4d4d4] border-none focus:ring-[#ff6b6b] focus:ring-2"
-                  />
-                  <Input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full bg-[#d4d4d4] border-none focus:ring-[#ff6b6b] focus:ring-2"
-                  />
-                  <Textarea
-                    placeholder="Message"
-                    className="w-full bg-[#d4d4d4] border-none focus:ring-[#ff6b6b] focus:ring-2"
-                  />
-                  <Button type="submit" className="w-full bg-teal-800 hover:bg-teal-900">
-                    Submit
-                  </Button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </main>
+      <div
+        className={`fixed bottom-6 right-4 z-50 transform transition-all duration-500 ease-in-out ${
+          showFloatingButton
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 translate-y-16 pointer-events-none"
+        }`}
+      >
+        <Link href="/Dulcinea/reserve">
+          <Button
+            size="lg"
+            className="bg-rose-600 hover:bg-rose-700 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-6 py-3"
+          >
+            <Calendar className="w-5 h-5" />
+            <span>Reservar</span>
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }
 
-function LocateIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="2" x2="5" y1="12" y2="12" />
-      <line x1="19" x2="22" y1="12" y2="12" />
-      <line x1="12" x2="12" y1="2" y2="5" />
-      <line x1="12" x2="12" y1="19" y2="22" />
-      <circle cx="12" cy="12" r="7" />
-    </svg>
-  )
-}
-
-function MailIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  )
-}
-
-function PhoneIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  )
-}
-
 export default Page
+
