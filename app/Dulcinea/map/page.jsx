@@ -69,6 +69,17 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
     }
   }, [isOpen])
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitted(true)
@@ -91,8 +102,8 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 text-white">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
+      <div className="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 my-8 text-white">
         <h2 className="text-3xl font-bold mb-6">{selectedArea}</h2>
         <div className="grid grid-cols-1 gap-6 mb-6">
           <div className='flex flex-col md:flex-row md:space-x-20'>

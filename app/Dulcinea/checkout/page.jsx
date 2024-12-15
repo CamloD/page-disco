@@ -23,9 +23,17 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     const storedData = localStorage.getItem('reservationFormData')
+    const reservationInfo = localStorage.getItem('reservationInfo')
     if (storedData) {
       const parsedData = JSON.parse(storedData)
       setReservationDetails(parsedData)
+      setFormData({
+        name: parsedData.name,
+        email: parsedData.email,
+      })
+    } else if (reservationInfo) {
+      const parsedInfo = JSON.parse(reservationInfo)
+      setReservationDetails(parsedInfo)
     }
   }, [])
 
@@ -44,6 +52,7 @@ export default function CheckoutPage() {
     console.log('Reservation details:', reservationDetails)
     // Clear the localStorage after successful payment
     localStorage.removeItem('reservationFormData')
+    localStorage.removeItem('reservationInfo')
     // Redirect to a confirmation page
     router.push('/Dulcinea/confirmation')
   }
@@ -58,9 +67,12 @@ export default function CheckoutPage() {
           {reservationDetails && (
             <div className="mb-6 p-4 bg-gray-700 rounded-lg">
               <h3 className="text-lg font-semibold mb-2">Detalles de la reserva:</h3>
-              <p><strong>Fecha:</strong> {format(new Date(reservationDetails.selectedDate), 'dd/MM/yyyy')}</p>
+              <p><strong>Fecha:</strong> {reservationDetails.selectedDate ? format(new Date(reservationDetails.selectedDate), 'dd/MM/yyyy') : 'No seleccionada'}</p>
               <p><strong>Área:</strong> {reservationDetails.selectedArea}</p>
               <p><strong>Tipo de reserva:</strong> {reservationDetails.reservationType === 'general' ? 'General' : 'Específica'}</p>
+              {reservationDetails.attendees && (
+                <p><strong>Número de asistentes:</strong> {reservationDetails.attendees}</p>
+              )}
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -131,4 +143,3 @@ export default function CheckoutPage() {
     </div>
   )
 }
-

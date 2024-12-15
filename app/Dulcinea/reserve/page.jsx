@@ -22,10 +22,6 @@ export default function Reserve() {
   const [reservationType, setReservationType] = useState('general')
   const [selectedDate, setSelectedDate] = useState(null)
   const [areas, setAreas] = useState([])
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [specialRequests, setSpecialRequests] = useState('')
   const router = useRouter()
 
   const {
@@ -34,7 +30,8 @@ export default function Reserve() {
     setEventDetails,
     setSelectedDate: setContextSelectedDate,
     setReservationType: setContextReservationType,
-    setAttendees,
+    clearReservation,
+    updateReservation
   } = useReservation()
 
   useEffect(() => {

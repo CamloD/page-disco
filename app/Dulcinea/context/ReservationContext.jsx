@@ -45,6 +45,15 @@ export const ReservationProvider = ({ children }) => {
     localStorage.setItem('reservationInfo', JSON.stringify(reservationInfo))
   }, [eventDetails, selectedArea, guestCount, selectedDate, reservationType, attendees])
 
+  const updateReservation = (newData) => {
+    setEventDetails(newData.eventDetails || eventDetails)
+    setSelectedArea(newData.selectedArea || selectedArea)
+    setGuestCount(newData.guestCount || guestCount)
+    setSelectedDate(newData.selectedDate || selectedDate)
+    setReservationType(newData.reservationType || reservationType)
+    setAttendees(newData.attendees || attendees)
+  }
+
   const clearReservation = () => {
     setEventDetails(null)
     setSelectedArea('')
@@ -70,6 +79,7 @@ export const ReservationProvider = ({ children }) => {
         setSelectedDate,
         setReservationType,
         setAttendees,
+        updateReservation,
         clearReservation,
       }}
     >
@@ -77,3 +87,4 @@ export const ReservationProvider = ({ children }) => {
     </ReservationContext.Provider>
   )
 }
+
