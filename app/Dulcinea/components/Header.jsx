@@ -8,7 +8,7 @@ import Nav from './Nav';
 import {Imagen, Videos} from "app/components/mostrarmedios"
 import {useSeleccionContext } from 'app/components/images_gallery/hooks/useSeleccion'
 import { Button } from "@/components/ui/button"
-import { Calendar } from 'lucide-react'
+import { AlignJustify, Calendar } from 'lucide-react'
 
 
 const Header = () => {
@@ -19,6 +19,8 @@ const Header = () => {
   const [scrollAccumulator, setScrollAccumulator] = useState(0);
   const headerRef = useRef(null)
   const lastScrollY = useRef(0)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClosed, setIClosed] = useState(null);
 
   const { selectedIndex } = useSeleccionContext();
   const openimage = selectedIndex >= 0
@@ -75,6 +77,12 @@ const Header = () => {
   };
 
   const esvisible = visible? openimage? false : true : false
+
+  const toggleSidebar = () => {
+    setIsOpen(prevState => !prevState);
+  };
+  const buttonVisible = isOpen
+  const buttonClosed = 0
   
 
   return (
@@ -105,21 +113,49 @@ const Header = () => {
             <Nav />
           </div>
           <div className="hidden md:block ml-[25px]">
+            <Link href="/Dulcinea/reserve">
+              <Button 
+                size="sm" 
+                className="bg-rose-600 hover:bg-rose-700 text-white rounded-[8px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-2"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Reservar</span>
+                </Button>
+            </Link>
+          </div>
+
+          
+
+          <div className='flex flex-row p-1 absolute right-6 space-x-3 items-center'>
+            <div className=" md:hidden ml-[25px]">
               <Link href="/Dulcinea/reserve">
                 <Button 
                   size="sm" 
                   className="bg-rose-600 hover:bg-rose-700 text-white rounded-[8px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-2"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Reservar</span>
-                </Button>
+                  <Calendar className="w-5 h-5" />
+                  <span className='text-[13px]'>Reservar</span>
+                  </Button>
               </Link>
             </div>
+            <div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden p-2 w-11 h-11 "
+              onClick={toggleSidebar}
+            >
+              <AlignJustify className="w-7 h-7 text-white" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </div>
+          </div>
+          
         </div>
       </header>
       {/* Mobile nav */}
       <div className="md:hidden">
-        <MobileNav visible = {esvisible}/>
+        <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </>
   );
