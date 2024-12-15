@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { scale, LayoutBlock, LayoutBlock2, LayoutBlockrotated } from './LayoutUtils';
 import Tooltip from './tooltip';
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export const getAreaInfo_SVG2 = (area) => {
   const areaInfo = {
@@ -23,19 +25,20 @@ export const getAreaInfo_SVG2 = (area) => {
   };
 
   return areaInfo[area] || { precio: 'Consultar', capacidad: 'Varía', extras: 'Información no disponible' };
-
 }
 
-const SVG_Piso2 = ({ className = 'text-white', onClick, resetSelection, selectedBlock }) => {
+const SVG_Piso2 = ({ className = 'text-white', onClick, resetSelection, selectedBlock, ViewMode, floorNumber }) => {
   const [selected, setSelected] = useState(null);
   const [hoveredArea, setHoveredArea] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
   const svgRef = useRef(null);
+  const viewMode = ViewMode || 'map'
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -48,7 +51,7 @@ const SVG_Piso2 = ({ className = 'text-white', onClick, resetSelection, selected
   };
 
   const handleMouseEnter = (area, event) => {
-    if (!isMobile) {
+    if (!isMobile && viewMode === 'map') {
       setHoveredArea(area);
       const svg = event.target.closest('svg');
       const rect = event.target.getBoundingClientRect();
@@ -90,6 +93,7 @@ const SVG_Piso2 = ({ className = 'text-white', onClick, resetSelection, selected
       </div>
     );
   };
+
 
   const palcoAereoData = [
     { id: 'Palco Aereo 1', x: 111.281, y: 544.091, width: 62.835, height: 63.09, 
@@ -283,83 +287,120 @@ const SVG_Piso2 = ({ className = 'text-white', onClick, resetSelection, selected
       },
   ];
 
+  const renderListView = () => {
+    const allAreas = [...palcoAereoData, ...Elements];
+    return (
+      <div className="bg-gray-900 rounded-lg shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">Segundo Piso</h2>
+        <ScrollArea className={`${isMobile ? "h-[calc(870px-200px)]" : 'h-[calc(960px-300px)]'} w-full rounded-md border border-gray-700 p-4`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {allAreas.map((area) => {
+              const areaInfo = getAreaInfo_SVG2(area.id);
+              return (
+                <div
+                  key={area.id}
+                  className="bg-gray-800 p-4 rounded-lg shadow-md transition-colors duration-200 cursor-pointer hover:bg-gray-700"
+                  onClick={() => handleBlockClick(area.id)}
+                >
+                  <h3 className="text-lg font-semibold mb-2 text-white">{area.id}</h3>
+                  <p className="text-sm text-gray-300">Capacidad: {areaInfo.capacidad}</p>
+                  <p className="text-sm text-gray-300">Precio: {areaInfo.precio}</p>
+                  <p className="text-xs text-gray-400 mt-2">{areaInfo.extras}</p>
+                </div>
+              );
+            })}
+          </div>
+        </ScrollArea>
+      </div>
+    );
+  };
+
   return (
     <div className="relative">
-      <svg
-        ref={svgRef}
-        xmlns="http://www.w3.org/2000/svg"
-        xmlSpace="preserve"
-        width={793.701 * scale}
-        height={1122.518 * scale}
-        viewBox="0 0 595.276 841.89"
-        className={className}
-      >
-        <g>
-          {palcoAereoData.map((palco) => (
-            <LayoutBlock
-              key={palco.id}
-              {...palco}
-              selected={selected}
-              onClick={handleBlockClick}
-              onMouseEnter={(e) => handleMouseEnter(palco.id, e)}
-              onMouseLeave={handleMouseLeave}
-            />
-          ))}
-          {Elements.map((element) => (
-            <LayoutBlock2
-              key={element.id}
-              {...element}
-              selected={selected}
-              onClick={handleBlockClick}
-            />
-          ))}
-          
-          <g id="shape2-1" transform="translate(198.27 -748.265)" style={{ cursor: 'default', userSelect: 'none' }}>
-            <title>{"Segundo Piso"}</title>
-            <path d="M0 785.394h211.117v56.496H0z" className="fill-none stroke-none stroke-[0.75]" />
-            <text
-              x={18.16}
-              y={827.44}
-              className="fill-current font-[Calistoga] text-[46px] "
-            >
-              {"2do piso"}
-            </text>
-          </g>
-          <g id="shape8-15" transform="rotate(180 54.989 529.405)"style={{ cursor: 'default', userSelect: 'none' }}>
-            <title>{"Entrada 1"}</title>
-            <path d="M0 793.264h13.169v48.626H0z" className="fill-none stroke-none stroke-[0.75]" />
-            <text
-              x={7.62}
-              y={797.94}
-              className="fill-current font-[Calistoga] text-[9px]"
-              writingMode="tb-rl"
-            >
-              {"Entrada 1"}
-            </text>
-          </g>
-          <g id="shape9-18" transform="translate(496.214 -569.98)" style={{ cursor: 'default', userSelect: 'none' }}>
-            <title>{"Entrada 2"}</title>
-            <path d="M0 774.743h13.169v67.147H0z" className="fill-none stroke-none stroke-[0.75]" />
-            <text
-              x={7.74}
-              y={785.98}
-              className="fill-current font-[Calistoga] text-[10px]"
-              writingMode="tb-rl"
-            >
-              {"Entrada 2"}
-            </text>
-          </g>
-        </g>
-      </svg>
-      <Tooltip
-        content={hoveredArea ? getTooltipContent(hoveredArea) : null}
-        visible={!!hoveredArea}
-        x={tooltipPosition.x}
-        y={tooltipPosition.y}
-        svgRef={svgRef}
-      />
+      {viewMode === 'map' ? (
+        <div>
+          <svg
+            ref={svgRef}
+            xmlns="http://www.w3.org/2000/svg"
+            xmlSpace="preserve"
+            width={793.701 * scale}
+            height={1122.518 * scale}
+            viewBox="0 0 595.276 841.89"
+            className={className}
+          >
+            <g>
+              {palcoAereoData.map((palco) => (
+                <LayoutBlock
+                  key={palco.id}
+                  {...palco}
+                  selected={selected}
+                  onClick={handleBlockClick}
+                  onMouseEnter={(e) => handleMouseEnter(palco.id, e)}
+                  onMouseLeave={handleMouseLeave}
+                />
+              ))}
+              {Elements.map((element) => (
+                <LayoutBlock2
+                  key={element.id}
+                  {...element}
+                  selected={selected}
+                  onClick={handleBlockClick}
+                />
+              ))}
+              
+              <g id="shape2-1" transform="translate(198.27 -748.265)" style={{ cursor: 'default', userSelect: 'none' }}>
+                <title>{"Segundo Piso"}</title>
+                <path d="M0 785.394h211.117v56.496H0z" className="fill-none stroke-none stroke-[0.75]" />
+                <text
+                  x={18.16}
+                  y={827.44}
+                  className="fill-current font-[Calistoga] text-[46px] "
+                >
+                  {"2do piso"}
+                </text>
+              </g>
+              <g id="shape8-15" transform="rotate(180 54.989 529.405)"style={{ cursor: 'default', userSelect: 'none' }}>
+                <title>{"Entrada 1"}</title>
+                <path d="M0 793.264h13.169v48.626H0z" className="fill-none stroke-none stroke-[0.75]" />
+                <text
+                  x={7.62}
+                  y={797.94}
+                  className="fill-current font-[Calistoga] text-[9px]"
+                  writingMode="tb-rl"
+                >
+                  {"Entrada 1"}
+                </text>
+              </g>
+              <g id="shape9-18" transform="translate(496.214 -569.98)" style={{ cursor: 'default', userSelect: 'none' }}>
+                <title>{"Entrada 2"}</title>
+                <path d="M0 774.743h13.169v67.147H0z" className="fill-none stroke-none stroke-[0.75]" />
+                <text
+                  x={7.74}
+                  y={785.98}
+                  className="fill-current font-[Calistoga] text-[10px]"
+                  writingMode="tb-rl"
+                >
+                  {"Entrada 2"}
+                </text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      ) : (
+        renderListView()
+      )}
+      {viewMode === 'map' && (
+        <Tooltip
+          content={hoveredArea ? getTooltipContent(hoveredArea) : null}
+          visible={!!hoveredArea}
+          x={tooltipPosition.x}
+          y={tooltipPosition.y}
+          svgRef={svgRef}
+        />
+      )}
     </div>
   );
 };
 
 export default SVG_Piso2;
+

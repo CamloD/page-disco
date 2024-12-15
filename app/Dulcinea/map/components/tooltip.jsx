@@ -6,14 +6,17 @@ const Tooltip = ({ content, visible, x, y, svgRef }) => {
   useEffect(() => {
     if (visible && svgRef.current) {
       const updatePosition = () => {
-        const svgRect = svgRef.current.getBoundingClientRect();
-        setPosition({
-          x: svgRect.left + x,
-          y: svgRect.top + y
-        });
+        // Asegúrate de que svgRef.current no sea null
+        if (svgRef.current) {
+          const svgRect = svgRef.current.getBoundingClientRect();
+          setPosition({
+            x: svgRect.left + x,
+            y: svgRect.top + y,
+          });
+        }
       };
 
-      updatePosition();
+      updatePosition(); // Actualiza la posición del tooltip
       window.addEventListener('scroll', updatePosition);
       window.addEventListener('resize', updatePosition);
 
@@ -24,7 +27,7 @@ const Tooltip = ({ content, visible, x, y, svgRef }) => {
     }
   }, [visible, x, y, svgRef]);
 
-  if (!visible) return null;
+  if (!visible) return null; // Si el tooltip no debe ser visible, no lo renderiza
 
   return (
     <div
@@ -43,4 +46,3 @@ const Tooltip = ({ content, visible, x, y, svgRef }) => {
 };
 
 export default Tooltip;
-

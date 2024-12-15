@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
@@ -8,11 +9,10 @@ import { format } from 'date-fns'
 import SVG_Piso1, { getAreaInfo_SVG1 } from "./components/SVG_Piso1"
 import SVG_Piso2, { getAreaInfo_SVG2 } from "./components/SVG_Piso2"
 import { useReservation } from '../context/ReservationContext'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Label } from "@/components/ui/label"
+import { Loader2 } from 'lucide-react'
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -54,7 +54,7 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
   const [phone, setPhone] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const { updateReservation } = useReservation()
+  const { updateReservation, reservationType } = useReservation()
   const router = useRouter()
 
   useEffect(() => {
@@ -88,10 +88,9 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
         attendees,
         guestCount: parseInt(attendees),
         selectedDate: selectedEvent ? new Date(selectedEvent.date) : selectedDate,
-        reservationType: selectedEvent ? 'specific' : 'general',
+        reservationType: selectedEvent ? 'event' : (reservationType || 'specific'),
         eventDetails: selectedEvent
       })
-      localStorage.setItem('reservationFormData', JSON.stringify({ name, email, phone, specialRequests }))
       onClose()
       router.push('/Dulcinea/checkout')
     }
@@ -103,10 +102,16 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
     onclickbutton()
   }
 
+  const handleOutsideClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleCancel()
+    }
+  }
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 top-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
+    <div className="fixed inset-0 top-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto" onClick={handleOutsideClick}>
       <div className="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 my-8 text-white mt-[240px]">
         <h2 className="text-3xl font-bold mb-6">{selectedArea}</h2>
         <div className="grid grid-cols-1 gap-6 mb-6">
@@ -116,12 +121,14 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
           </div>
           {selectedEvent ? (
             <div>
+              <p className="text-lg"><strong>Tipo de Reserva:</strong> Evento</p>
               <p className="text-lg"><strong>Evento:</strong> {selectedEvent.title}</p>
               <p className="text-lg"><strong>Fecha:</strong> {format(new Date(selectedEvent.date), 'dd/MM/yyyy')}</p>
               <p className="text-lg"><strong>Hora:</strong> {selectedEvent.time}</p>
             </div>
           ) : (
             <div>
+              <p className="text-lg"><strong>Tipo de Reserva:</strong> {reservationType === 'general' ? 'General' : 'Específica'}</p>
               <p className="text-lg"><strong>Fecha:</strong> {format(selectedDate, 'dd/MM/yyyy')}</p>
               <p className="text-lg"><strong>Hora:</strong> {selectedTime}</p>
             </div>
@@ -129,23 +136,23 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-          <Label htmlFor="attendees" className="block text-sm font-medium mb-1">Número de asistentes</Label>
-          <Select value={attendees} onValueChange={setAttendees}>
-            <SelectTrigger className="w-full bg-gray-700 text-white border-gray-600 focus:ring-blue-500 focus:border-blue-500">
-              <SelectValue placeholder="Selecciona el número de asistentes" />
-            </SelectTrigger>
-            <SelectContent 
-              className="bg-gray-700 text-white border-gray-600"
-              style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1000 }}
-            >
-              {[...Array(10)].map((_, i) => (
-                <SelectItem key={i + 1} value={(i + 1).toString()}>
-                  {i + 1}
-                </SelectItem>
-              ))}
-              <SelectItem value="10+">Más de 10</SelectItem>
-            </SelectContent>
-          </Select>
+            <Label htmlFor="attendees" className="block text-sm font-medium mb-1">Número de asistentes</Label>
+            <Select value={attendees} onValueChange={setAttendees}>
+              <SelectTrigger className="w-full bg-gray-700 text-white border-gray-600 focus:ring-blue-500 focus:border-blue-500">
+                <SelectValue placeholder="Selecciona el número de asistentes" />
+              </SelectTrigger>
+              <SelectContent 
+                className="bg-gray-700 text-white border-gray-600"
+                style={{ position: 'absolute', top: '100%', left: 0, zIndex: 1000 }}
+              >
+                {[...Array(10)].map((_, i) => (
+                  <SelectItem key={i + 1} value={(i + 1).toString()}>
+                    {i + 1}
+                  </SelectItem>
+                ))}
+                <SelectItem value="10+">Más de 10</SelectItem>
+              </SelectContent>
+            </Select>
             {isSubmitted && !attendees && <p className="text-red-500 text-sm">Por favor, selecciona el número de asistentes.</p>}
           </div>
           <div>
@@ -212,10 +219,9 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
 
 const MemoizedReservationModal = React.memo(ReservationModal);
 
-export default function ReservationPage() {
+export default function ReservationMap() {
   const [selectedArea, setSelectedArea] = useState('')
   const [currentFloor, setCurrentFloor] = useState(1)
-  const [localGuestCount, setLocalGuestCount] = useState(0)
   const selectedPositionsRef = useRef({
     1: { x: 0, y: 0, area: "", color: "" },
     2: { x: 0, y: 0, area: "", color: "" },
@@ -225,8 +231,8 @@ export default function ReservationPage() {
   const [selectedAreaInfo, setSelectedAreaInfo] = useState({})
   const [viewMode, setViewMode] = useState('map')
   const [resetSelection, setResetSelection] = useState(false)
-  const [hasReservationInfo, setHasReservationInfo] = useState(false)
-  const { eventDetails, selectedArea: contextSelectedArea, guestCount, selectedDate, reservationType, setAttendees, setSelectedArea1 } = useReservation()
+  const [loading, setLoading] = useState(true)
+  const { eventDetails, selectedArea: contextSelectedArea, guestCount, selectedDate, reservationType } = useReservation()
 
   const mapRef = useRef(null)
   const router = useRouter()
@@ -235,58 +241,31 @@ export default function ReservationPage() {
     const checkDeviceType = () => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
         setDeviceType('mobile')
-        //setViewMode('list')
       } else if (window.innerWidth <= TABLET_BREAKPOINT) {
         setDeviceType('tablet')
-        //setViewMode('map')
       } else {
         setDeviceType('desktop')
-        //setViewMode('map')
       }
     }
 
     checkDeviceType()
     window.addEventListener('resize', checkDeviceType)
-    return () => window.removeEventListener('resize', checkDeviceType)
-  }, [])
 
-  useEffect(() => {
-    /*const loadReservationInfo = () => {
-      const storedInfo = localStorage.getItem('reservationInfo')
-      if (storedInfo) {
-        const parsedInfo = JSON.parse(storedInfo)
-        setHasReservationInfo(true)
-        // Update context with stored info
-        // This assumes you have these setters in your context
-        //setEventDetails(parsedInfo.eventDetails)
-        //setSelectedArea(parsedInfo.selectedArea)
-        //setGuestCount(parsedInfo.guestCount)
-        //setSelectedDate(new Date(parsedInfo.selectedDate))
-        //setReservationType(parsedInfo.reservationType)
-      } else {
-        setHasReservationInfo(false)
-      }
-    }*/
+    // Reset reservation information
+    setSelectedArea('')
+    setSelectedAreaInfo({})
+    setIsModalOpen(false)
+    handleClearSelection()
 
-    //loadReservationInfo()
-  }, [])
-
-  useEffect(() => {
+    // Check if reservation info exists
     if (eventDetails || selectedDate) {
-      setHasReservationInfo(true)
-      // Save reservation info to localStorage
-      const reservationInfo = {
-        eventDetails,
-        selectedArea: contextSelectedArea,
-        guestCount,
-        selectedDate,
-        reservationType
-      }
-      localStorage.setItem('reservationInfo', JSON.stringify(reservationInfo))
+      setLoading(false)
     } else {
-      setHasReservationInfo(false)
+      setLoading(false)
     }
-  }, [eventDetails, selectedDate, contextSelectedArea, guestCount, reservationType])
+
+    return () => window.removeEventListener('resize', checkDeviceType)
+  }, [eventDetails, selectedDate, reservationType])
 
   const handleFloorChange = (floor) => {
     setCurrentFloor(floor)
@@ -318,7 +297,7 @@ export default function ReservationPage() {
       }
       setIsModalOpen(true)
     }
-  }, [currentFloor])
+  }, [currentFloor, reservationType])
 
   const handleClearSelection = () => {
     setResetSelection(true)
@@ -376,12 +355,19 @@ export default function ReservationPage() {
   }
 
   const handleContinue = () => {
-    // Add logic to proceed to the next step (e.g., checkout)
     router.push('/Dulcinea/checkout')
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin" />
+        <p className="mt-4">Cargando información de reserva...</p>
+      </div>
+    )
+  }
 
-  if (!hasReservationInfo) {
+  if (!eventDetails && !selectedDate) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold mb-4">No hay información de reserva</h1>
@@ -409,6 +395,7 @@ export default function ReservationPage() {
               <h3 className="text-2xl font-bold mb-4">Detalles de la Reserva</h3>
               {eventDetails ? (
                 <>
+                  <p><strong>Tipo:</strong> Evento</p>
                   <p><strong>Evento:</strong> {eventDetails.title}</p>
                   <p><strong>Fecha:</strong> {format(new Date(eventDetails.date), 'dd/MM/yyyy')}</p>
                   <p><strong>Hora:</strong> {eventDetails.time}</p>
@@ -418,6 +405,7 @@ export default function ReservationPage() {
                   <p><strong>Tipo de Reserva:</strong> {reservationType === 'general' ? 'General' : 'Específica'}</p>
                   <p><strong>Fecha:</strong> {format(selectedDate, 'dd/MM/yyyy')}</p>
                   {reservationType === 'general' && <p><strong>Área:</strong> {contextSelectedArea}</p>}
+                  {reservationType === 'specific' && selectedArea && <p><strong>Área:</strong> {selectedArea}</p>}
                 </>
               )}
             </div>

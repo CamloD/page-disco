@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
 import { scale, LayoutBlock, LayoutBlock2 } from './LayoutUtils';
 import Tooltip from './tooltip';
-import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-export const getAreaInfo_SVG1 = (area, isMobile) => {
+export const getAreaInfo_SVG1 = (area) => {
   const areaInfo = {
     'Palco 1': { precio: '$500', capacidad: '10 personas', extras: 'Vista premium' },
     'Palco 2': { precio: '$450', capacidad: '8 personas', extras: 'Servicio de mesero dedicado' },
@@ -39,8 +37,7 @@ export const getAreaInfo_SVG1 = (area, isMobile) => {
   return areaInfo[area] || { precio: 'Consultar', capacidad: 'Varía', extras: 'Información no disponible' };
 };
 
-const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selectedBlock, ViewMode }) => {
-
+const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selectedBlock, ViewMode, floorNumber }) => {
   const [selected, setSelected] = useState(null);
   const [hoveredArea, setHoveredArea] = useState(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
@@ -52,7 +49,6 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
     const checkMobile = () => {
       const isMobileView = window.innerWidth < 768;
       setIsMobile(isMobileView);
-      
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -93,12 +89,6 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
     }
   };
 
-  useEffect(() => {
-    if (resetSelection) {
-      setSelected(null);
-    }
-  }, [resetSelection]);
-
   const getTooltipContent = (area) => {
     const info = getAreaInfo_SVG1(area);
     return (
@@ -114,7 +104,6 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
     );
   };
   
-
   const palcoData = [
     { id: 'Palco 1', x: 26.944, y: 581.987, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "1" } } },
     { id: 'Palco 2', x: 26.944, y: 521.121, width: 58.099, height: 61.157, pathD: "780.732h58.099v61.157H0z", textConfig: { x: 30, y: 805.91, content: "Palco ", tspan: { x: 28.73, className: "text-[12px]", dy: "1.2em", content: "2" } } },
@@ -200,29 +189,31 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
       },
   ];
 
-
-  const toggleViewMode = () => {
-    setViewMode(viewMode === 'map' ? 'list' : 'map');
-  };
-
   const renderListView = () => {
     const allAreas = [...palcoData, ...vipData];
     return (
-      <ScrollArea className={`${isMobile? "h-[calc(870px-200px)]":'h-[calc(960px-300px)]'}  w-full rounded-md border p-4`}>
-        <div className="grid grid-cols-1 gap-4">
-          {allAreas.map((area) => (
-            <div
-              key={area.id}
-              className="bg-gray-800 p-4 rounded-lg shadow-md transition-colors duration-200 cursor-pointer"
-              onClick={() => handleBlockClick(area.id)}
-            >
-              <h3 className="text-lg font-semibold mb-2">{area.id}</h3>
-              <p className="text-sm text-gray-300">Capacidad: {getAreaInfo_SVG1(area.id).capacidad}</p>
-              <p className="text-sm text-gray-300">Precio: {getAreaInfo_SVG1(area.id).precio}</p>
-            </div>
-          ))}
-        </div>
-      </ScrollArea>
+      <div className="bg-gray-900 rounded-lg shadow-lg p-6">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">Primer Piso</h2>
+        <ScrollArea className={`${isMobile ? "h-[calc(870px-200px)]" : 'h-[calc(960px-300px)]'} w-full rounded-md border border-gray-700 p-4`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {allAreas.map((area) => {
+              const areaInfo = getAreaInfo_SVG1(area.id);
+              return (
+                <div
+                  key={area.id}
+                  className="bg-gray-800 p-4 rounded-lg shadow-md transition-colors duration-200 cursor-pointer hover:bg-gray-700"
+                  onClick={() => handleBlockClick(area.id)}
+                >
+                  <h3 className="text-lg font-semibold mb-2 text-white">{area.id}</h3>
+                  <p className="text-sm text-gray-300">Capacidad: {areaInfo.capacidad}</p>
+                  <p className="text-sm text-gray-300">Precio: {areaInfo.precio}</p>
+                  <p className="text-xs text-gray-400 mt-2">{areaInfo.extras}</p>
+                </div>
+              );
+            })}
+          </div>
+        </ScrollArea>
+      </div>
     );
   };
 
@@ -307,3 +298,4 @@ const SVG_Piso1 = ({ className = 'text-white', onClick, resetSelection, selected
 };
 
 export default SVG_Piso1;
+

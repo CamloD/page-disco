@@ -24,6 +24,11 @@ export default function Reserve() {
   const [areas, setAreas] = useState([])
   const router = useRouter()
 
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [specialRequests, setSpecialRequests] = useState('')
+
   const {
     selectedArea,
     setSelectedArea,
@@ -49,7 +54,7 @@ export default function Reserve() {
       setContextReservationType(reservationType)
       if (reservationType === 'general') {
         // Save form data to context or local storage here
-        localStorage.setItem('reservationFormData', JSON.stringify({ name, email, phone, specialRequests, selectedArea, selectedDate }))
+        //localStorage.setItem('reservationFormData', JSON.stringify({ name, email, phone, specialRequests, selectedArea, selectedDate }))
         router.push('/Dulcinea/checkout')
       } else {
         router.push('/Dulcinea/map')
@@ -72,7 +77,7 @@ export default function Reserve() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8 bg-gray-800 p-8 rounded-xl shadow-2xl">
+      <div className="w-full mt-16 max-w-md space-y-8 bg-gray-800 p-8 rounded-xl shadow-2xl">
         <div>
           <h2 className="text-3xl font-extrabold text-center mb-6 text-blue-400">Reserva tu experiencia</h2>
           <div className="flex justify-center space-x-2">
@@ -245,3 +250,4 @@ export default function Reserve() {
     </div>
   )
 }
+
