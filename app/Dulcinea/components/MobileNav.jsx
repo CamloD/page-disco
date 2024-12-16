@@ -49,13 +49,13 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
 
   const handleLinkClick = (e, path) => {
     const targetId = path.split("#")[1]; 
-      if (targetId && pathname !== "/Dulcinea") {
+    if (targetId && pathname !== "/Dulcinea") {
         e.preventDefault(); 
         // Usar router.push en lugar de window.location.href
-        Router.push("/Dulcinea#"+targetId); 
-      } else if (pathname === "/Dulcinea" && targetId) {
+        router.push("/Dulcinea#"+targetId); 
+    } else if (pathname === "/Dulcinea" && targetId) {
         handleAnchorClick(e, targetId);
-      }
+    }
     setIsOpen(false); // Close the mobile menu after clicking
   };
 

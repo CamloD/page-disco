@@ -161,13 +161,6 @@ const Page = () => {
         }`}
       >
         <div className="flex space-x-2">
-        <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white rounded-[19px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-3"
-            onClick={scrollToTop}
-          >
-            <ChevronUp  className='h-6 w-6'/>
-          </Button>
           <Link href="/Dulcinea/reserve">
             <Button
               size="lg"
@@ -177,6 +170,13 @@ const Page = () => {
               <span>Reservar</span>
             </Button>
           </Link>
+          <Button
+            size="lg"
+            className="bg-blue-600 hover:bg-blue-700 text-white rounded-[19px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-3"
+            onClick={scrollToTop}
+          >
+            <ChevronUp  className='h-6 w-6'/>
+          </Button>
         </div>
       </div>
     </div>

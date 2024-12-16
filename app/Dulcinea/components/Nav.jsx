@@ -25,22 +25,23 @@ const scrollToElement = (id) => {
   }
 };
 
-const handleAnchorClick = (e, targetId) => {
-    if (targetId) {
-        e.preventDefault();
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: "smooth",
-                block: "start", 
-            });
-        }
-    }
-};
 
 const Naveg = () => {
     const pathname = usePathname(); 
     const router = useRouter();
+
+    const handleAnchorClick = (e, targetId) => {
+        if (targetId) {
+            e.preventDefault();
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start", 
+                });
+            }
+        }
+    };
 
     const handleLinkClick = (e, path) => {
         const targetId = path.split("#")[1]; 
@@ -57,6 +58,9 @@ const Naveg = () => {
         if (pathname === "/Dulcinea" && window.location.hash) {
             const targetId = window.location.hash.substring(1);
             const targetElement = document.getElementById(targetId);
+            setTimeout(() => {
+                scrollToElement(targetId);
+            }, 0);
             if (targetElement) {
                 targetElement.scrollIntoView({
                     behavior: "smooth",
@@ -70,7 +74,6 @@ const Naveg = () => {
         <nav className="hidden md:flex items-center space-x-6">
             {links.map((link, index) => {
                 const isActive = pathname === link.path || pathname.startsWith(link.path);
-
                 return (
                     <Link
                         href={link.path}
