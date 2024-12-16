@@ -8,11 +8,11 @@ import { Imagen, Videos } from "app/components/mostrarmedios";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "Eventos", path: "/Dulcinea/eventos" }, 
-  { name: "Galería", path: "/Dulcinea#gallery" },
-  { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" },
-  { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },
-  { name: "Contactanos", path: "/Dulcinea/escribenos" },
+  { name: "Eventos", path: "Dulcinea/eventos" }, 
+  { name: "Galería", path: "Dulcinea#gallery" },
+  { name: "Código de vestimenta", path: "Dulcinea#vestimentacode" },
+  { name: "FAQ", path: "Dulcinea/preguntasfrecuentes" },
+  { name: "Contactanos", path: "Dulcinea/escribenos" },
 ];
 
 const scrollToElement = (id) => {
@@ -118,21 +118,25 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
             </Link>
           </div>
           <nav className="flex flex-col justify-center items-center gap-4 p-4">
-            {links.map((link, index) => (
-              <Link
-                href={link.path}
-                key={index}
-                onClick={(e) => handleLinkClick(e, link.path)}
-                className={`${
-                  pathname === link.path || pathname.startsWith(link.path)
-                    ? 'text-lg font-medium text-sky-300 border-b-2 border-sky-600'
-                    : 'text-xl  hover:text-blue-400'
-                }  transition-all`}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link, index) => {
+              const isActive = pathname === link.path || pathname.startsWith(link.path);
+
+                return (
+                    <Link
+                        href={link.path}
+                        key={index}
+                        onClick={(e) => handleLinkClick(e, link.path)}
+                        className={`${
+                          pathname === link.path || pathname.startsWith(link.path)
+                            ? 'text-lg font-medium text-sky-300 border-b-2 border-sky-600'
+                            : 'text-xl  hover:text-blue-400'
+                        }  transition-all`}
+                        aria-current={isActive ? "page" : undefined}
+                    >
+                        {link.name}
+                    </Link>
+                );
+            })}
           </nav>
         </div>
       </div>
