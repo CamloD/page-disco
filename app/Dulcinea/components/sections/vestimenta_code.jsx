@@ -114,7 +114,7 @@ export const Vestimenta_Code = () => {
             Código de Vestimenta
           </h1>
           <p className="text-muted-foreground text-lg sm:text-xl text-white text-center mt-4">
-            No premitimos el ingreso con:
+            No permitimos el ingreso con:
           </p>
           <p className="text-muted-foreground text-lg sm:text-xl text-white text-center">
             Chompas, sudaderas, pantalonetas, mochos, chanclas
