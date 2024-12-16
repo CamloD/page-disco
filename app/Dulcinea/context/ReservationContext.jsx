@@ -19,6 +19,18 @@ export const ReservationProvider = ({ children }) => {
   const [selectedDate, setSelectedDate] = useState(null)
   const [reservationType, setReservationType] = useState(null)
   const [attendees, setAttendees] = useState(null)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [formData, setFormData] = useState({
+    cardNumber: '',
+    expiryDate: '',
+    cvv: ''
+  })
+  const [reservationName, setReservationName] = useState('')
+  const [reservationEmail, setReservationEmail] = useState('')
+  const [reservationPhone, setReservationPhone] = useState('')
+  const [specialRequests, setSpecialRequests] = useState('')
 
   const updateReservation = (newData) => {
     setEventDetails(newData.eventDetails ?? eventDetails)
@@ -27,6 +39,14 @@ export const ReservationProvider = ({ children }) => {
     setSelectedDate(newData.selectedDate ?? selectedDate)
     setReservationType(newData.reservationType ?? reservationType)
     setAttendees(newData.attendees ?? attendees)
+    setName(newData.name ?? name)
+    setEmail(newData.email ?? email)
+    setPhone(newData.phone ?? phone)
+    setFormData(newData.formData ?? formData)
+    setReservationName(newData.reservationName ?? reservationName)
+    setReservationEmail(newData.reservationEmail ?? reservationEmail)
+    setReservationPhone(newData.reservationPhone ?? reservationPhone)
+    setSpecialRequests(newData.specialRequests ?? specialRequests)
   }
 
   const clearReservation = () => {
@@ -36,6 +56,18 @@ export const ReservationProvider = ({ children }) => {
     setSelectedDate(null)
     setReservationType(null)
     setAttendees(null)
+    setName('')
+    setEmail('')
+    setPhone('')
+    setFormData({
+      cardNumber: '',
+      expiryDate: '',
+      cvv: ''
+    })
+    setReservationName('')
+    setReservationEmail('')
+    setReservationPhone('')
+    setSpecialRequests('')
   }
 
   return (
@@ -47,18 +79,33 @@ export const ReservationProvider = ({ children }) => {
         selectedDate,
         reservationType,
         attendees,
+        name,
+        email,
+        phone,
         setEventDetails,
         setSelectedArea,
         setGuestCount,
         setSelectedDate,
         setReservationType,
         setAttendees,
+        setName,
+        setEmail,
+        setPhone,
         updateReservation,
         clearReservation,
+        formData,
+        setFormData,
+        reservationName,
+        reservationEmail,
+        reservationPhone,
+        specialRequests,
+        setReservationName,
+        setReservationEmail,
+        setReservationPhone,
+        setSpecialRequests,
       }}
     >
       {children}
     </ReservationContext.Provider>
   )
 }
-

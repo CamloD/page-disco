@@ -16,6 +16,7 @@ import {
 import { useReservation } from '../context/ReservationContext'
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Loader2, User, Phone, Mail, CalendarPlus2Icon as CalendarIcon2, MapPin, Users, Clock, CreditCard, MessageSquare } from 'lucide-react'
 
 export default function Reserve() {
   const [step, setStep] = useState(1)
@@ -36,7 +37,11 @@ export default function Reserve() {
     setSelectedDate: setContextSelectedDate,
     setReservationType: setContextReservationType,
     clearReservation,
-    updateReservation
+    updateReservation,
+    reservationName,
+    reservationEmail,
+    reservationPhone,
+    specialRequests: contextSpecialRequests
   } = useReservation()
 
   useEffect(() => {
@@ -53,8 +58,7 @@ export default function Reserve() {
       setContextSelectedDate(selectedDate)
       setContextReservationType(reservationType)
       if (reservationType === 'general') {
-        // Save form data to context or local storage here
-        //localStorage.setItem('reservationFormData', JSON.stringify({ name, email, phone, specialRequests, selectedArea, selectedDate }))
+        updateReservation({ name, email, phone, specialRequests, selectedArea, selectedDate })
         router.push('/Dulcinea/checkout')
       } else {
         router.push('/Dulcinea/map')
@@ -75,6 +79,11 @@ export default function Reserve() {
     return false
   }
 
+  const handleReturnHome = () => {
+    router.push('/')
+    clearReservation()
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full mt-16 max-w-md space-y-8 bg-gray-800 p-8 rounded-xl shadow-2xl">
@@ -93,7 +102,7 @@ export default function Reserve() {
             ))}
           </div>
         </div>
-        
+
         {step === 1 && (
           <div className="space-y-4">
             <h3 className="text-xl font-medium text-center text-blue-300">Selecciona el tipo de reserva</h3>
@@ -102,8 +111,8 @@ export default function Reserve() {
                 variant={reservationType === 'general' ? 'default' : 'outline'}
                 onClick={() => setReservationType('general')}
                 className={`py-6 text-lg ${
-                  reservationType === 'general' 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                  reservationType === 'general'
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
                 }`}
               >
@@ -114,8 +123,8 @@ export default function Reserve() {
                 variant={reservationType === 'specific' ? 'default' : 'outline'}
                 onClick={() => setReservationType('specific')}
                 className={`py-6 text-lg ${
-                  reservationType === 'specific' 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                  reservationType === 'specific'
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
                 }`}
               >
@@ -230,16 +239,16 @@ export default function Reserve() {
 
         {/* Navigation buttons */}
         <div className="mt-8 flex justify-between">
-          <Button 
-            variant="outline" 
-            onClick={handleBack} 
+          <Button
+            variant="outline"
+            onClick={handleBack}
             disabled={step === 1}
             className="bg-gray-700 text-white border-gray-600 hover:bg-gray-600"
           >
             Atrás
           </Button>
-          <Button 
-            onClick={handleNext} 
+          <Button
+            onClick={handleNext}
             disabled={isNextDisabled()}
             className="bg-blue-600 hover:bg-blue-700 text-white"
           >

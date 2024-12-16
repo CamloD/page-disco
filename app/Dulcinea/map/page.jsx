@@ -89,7 +89,11 @@ const ReservationModal = ({ isOpen, onClose, selectedArea, areaInfo, onclickbutt
         guestCount: parseInt(attendees),
         selectedDate: selectedEvent ? new Date(selectedEvent.date) : selectedDate,
         reservationType: selectedEvent ? 'event' : (reservationType || 'specific'),
-        eventDetails: selectedEvent
+        eventDetails: selectedEvent,
+        reservationName: name,
+        reservationEmail: email,
+        reservationPhone: phone,
+        specialRequests
       })
       onClose()
       router.push('/Dulcinea/checkout')
@@ -458,4 +462,3 @@ export default function ReservationMap() {
     </div>
   )
 }
-

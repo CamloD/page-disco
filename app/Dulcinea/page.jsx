@@ -2,10 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"; 
 
-"use client";
-
 import React, { useEffect, useRef, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Calendar, ChevronUp } from 'lucide-react';
@@ -36,7 +34,6 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
         left: '50%',
         top: '50%',
         transform: `rotate(-46.60deg) scale(2) translate(${trnansX}, ${trnansY})`,
-      //transform: 'rotate(-46.60deg) scale(2) translate(-5%, -24%)',
         backgroundImage: `url("${BACKGROUND_PATTERN}")`,
         backgroundSize: '3px 3px',
         backgroundPosition: 'center',
@@ -58,8 +55,6 @@ const Page = () => {
   const homeRef = useRef(null);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -113,7 +108,7 @@ const Page = () => {
       const id = window.location.hash.substring(1);
       const element = document.getElementById(id);
       if (element) {
-        const headerOffset = 180; // Ajusta este valor según la altura de tu encabezado fijo
+        const headerOffset = 180;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -123,7 +118,7 @@ const Page = () => {
         });
       }
     }
-  }, [isLoading, pathname, searchParams]);
+  }, [isLoading, pathname]);
 
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
@@ -189,4 +184,3 @@ const Page = () => {
 };
 
 export default Page;
-

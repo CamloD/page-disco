@@ -120,7 +120,7 @@ export const Vestimenta_Code = () => {
             Chompas, sudaderas, pantalonetas, mochos, chanclas
           </p>
           <p className="text-muted-foreground text-lg sm:text-xl text-white text-center">
-            viseras, camisetas sin mangas, alucinogenos, armas
+            viseras, camisetas sin mangas, alucinogenos, armas de fuego o cortantes
           </p>
         </div>
       </div>

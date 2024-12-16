@@ -12,10 +12,23 @@ import { Loader2 } from 'lucide-react'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { selectedArea, selectedDate, reservationType, eventDetails, attendees, guestCount, clearReservation } = useReservation()
+  const { 
+    selectedArea, 
+    selectedDate, 
+    reservationType, 
+    eventDetails, 
+    attendees, 
+    guestCount,
+    reservationName,
+    reservationEmail,
+    reservationPhone,
+    specialRequests,
+    updateReservation 
+  } = useReservation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     cardNumber: '',
     expiryDate: '',
     cvv: ''
@@ -51,15 +64,21 @@ export default function CheckoutPage() {
     console.log('Payment processed:', formData)
     console.log('Reservation details:', { selectedArea, selectedDate, reservationType, eventDetails, attendees, guestCount })
     
-    
-    // Redirect to a confirmation page
-    router.push('/Dulcinea/confirmation')
-    //clearReservation()
+    // Update reservation with final details
+    updateReservation({
+      ...formData,
+      selectedArea,
+      selectedDate,
+      reservationType,
+      eventDetails,
+      attendees: attendees || guestCount
+    })
+    router.push('/Dulcinea/checkout/confirmacion')
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-800 text-gray-100 flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     )
@@ -67,7 +86,7 @@ export default function CheckoutPage() {
 
   if (!hasReservationInfo) {
     return (
-      <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-800 text-gray-100 flex flex-col items-center justify-center p-4">
         <h1 className="text-3xl font-bold mb-4">No hay información de reserva para el pago</h1>
         <p className="mb-8">Por favor, realiza una reserva antes de acceder a esta página.</p>
         <Button onClick={() => router.push('/Dulcinea')} className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -78,8 +97,8 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden mt-16">
+    <div className="min-h-screen bg-gray-800 text-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl bg-gray-700 border border-gray-600 rounded-xl shadow-xl overflow-hidden mt-24">
         <div className="flex flex-col md:flex-row">
           {/* Left side: Payment form */}
           <div className="w-full md:w-1/2 p-8">
@@ -96,7 +115,7 @@ export default function CheckoutPage() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="bg-gray-700 border-gray-600 text-white"
+                    className="bg-gray-600 border-gray-500 text-white"
                   />
                 </div>
                 <div>
@@ -108,7 +127,19 @@ export default function CheckoutPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="bg-gray-700 border-gray-600 text-white"
+                    className="bg-gray-600 border-gray-500 text-white"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Teléfono</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-gray-600 border-gray-500 text-white"
                   />
                 </div>
                 <div>
@@ -119,7 +150,7 @@ export default function CheckoutPage() {
                     value={formData.cardNumber}
                     onChange={handleInputChange}
                     required
-                    className="bg-gray-700 border-gray-600 text-white"
+                    className="bg-gray-600 border-gray-500 text-white"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -131,7 +162,7 @@ export default function CheckoutPage() {
                       value={formData.expiryDate}
                       onChange={handleInputChange}
                       required
-                      className="bg-gray-700 border-gray-600 text-white"
+                      className="bg-gray-600 border-gray-500 text-white"
                     />
                   </div>
                   <div>
@@ -142,7 +173,7 @@ export default function CheckoutPage() {
                       value={formData.cvv}
                       onChange={handleInputChange}
                       required
-                      className="bg-gray-700 border-gray-600 text-white"
+                      className="bg-gray-600 border-gray-500 text-white"
                     />
                   </div>
                 </div>
@@ -154,7 +185,7 @@ export default function CheckoutPage() {
           </div>
           
           {/* Right side: Reservation details */}
-          <div className="w-full md:w-1/2 bg-gray-700 p-8">
+          <div className="w-full md:w-1/2 bg-gray-600 p-8">
             <h2 className="text-2xl font-bold mb-6 text-center">Detalles de la reserva</h2>
             <div className="space-y-4">
               <p><strong>Fecha:</strong> {selectedDate ? format(new Date(selectedDate), 'dd/MM/yyyy') : 'No seleccionada'}</p>
@@ -167,6 +198,13 @@ export default function CheckoutPage() {
                 </>
               )}
               <p><strong>Número de asistentes:</strong> {attendees || guestCount}</p>
+              <h3 className="text-xl font-bold mt-6 mb-4">Información del reservante</h3>
+              <p><strong>Nombre:</strong> {reservationName}</p>
+              <p><strong>Email:</strong> {reservationEmail}</p>
+              <p><strong>Teléfono:</strong> {reservationPhone}</p>
+              {specialRequests && (
+                <p><strong>Solicitudes especiales:</strong> {specialRequests}</p>
+              )}
             </div>
           </div>
         </div>
