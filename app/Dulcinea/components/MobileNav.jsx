@@ -8,7 +8,7 @@ import { Imagen, Videos } from "app/components/mostrarmedios";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "Eventos", path: "/Dulcinea/eventos" },
+  { name: "Eventos", path: "/Dulcinea/eventos" }, 
   { name: "Galería", path: "/Dulcinea#gallery" },
   { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" },
   { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },
@@ -128,7 +128,7 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
                     ? 'text-lg font-medium text-sky-300 border-b-2 border-sky-600'
                     : 'text-xl  hover:text-blue-400'
                 }  transition-all`}
-                aria-current={pathname === link.path || pathname.startsWith(link.path) ? "page" : undefined}
+                aria-current={isActive ? "page" : undefined}
               >
                 {link.name}
               </Link>
