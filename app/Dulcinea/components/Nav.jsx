@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; 
+import { usePathname, useRouter } from "next/navigation"; 
 import { useEffect } from "react";
 
 const links = [
@@ -25,27 +25,45 @@ const scrollToElement = (id) => {
   }
 };
 
+const handleAnchorClick = (e, targetId) => {
+    if (targetId) {
+        e.preventDefault();
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: "smooth",
+                block: "start", 
+            });
+        }
+    }
+};
+
+
 const Naveg = () => {
     const pathname = usePathname(); 
+    const router = useRouter();
 
     const handleLinkClick = (e, path) => {
-        const targetId = path.split("#")[1];
-        if (targetId) {
-            e.preventDefault();
-            if (pathname === "/Dulcinea") {
-                scrollToElement(targetId);
-            } else {
-                window.location.href = path;
-            }
+        const targetId = path.split("#")[1]; 
+        if (targetId && pathname !== "/Dulcinea") {
+            e.preventDefault(); 
+            // Usar router.push en lugar de window.location.href
+            router.push("/Dulcinea#"+targetId); 
+        } else if (pathname === "/Dulcinea" && targetId) {
+            handleAnchorClick(e, targetId);
         }
     };
 
     useEffect(() => {
         if (pathname === "/Dulcinea" && window.location.hash) {
             const targetId = window.location.hash.substring(1);
-            setTimeout(() => {
-                scrollToElement(targetId);
-            }, 0);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start", 
+                });
+            }
         }
     }, [pathname]);
 
