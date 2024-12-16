@@ -130,7 +130,7 @@ const Page = () => {
   const isDesktop = deviceType === 'desktop';
 
   return (
-    <div className={`bg-[#1a1a1a] max-w-[100wh] relative ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}>
+    <div className={`bg-[#1a1a1a] max-w-[100wh] relative ${isLoading ? '' : 'opacity-100 transition-opacity duration-300'}`}>
       <BackgroundFigure isMobile={isMobile} isTablet={isTablet} />
       <main className="flex-1 relative z-0">
         <section id="home" ref={homeRef} className="bg-transparent relative h-screen overflow-hidden">
@@ -166,9 +166,9 @@ const Page = () => {
         }`}
       >
         <div className="flex space-x-2">
-          <Button
+        <Button
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white rounded-[18px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-3"
+            className="bg-blue-600 hover:bg-blue-700 text-white rounded-[19px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-3"
             onClick={scrollToTop}
           >
             <ChevronUp  className='h-6 w-6'/>
@@ -187,9 +187,6 @@ const Page = () => {
     </div>
   );
 };
-
-
-
 
 export default Page;
 
