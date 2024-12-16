@@ -112,7 +112,7 @@ export function EventDetails() {
           <h1 className="text-4xl font-bold text-center text-white">{event.title}</h1>
         </div>
         <Button 
-          onClick={() => router.push('calendario')} 
+          onClick={() => router.push('eventos')} 
           className="absolute top-20 left-4 z-0 bg-black bg-opacity-50 hover:bg-opacity-75"
         >
           <ChevronLeft className="mr-2" />

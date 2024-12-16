@@ -2,157 +2,241 @@
   "events": [
     {
       "id": 1,
-      "title": "Fiesta de Verano",
-      "date": "2024-12-09",
-      "time": "22:00",
-      "description": "Disfruta de una noche llena de música, baile y diversión con los mejores DJs del momento.",
-      "image": "events/agropecuario.jpg",
-      "dj": {
-        "name": "DJ Electro",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 2,
-      "title": "Fiesta Temática",
-      "date": "2024-12-04",
-      "time": "23:00",
-      "description": "Ven disfrazado y disfruta de una noche llena de sorpresas y diversión.",
-      "image": "events/nelson.jpg",
-      "dj": {
-        "name": "DJ Techno",
-        "avatar": "images/image11.jpg"
-      }
-    },
-    {
-      "id": 3,
-      "title": "Noche de Salsa",
-      "date": "2024-12-5",
-      "time": "19:00",
-      "description": "Mueve tus caderas al ritmo de la mejor salsa en vivo.",
-      "image": "events/ryan.jpg",
-      "dj": {
-        "name": "DJ Sabor",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 4,
-      "title": "Retro Party",
-      "date": "2024-12-05",
-      "time": "22:00",
-      "description": "Revive los mejores éxitos de los 80s y 90s.",
-      "image": "images/image1.jpg?height=300&width=400",
-      "dj": {
-        "name": "DJ Nostalgia",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 5,
-      "title": "Noche de Rock",
-      "date": "2024-12-11",
-      "time": "21:30",
-      "description": "Disfruta de las mejores bandas de rock en vivo.",
-      "image": "images/image2.jpg?height=300&width=400",
-      "dj": {
-        "name": "DJ RockStar",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 6,
       "title": "Fiesta de Espuma",
       "date": "2024-12-18",
       "time": "22:00",
       "description": "Una noche refrescante llena de espuma y diversión.",
-      "image": "images/image3.jpg?height=300&width=400",
+      "image": "images/image1.jpg?height=300&width=400",
       "dj": {
         "name": "DJ Bubble",
         "avatar": "/placeholder.svg?height=40&width=40"
       }
     },
     {
-      "id": 7,
+      "id": 2,
       "title": "Noche Latina",
       "date": "2024-12-25",
       "time": "21:00",
       "description": "Baila al ritmo de reggaeton, bachata y merengue.",
-      "image": "images/image4.jpg?height=300&width=400",
+      "image": "images/image2.jpg?height=300&width=400",
       "dj": {
         "name": "DJ Latino",
         "avatar": "/placeholder.svg?height=40&width=40"
       }
     },
     {
-      "id": 8,
-      "title": "EDM Fest",
-      "date": "2024-12-03",
-      "time": "22:00",
-      "description": "Una noche llena de música electrónica y efectos visuales impresionantes.",
-      "image": "images/image5.jpg?height=300&width=400",
-      "dj": {
-        "name": "DJ Beats",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 9,
-      "title": "Karaoke Night",
-      "date": "2024-12-14",
-      "time": "20:00",
-      "description": "Demuestra tus habilidades vocales en nuestra noche de karaoke.",
-      "image": "images/image6.jpg?height=300&width=400",
-      "dj": {
-        "name": "DJ Sing",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 10,
-      "title": "Noche de Jazz",
-      "date": "2024-12-15",
-      "time": "21:00",
-      "description": "Disfruta de una velada sofisticada con los mejores músicos de jazz.",
-      "image": "images/image7.jpg?height=300&width=400",
-      "dj": {
-        "name": "DJ Smooth",
-        "avatar": "/placeholder.svg?height=40&width=40"
-      }
-    },
-    {
-      "id": 11,
+      "id": 3,
       "title": "Halloween Party",
-      "date": "2024-12-31",
+      "date": "2024-12-30",
       "time": "22:00",
       "description": "La fiesta de disfraces más terrorífica del año.",
-      "image": "images/image8.jpg?height=300&width=400",
+      "image": "images/image3.jpg?height=300&width=400",
       "dj": {
         "name": "DJ Spooky",
         "avatar": "/placeholder.svg?height=40&width=40"
       }
     },
     {
-      "id": 12,
+      "id": 4,
       "title": "Año Nuevo",
       "date": "2024-12-31",
       "time": "22:00",
       "description": "Celebra la llegada del nuevo año con una fiesta inolvidable.",
-      "image": "images/image9.jpg?height=300&width=400",
+      "image": "images/image4.jpg?height=300&width=400",
       "dj": {
         "name": "DJ Countdown",
         "avatar": "/placeholder.svg?height=40&width=40"
       }
     },
     {
-      "id": 13,
-      "title": "vistass",
+      "id": 5,
+      "title": "Rock Night",
       "date": "2024-12-24",
       "time": "17:00",
       "description": "Celebra la llegada del nuevo año con una fiesta inolvidable.",
-      "image": "images/image10.jpg?height=300&width=400",
+      "image": "images/image5.jpg?height=300&width=400",
       "dj": {
         "name": "DJ Countdown",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Noche de Reggaetón",
+      "date": "2024-12-20",
+      "time": "22:00",
+      "description": "Baila y disfruta de los mejores éxitos de reggaetón de todos los tiempos.",
+      "image": "images/image6.jpg",
+      "dj": {
+        "name": "DJ Rumba",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 7,
+      "title": "Fiesta de Año Nuevo",
+      "date": "2024-12-31",
+      "time": "20:00",
+      "description": "Celebra la llegada del nuevo año con una fiesta única, llena de sorpresas y música.",
+      "image": "images/image7.jpg",
+      "dj": {
+        "name": "DJ Countdown",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 8,
+      "title": "Fiesta Neon",
+      "date": "2024-12-22",
+      "time": "23:00",
+      "description": "Vive una experiencia única con luces y colores neon, música electrónica y mucho más.",
+      "image": "images/image8.jpg",
+      "dj": {
+        "name": "DJ Glow",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 9,
+      "title": "Noche de Comedia",
+      "date": "2024-12-27",
+      "time": "21:00",
+      "description": "Una noche llena de risas con los mejores comediantes en vivo.",
+      "image": "images/image9.jpg",
+      "dj": {
+        "name": "No aplica",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 10,
+      "title": "Rave Party",
+      "date": "2024-12-28",
+      "time": "23:30",
+      "description": "La fiesta de música electrónica más épica del mes, con luces, láseres y DJs internacionales.",
+      "image": "images/image10.jpg",
+      "dj": {
+        "name": "DJ Laser",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 11,
+      "title": "Fiesta Black & White",
+      "date": "2025-01-02",
+      "time": "23:00",
+      "description": "Una fiesta elegante con código de vestimenta en blanco y negro, llena de glamour y música.",
+      "image": "images/image11.jpg",
+      "dj": {
+        "name": "DJ Classy",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Día de la Cerveza",
+      "date": "2025-01-06",
+      "time": "18:00",
+      "description": "Disfruta de las mejores cervezas del mundo, acompañadas de música en vivo y buena compañía.",
+      "image": "images/image12.jpg",
+      "dj": {
+        "name": "DJ Brew",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 13,
+      "title": "Noche de Karaoke",
+      "date": "2025-01-07",
+      "time": "20:00",
+      "description": "Demuestra tus habilidades vocales en nuestra noche de karaoke.",
+      "image": "images/image13.jpg",
+      "dj": {
+        "name": "DJ Sing",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 14,
+      "title": "Fiesta de Año Nuevo",
+      "date": "2025-01-09",
+      "time": "22:00",
+      "description": "Prepárate para recibir el 2025 con una fiesta épica llena de sorpresas.",
+      "image": "images/image14.jpg",
+      "dj": {
+        "name": "DJ Countdown",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 15,
+      "title": "Carnaval de Río",
+      "date": "2025-01-10",
+      "time": "21:00",
+      "description": "Siente el ritmo del carnaval brasileño, con samba y la mejor música latina.",
+      "image": "images1.jpg",
+      "dj": {
+        "name": "DJ Samba",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 16,
+      "title": "Noche de Hip-Hop",
+      "date": "2025-01-12",
+      "time": "23:00",
+      "description": "Baila al ritmo del mejor hip-hop en vivo.",
+      "image": "images/image15.jpg",
+      "dj": {
+        "name": "DJ Flow",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 17,
+      "title": "Fiesta de Circo",
+      "date": "2025-01-13",
+      "time": "20:30",
+      "description": "Un evento lleno de magia, acrobacias y sorpresas.",
+      "image": "events/nelson.jpg",
+      "dj": {
+        "name": "DJ Circus",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 18,
+      "title": "Fiesta de Navidad",
+      "date": "2025-01-16",
+      "time": "22:00",
+      "description": "Celebra la Navidad con música festiva y mucha diversión.",
+      "image": "events/agropecuario.jpg",
+      "dj": {
+        "name": "DJ Santa",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 19,
+      "title": "Super Fiesta de Fin de Año",
+      "date": "2025-01-07",
+      "time": "23:30",
+      "description": "La fiesta más grande para recibir el fin de año, con una experiencia única.",
+      "image": "events/agropecuario.jpg",
+      "dj": {
+        "name": "DJ Ultimate",
+        "avatar": "/placeholder.svg?height=40&width=40"
+      }
+    },
+    {
+      "id": 20,
+      "title": "Noche de Magia",
+      "date": "2024-12-19",
+      "time": "20:00",
+      "description": "Un evento lleno de magia, ilusionismo y asombrosos trucos en vivo.",
+      "image": "events/ryan.jpg",
+      "dj": {
+        "name": "No aplica",
         "avatar": "/placeholder.svg?height=40&width=40"
       }
     }

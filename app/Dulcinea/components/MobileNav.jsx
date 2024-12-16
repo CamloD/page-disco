@@ -8,7 +8,7 @@ import { Imagen, Videos } from "app/components/mostrarmedios";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { name: "Eventos", path: "/Dulcinea/calendario" },
+  { name: "Eventos", path: "/Dulcinea/eventos" },
   { name: "Galería", path: "/Dulcinea#gallery" },
   { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" },
   { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },

@@ -38,10 +38,10 @@ export default function Page({ params }) {
         if (matchedEvent) {
           setEvent(matchedEvent)
         } else {
-          router.push('/calendario')
+          router.push('/eventos')
         }
       } else {
-        router.push('/calendario')
+        router.push('/eventos')
       }
     }
   }, [params.slug, router])
