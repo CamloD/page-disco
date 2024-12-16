@@ -38,7 +38,6 @@ const handleAnchorClick = (e, targetId) => {
     }
 };
 
-
 const Naveg = () => {
     const pathname = usePathname(); 
     const router = useRouter();
