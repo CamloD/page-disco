@@ -47,7 +47,7 @@ export default function Contacto() {
         <section id="contact" className="bg-transparent">
           <div className="mx-auto max-w-screen-xl px-4 ">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 h-[450px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-[450px]">
               <div className="text-white ml-[25px]">
                 <div className="flex space-x-3 items-center">
                   <div className="w-[35px] h-[4px] bg-white rounded-full"/>
@@ -80,7 +80,6 @@ export default function Contacto() {
 
               <div className="bg-[#1F2937] p-6 rounded-lg shadow-lg inline-flex justify-center items-center min-w-max relative">
                 
-                {/* Mensaje flotante */}
                 {mensajeExitoso && (
                   <div className="absolute top-0 left-0 w-full bg-green-600 text-white text-center py-2 z-10 rounded-md">
                     <h2>¡Mensaje enviado!</h2>

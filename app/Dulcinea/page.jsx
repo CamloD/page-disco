@@ -17,23 +17,21 @@ const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
 const BACKGROUND_PATTERN = "data:image/svg+xml,%3Csvg width='6' height='6' viewBox='6 6 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='12' height='12' fill='%230a5770' fill-opacity='0.4'/%3E%3C/svg%3E"
 
-const BackgroundFigure = ({isMobile, isTablet}) => {
-  const width = isMobile ? '1500vw' : (isTablet ? '900vw' : '600vw');
-  const height = isMobile ? '1000vh' : (isTablet ? '1200vh' : '800vh');
-  const trnansX = isMobile ? '11%' : (isTablet ? '-5%' : '-5%');
-  const trnansY = isMobile ? '-29%' : (isTablet ? '-24%' : '-24%');
+const BackgroundFigure = ({Mobile_s, Tablet_s}) => {
+  //const width = isMobile ? '1500vw' : (isTablet ? '900vw' : '600vw');
+  //const height = isMobile ? '1000vh' : (isTablet ? '1200vh' : '800vh');
+  const trnansX = Mobile_s ? '11%' : Tablet_s ? '-5%' : '-5%';
+  const trnansY = Mobile_s ? '-29%' : Tablet_s ? '-24%' : '-24%';
 
   return(
   <div className="absolute inset-0 w-full h-full overflow-hidden bg-gray-900 flex">
     <div 
-      className="absolute inset-0 flex items-center justify-center"
+      className="absolute inset-0 flex items-center justify-center md:top-[50%] md:left-[-50%]"
       style={{
         transform: 'rotate(-46.60deg) scale(2)',
-        width: width,  //'400vw'
-        height: height, // '800vh'
-        left: '50%',
-        top: '50%',
-        transform: `rotate(-46.60deg) scale(2) translate(${trnansX}, ${trnansY})`,
+        width: '1500vw', //width,  //'400vw'
+        height: '2500vh', //height, // '800vh'
+        transform: `rotate(-46.60deg) scale(2) `,
         backgroundImage: `url("${BACKGROUND_PATTERN}")`,
         backgroundSize: '3px 3px',
         backgroundPosition: 'center',
@@ -50,7 +48,7 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
 
 
 const Page = () => {
-  const [deviceType, setDeviceType] = useState('desktop');
+  const [deviceType1, setDeviceType1] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const homeRef = useRef(null);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
@@ -63,31 +61,38 @@ const Page = () => {
   };
 
   useEffect(() => {
-    const checkDeviceType = () => {
+    const checkDeviceType1 = () => {
       if (window.innerWidth <= MOBILE_BREAKPOINT) {
-        setDeviceType('mobile');
+        setDeviceType1('mobile1');
       } else if (window.innerWidth <= TABLET_BREAKPOINT) {
-        setDeviceType('tablet');
+        setDeviceType1('tablet1');
       } else {
-        setDeviceType('desktop');
+        setDeviceType1('desktop1');
       }
     };
-    checkDeviceType();
-    window.addEventListener('resize', checkDeviceType);
-    return () => window.removeEventListener('resize', checkDeviceType);
+    checkDeviceType1();
+    window.addEventListener('resize', checkDeviceType1);
+    return () => window.removeEventListener('resize', checkDeviceType1);
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 199) {
-        setShowFloatingButton(true);
-      } else {
-        setShowFloatingButton(false);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowFloatingButton(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: '-200px 0px 0px 0px' }
+    );
+
+    const target = homeRef.current;
+    if (target) {
+      observer.observe(target);
+    }
+
+    return () => {
+      if (target) {
+        observer.unobserve(target);
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -104,30 +109,46 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && window.location.hash) {
-      const id = window.location.hash.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        const headerOffset = 180;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    if (!isLoading) {
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 180;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "auto"
-        });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
       }
     }
-  }, [isLoading, pathname]);
+  }, [isLoading]);
 
-  const isMobile = deviceType === 'mobile';
-  const isTablet = deviceType === 'tablet';
-  const isDesktop = deviceType === 'desktop';
+  // Removed the problematic useEffect
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem('scrollPosition', window.pageYOffset.toString());
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+  const Mobile = deviceType1 === 'mobile1';
+  const Tablet = deviceType1 === 'tablet1';
+  const Desktop = deviceType1 === 'desktop1';
 
   return (
     <div className={`bg-[#1a1a1a] max-w-[100wh] relative ${isLoading ? '' : 'opacity-100 transition-opacity duration-300'}`}>
-      <BackgroundFigure isMobile={isMobile} isTablet={isTablet} />
-      <main className="flex-1 relative z-0">
+     <BackgroundFigure Mobile_s={Mobile} Tablet_s={Tablet} />
+      <div className="flex-1 relative z-0">
         <section id="home" ref={homeRef} className="bg-transparent relative h-screen overflow-hidden">
           <ImageBackgroung1 />
         </section>
@@ -137,7 +158,7 @@ const Page = () => {
         </section>
 
         <section className="bg-transparent py-12 md:py-8 lg:py-12 min-h-[930px]">
-          <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
+          <ProximosEventos isMobile={Mobile} isTablet={Tablet} isDesktop={Desktop} />
         </section>
 
         <section id="gallery" className="py-12 bg-transparent text-white">
@@ -152,7 +173,7 @@ const Page = () => {
         <section className="min-h-[480px]">
           <Preguntas />
         </section>
-      </main>
+      </div>
       <div
         className={`fixed bottom-6 right-4 z-50 transform transition-all duration-500 ease-in-out ${
           showFloatingButton
@@ -184,3 +205,4 @@ const Page = () => {
 };
 
 export default Page;
+

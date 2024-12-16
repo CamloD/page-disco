@@ -4,9 +4,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const links = [
-    { name: "Eventos", path: "/Dulcinea/eventos" }, 
+    { name: "Eventos", path: "/Dulcinea/eventos" },
+    { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" }, 
     { name: "Galería", path: "/Dulcinea#gallery" },
-    { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" },
     { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },
     { name: "Contactanos", path: "/Dulcinea/escribenos" },
 ];
