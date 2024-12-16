@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AlignJustify, XIcon } from 'lucide-react';
 import { Imagen, Videos } from "app/components/mostrarmedios";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const links = [
   { name: "Eventos", path: "/Dulcinea/calendario" },
@@ -15,52 +15,36 @@ const links = [
   { name: "Contactanos", path: "/Dulcinea/escribenos" },
 ];
 
+const scrollToElement = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    const headerOffset = 84; // 100px del header + 45px extra
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "auto"
+    });
+  }
+};
+
 const MobileNav = ({ isOpen, setIsOpen }) => {
   const pathname = usePathname();
-  const router = useRouter();
-
-  const handleAnchorClick = (e, targetId) => {
-    if (targetId) {
-      e.preventDefault();
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }
-  };
 
   const handleLinkClick = (e, path) => {
     const targetId = path.split("#")[1];
-    if (targetId && pathname !== "/Dulcinea") {
+    if (targetId) {
       e.preventDefault();
-      router.push("/Dulcinea#" + targetId);
-    } else if (pathname === "/Dulcinea" && targetId) {
-      handleAnchorClick(e, targetId);
-    }
-  };
-
-  useEffect(() => {
-    if (pathname === "/Dulcinea" && window.location.hash) {
-      const targetId = window.location.hash.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+      if (pathname === "/Dulcinea") {
+        scrollToElement(targetId);
+      } else {
+        window.location.href = path;
       }
     }
-  }, [pathname]);
-
-
-  const toggleSidebar = () => {
-    setIsOpen(prevState => !prevState);
+    setIsOpen(false); // Close the mobile menu after clicking
   };
 
-  // Deshabilitar el scroll cuando el menú está abierto
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -73,6 +57,19 @@ const MobileNav = ({ isOpen, setIsOpen }) => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (pathname === "/Dulcinea" && window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      setTimeout(() => {
+        scrollToElement(targetId);
+      }, 0);
+    }
+  }, [pathname]);
+
+  const toggleSidebar = () => {
+    setIsOpen(prevState => !prevState);
+  };
 
   return (
     <div className='fixed top-0 right-4 z-50'>

@@ -2,16 +2,18 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"; 
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { useState, useEffect, useRef } from 'react'
-import {ImageGrid} from "app/components/images_gallery/imagesgrid"
-import Preguntas from "app/Dulcinea/components/sections/preguntas"
+"use client";
 
-import ImageBackgroung1 from "./components/sections/ImageBackgroung1"
-import {ProximosEventos} from "app/Dulcinea/components/sections/comingevents"
-import {Vestimenta_Code} from "./components/sections/vestimenta_code"
-import { Calendar } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Calendar, ChevronUp } from 'lucide-react';
+import ImageBackgroung1 from "./components/sections/ImageBackgroung1";
+import { ProximosEventos } from "app/Dulcinea/components/sections/comingevents";
+import { Vestimenta_Code } from "./components/sections/vestimenta_code";
+import { ImageGrid } from "app/components/images_gallery/imagesgrid";
+import Preguntas from "app/Dulcinea/components/sections/preguntas";
 
 const MOBILE_BREAKPOINT = 768
 const TABLET_BREAKPOINT = 990
@@ -52,18 +54,18 @@ const BackgroundFigure = ({isMobile, isTablet}) => {
 
 const Page = () => {
   const [deviceType, setDeviceType] = useState('desktop');
+  const [isLoading, setIsLoading] = useState(true);
   const homeRef = useRef(null);
   const [showFloatingButton, setShowFloatingButton] = useState(false);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.history.scrollRestoration = 'manual'
-    }
-    window.scrollTo(0, 0)
-    if (window.location.hash) {
-      window.history.replaceState(null, null, window.location.pathname + window.location.search);
-    }
-  }, []);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   useEffect(() => {
     const checkDeviceType = () => {
@@ -82,13 +84,10 @@ const Page = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      //console.log( "scroll:  ", window.scrollY)
       if (window.scrollY > 199) {
         setShowFloatingButton(true);
-        //console.log("button on")
       } else {
         setShowFloatingButton(false);
-        //console.log("button off")
       }
     };
 
@@ -96,87 +95,68 @@ const Page = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleLoad = () => {
+      setIsLoading(false);
+    };
+
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        const headerOffset = 180; // Ajusta este valor según la altura de tu encabezado fijo
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "auto"
+        });
+      }
+    }
+  }, [isLoading, pathname, searchParams]);
+
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
-  return (
-    <div className="bg-[#1a1a1a] max-w-[100wh] relative">
-      <BackgroundFigure  isMobile= {isMobile} isTablet={isTablet} />
-      <main className="flex-1 relative z-0">
 
+  return (
+    <div className={`bg-[#1a1a1a] max-w-[100wh] relative ${isLoading ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}>
+      <BackgroundFigure isMobile={isMobile} isTablet={isTablet} />
+      <main className="flex-1 relative z-0">
         <section id="home" ref={homeRef} className="bg-transparent relative h-screen overflow-hidden">
-          <ImageBackgroung1/>
+          <ImageBackgroung1 />
         </section>
 
         <section id="vestimentacode" className="min-h-[1200px]">
-          <Vestimenta_Code/>
+          <Vestimenta_Code />
         </section>
 
         <section className="bg-transparent py-12 md:py-8 lg:py-12 min-h-[930px]">
           <ProximosEventos isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         </section>
 
-        <section id="events" className="py-12 md:py-20 lg:py-8 bg-transparent min-h-[440px]">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
-                    Próximo
-                  </div>
-                  <div className="text-sm text-muted-foreground">Sábado, 15 de julio</div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Fiesta de Verano con DJ Sasha</h3>
-                <p className="text-muted-foreground mb-4">
-                  Ven a disfrutar de una noche llena de música electrónica y ambiente de fiesta. Contaremos con la
-                  presencia del DJ internacional Sasha.
-                </p>
-                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
-              </div>
-              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
-                    Próximo
-                  </div>
-                  <div className="text-sm text-muted-foreground">Viernes, 4 de agosto</div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Noche Latina con Grupo Niche</h3>
-                <p className="text-muted-foreground mb-4">
-                  Disfruta de una noche llena de ritmos latinos con la presentación del legendario grupo Niche.
-                </p>
-                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
-              </div>
-              <div className="bg-[#d4d4d4] p-6 rounded-lg shadow-md">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium bg-emerald-600">
-                    Próximo
-                  </div>
-                  <div className="text-sm text-muted-foreground">Sábado, 26 de agosto</div>
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Fiesta de Aniversario con DJ Tiësto</h3>
-                <p className="text-muted-foreground mb-4">
-                  Celebramos nuestro 5to aniversario con una fiesta espectacular con la presentación del DJ Tiësto.
-                </p>
-                <Link href="/Dulcinea/reservation"><Button size="sm" className="bg-rose-900 hover:bg-rose-950">Reservar</Button></Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="gallery" className=" py-12 bg-transparent text-white">
+        <section id="gallery" className="py-12 bg-transparent text-white">
           <div className="container mx-auto min-h-[820px]">
             <h2 className="text-5xl font-bold mb-6">Gallery</h2>    
             <main className="relative">
-              <ImageGrid/>
+              <ImageGrid />
             </main>
           </div>
         </section>
 
         <section className="min-h-[480px]">
-          <Preguntas/>
+          <Preguntas />
         </section>
-
-        
       </main>
       <div
         className={`fixed bottom-6 right-4 z-50 transform transition-all duration-500 ease-in-out ${
@@ -185,19 +165,31 @@ const Page = () => {
             : "opacity-0 translate-y-16 pointer-events-none"
         }`}
       >
-        <Link href="/Dulcinea/reserve">
+        <div className="flex space-x-2">
           <Button
             size="lg"
-            className="bg-rose-600 hover:bg-rose-700 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-6 py-3"
+            className="bg-blue-600 hover:bg-blue-700 text-white rounded-[18px] shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-4 py-3"
+            onClick={scrollToTop}
           >
-            <Calendar className="w-5 h-5" />
-            <span>Reservar</span>
+            <ChevronUp  className='h-6 w-6'/>
           </Button>
-        </Link>
+          <Link href="/Dulcinea/reserve">
+            <Button
+              size="lg"
+              className="bg-rose-600 hover:bg-rose-700 text-white rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2 px-6 py-3"
+            >
+              <Calendar className="w-5 h-5" />
+              <span>Reservar</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+
+
+
+export default Page;
 
