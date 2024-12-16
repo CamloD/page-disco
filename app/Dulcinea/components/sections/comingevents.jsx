@@ -112,7 +112,7 @@ export function ProximosEventos({isMobile, isTablet, isDesktop}) {
                 Hacer Reservación
               </Button>
             </Link>
-            <Link href="/Dulcinea/calendario" className="w-full sm:w-auto">
+            <Link href="/Dulcinea/eventos" className="w-full sm:w-auto">
               <Button size={isMobile ? "default" : "lg"} className="w-full bg-emerald-500 hover:bg-emerald-700">
                 Ver Calendario
               </Button>
