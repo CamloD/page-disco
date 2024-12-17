@@ -8,11 +8,11 @@ import { Imagen, Videos } from "app/components/mostrarmedios";
 import { usePathname, useRouter } from "next/navigation";
 
 const links = [
-  { name: "Eventos", path: "Dulcinea/eventos" },
-  { name: "Código de vestimenta", path: "Dulcinea#vestimentacode" }, 
-  { name: "Galería", path: "Dulcinea#gallery" },
-  { name: "FAQ", path: "Dulcinea/preguntasfrecuentes" },
-  { name: "Contactanos", path: "Dulcinea/escribenos" },
+  { name: "Eventos", path: "/Dulcinea/eventos" },
+  { name: "Código de vestimenta", path: "/Dulcinea#vestimentacode" }, 
+  { name: "Galería", path: "/Dulcinea#gallery" },
+  { name: "FAQ", path: "/Dulcinea/preguntasfrecuentes" },
+  { name: "Contactanos", path: "/Dulcinea/escribenos" },
 ];
 
 const scrollToElement = (id) => {
